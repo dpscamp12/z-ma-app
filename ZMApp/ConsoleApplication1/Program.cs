@@ -10,8 +10,8 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("DPS CAMP 12");
-            Console.ReadLine();
+            Console.WriteLine("DPS CAMP 12"); // Gaga
+            Console.ReadLine(); //Comment
         }
     }
 }
