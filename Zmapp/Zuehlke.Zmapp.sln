@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuehlke.Zmapp.Wpf", "Zuehlk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuehlke.Zmapp.Services", "Zuehlke.Zmapp.Services\Zuehlke.Zmapp.Services.csproj", "{B7EC1CF4-0AB3-43DC-B299-EB7D41ADA67C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuehlke.Zmapp.Services.Test", "Zuehlke.Zmapp.Services.Test\Zuehlke.Zmapp.Services.Test.csproj", "{64F393DC-FBCD-4EBC-9867-C405C40B9618}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{B7EC1CF4-0AB3-43DC-B299-EB7D41ADA67C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7EC1CF4-0AB3-43DC-B299-EB7D41ADA67C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7EC1CF4-0AB3-43DC-B299-EB7D41ADA67C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64F393DC-FBCD-4EBC-9867-C405C40B9618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64F393DC-FBCD-4EBC-9867-C405C40B9618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64F393DC-FBCD-4EBC-9867-C405C40B9618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64F393DC-FBCD-4EBC-9867-C405C40B9618}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
