@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 
 namespace Zuehlke.Zmapp.Services
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class EmployeeEvaluationService : IEmployeeEvaluationService
     {
         public CustomerInfo[] GetCustomers()
