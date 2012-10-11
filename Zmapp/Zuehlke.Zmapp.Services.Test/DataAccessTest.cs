@@ -53,12 +53,12 @@ namespace Zuehlke.Zmapp.Services.Test
                                                 {
                                                     new Reservation
                                                         {
-                                                            StartDate = new DateTime(2013, 1, 1),
+                                                            Start = new DateTime(2013, 1, 1),
                                                             End = new DateTime(2013, 2, 5)
                                                         },
                                                     new Reservation
                                                         {
-                                                            StartDate = new DateTime(2013, 1, 1),
+                                                            Start = new DateTime(2013, 1, 1),
                                                             End = new DateTime(2013, 2, 5)
                                                         }
                                                 },

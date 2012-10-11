@@ -50,8 +50,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="EmployeeTest.cs" />
     <Compile Include="DataAccessTest.cs" />
+    <Compile Include="EmployeeEvaluationServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zuehlke.Zmapp.Services.Contracts\Zuehlke.Zmapp.Services.Contracts.csproj">

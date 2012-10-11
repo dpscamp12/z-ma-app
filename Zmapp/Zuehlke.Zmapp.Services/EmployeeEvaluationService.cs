@@ -11,12 +11,59 @@ namespace Zuehlke.Zmapp.Services
     {
         public CustomerInfo[] GetCustomers()
         {
-            return new[] { new CustomerInfo { Id = 1, Name = "DummyName" } };
+            return Repository.Instance.GetCustomers()
+                .Select(c => new CustomerInfo {Id = c.Id, Name = c.Name})
+                .ToArray();
         }
 
         public EmployeeSearchResult[] FindPotentialEmployeesForCustomer(EmployeeQuery query)
         {
-            return new[] { new EmployeeSearchResult { Distance = 10.1F, EmployeeName = "Dummy, CrashTest", Skills = new[] { Skill.SqlServer, Skill.CSharp } } };
+            IEnumerable<Employee> foundEmployees = FindEmployees(query);
+            return foundEmployees
+                .Select(e => new EmployeeSearchResult
+                                 {
+                                     Distance = 10.1F,
+                                     EmployeeName = String.Format("{0} {1}", e.FirstName, e.LastName),
+                                     Skills = new[] {Skill.SqlServer, Skill.CSharp}
+                                 })
+                .ToArray();
+        }
+
+        public IEnumerable<Employee> FindEmployees(EmployeeQuery query)
+        {
+            return FindEmployees(Repository.Instance.GetEmployees(), query);
+        }
+
+        public static IEnumerable<Employee> FindEmployees(IEnumerable<Employee> employees, EmployeeQuery query)
+        {
+            var foundEmployees = new List<Employee>();
+
+            foreach (Employee employee in employees)
+            {
+                // skills
+                if (query.RequestedSkills != null && query.RequestedSkills.Length > 0 &&
+                    !query.RequestedSkills.Any(employee.HasSkill))
+                {
+                    continue;
+                }
+
+                // career level
+                if (query.RequestedCareerLevels != null && query.RequestedCareerLevels.Length > 0 &&
+                    !query.RequestedCareerLevels.Any(requestedCareerLevel => employee.CareerLevel == requestedCareerLevel))
+                {
+                    continue;
+                }
+               
+                // free time
+                if (!employee.HasAnyAvailableTime(query.BeginOfWorkPeriod, query.EndOfWorkPeriod))
+                {
+                    continue;
+                }
+            
+                foundEmployees.Add(employee);
+            }
+            
+            return foundEmployees;
         }
     }
 }
