@@ -32,6 +32,10 @@
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
                 <TextBlock VerticalAlignment="Center" Margin="20,10,10,10">Customer:</TextBlock>
                 <ComboBox VerticalAlignment="Center" Margin="20,10,10,10"></ComboBox>
+                <TextBlock VerticalAlignment="Center" Margin="20,10,0,10">Reservation period for employee(s) starts on</TextBlock>
+                <DatePicker VerticalAlignment="Center" Margin="5,10,0,10"></DatePicker>
+                <TextBlock VerticalAlignment="Center" Margin="5,10,0,10">and ends at</TextBlock>
+                <DatePicker VerticalAlignment="Center" Margin="5,10,10,10"></DatePicker>
             </StackPanel>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="100" Grid.Row="2" VerticalAlignment="Top" Width="100"/>
