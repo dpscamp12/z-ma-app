@@ -1,5 +1,4 @@
-﻿using System;
-using System.ServiceModel;
+﻿using System.ServiceModel;
 
 namespace Zuehlke.Zmapp.Services.Contracts.Employee
 {
@@ -10,6 +9,6 @@ namespace Zuehlke.Zmapp.Services.Contracts.Employee
         CustomerInfo[] GetCustomers();
 
         [OperationContract]
-        EmployeeSearchResult[] FindPotentialEmployeesForCustomer(int customerId, Skill[] skills, CareerLevel[] level, DateTime from, DateTime though);
+        EmployeeSearchResult[] FindPotentialEmployeesForCustomer(EmployeeQuery query);
     }
 }

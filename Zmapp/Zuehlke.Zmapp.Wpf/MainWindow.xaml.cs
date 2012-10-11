@@ -29,7 +29,7 @@ namespace Zuehlke.Zmapp.Wpf
             Console.WriteLine(typeof(IEmployeeEvaluationService).AssemblyQualifiedName);
             var x = new Test();
             x.Open();
-            var y=x.GetCustomers();
+            var y = x.GetCustomers();
             x.Close();
         }
     }
@@ -41,9 +41,9 @@ namespace Zuehlke.Zmapp.Wpf
             return Channel.GetCustomers();
         }
 
-        public EmployeeSearchResult[] FindPotentialEmployeesForCustomer(int customerId, Skill[] skills, CareerLevel[] level, DateTime @from, DateTime though)
+        public EmployeeSearchResult[] FindPotentialEmployeesForCustomer(EmployeeQuery query)
         {
-            return Channel.FindPotentialEmployeesForCustomer(customerId, skills, level, from, though);
+            return Channel.FindPotentialEmployeesForCustomer(query);
         }
     }
 }

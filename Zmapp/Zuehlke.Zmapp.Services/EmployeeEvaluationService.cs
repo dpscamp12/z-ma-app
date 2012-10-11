@@ -14,7 +14,7 @@ namespace Zuehlke.Zmapp.Services
             return new[] { new CustomerInfo { Id = 1, Name = "DummyName" } };
         }
 
-        public EmployeeSearchResult[] FindPotentialEmployeesForCustomer(int customerId, Skill[] skills, CareerLevel[] level, DateTime from, DateTime though)
+        public EmployeeSearchResult[] FindPotentialEmployeesForCustomer(EmployeeQuery query)
         {
             return new[] { new EmployeeSearchResult { Distance = 10.1F, EmployeeName = "Dummy, CrashTest", Skills = new[] { Skill.SqlServer, Skill.CSharp } } };
         }
