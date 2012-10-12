@@ -1,8 +1,22 @@
-﻿<Window
+﻿<Window x:Class="Zuehlke.Zmapp.Wpf.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Zuehlke.Zmapp.Wpf.MainWindow"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
         Title="Zmapp - Zühlke Mitarbeiter App">
+    <Window.Resources>
+        <!--<DataTemplate x:Key="SkillListItemTemplate" />
+        <DataTemplate x:Key="EmployeeListItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" />
+                <ItemsControl ItemsSource="{Binding Skills}" ItemTemplate="{StaticResource SkillListItemTemplate}" />
+            </StackPanel>
+        </DataTemplate>-->
+        <Style x:Key="BaseInputStyle" />
+        <Style x:Key="InputLabelStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseInputStyle}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,10,10,10" />
+        </Style>
+    </Window.Resources>
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -13,7 +27,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
-            <Image HorizontalAlignment="Left" Margin="20"  Height="100" Width="100" Source="ZE_Logo.png" Stretch="Fill"/>
+            <Image HorizontalAlignment="Left" Margin="20"  Height="100" Width="100" Source="{StaticResource ZuehlkeLogo}" Stretch="Fill"/>
             <TextBlock VerticalAlignment="Center" Margin="20,10,20,10" FontSize="30" >ZMapp - Zühlke Mitarbeiter App</TextBlock>
         </StackPanel>
         <GroupBox Grid.Row="1" Header="Usage" Padding="0,5,0,5" Margin="20,0,0,0">
@@ -26,7 +40,7 @@
                     <RowDefinition Height="100*"/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
-                    <TextBlock VerticalAlignment="Center" Margin="20,10,10,10">Customer:</TextBlock>
+                    <TextBlock Style="{StaticResource InputLabelStyle}">Customer:</TextBlock>
                     <ComboBox VerticalAlignment="Center" Margin="20,10,10,10"></ComboBox>
                     <TextBlock VerticalAlignment="Center" Margin="20,10,0,10">Reservation period for employee(s) starts on</TextBlock>
                     <DatePicker VerticalAlignment="Center" Margin="5,10,0,10"></DatePicker>

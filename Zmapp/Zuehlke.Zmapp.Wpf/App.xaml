@@ -1,8 +1,8 @@
 ﻿<Application x:Class="Zuehlke.Zmapp.Wpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             StartupUri="EmployeeList.xaml">
     <Application.Resources>
-         
+        <BitmapImage x:Key="ZuehlkeLogo" UriSource="ZE_Logo.png" />
     </Application.Resources>
 </Application>

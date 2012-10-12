@@ -23,6 +23,8 @@ namespace Zuehlke.Zmapp.Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly EmployeeListViewModel viewModel = new EmployeeListViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,6 +33,7 @@ namespace Zuehlke.Zmapp.Wpf
             //x.Open();
             //var y = x.GetCustomers();
             //x.Close();
+            this.DataContext = this.viewModel;
         }
     }
 
