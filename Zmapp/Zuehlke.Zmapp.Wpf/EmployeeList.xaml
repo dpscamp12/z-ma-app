@@ -11,10 +11,31 @@
                 <ItemsControl ItemsSource="{Binding Skills}" ItemTemplate="{StaticResource SkillListItemTemplate}" />
             </StackPanel>
         </DataTemplate>-->
-        <Style x:Key="BaseInputStyle" />
-        <Style x:Key="InputLabelStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseInputStyle}">
+        <Style x:Key="InputLabelStyle" TargetType="{x:Type TextBlock}" >
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="20,10,10,10" />
+        </Style>
+        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}"  >
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,10,10,10" />
+        </Style>
+        <Style x:Key="LabelCompanyInformation" TargetType="{x:Type TextBlock}" >
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="10,10,10,10" />
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="DatePickerStyle" TargetType="{x:Type DatePicker}" >
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,10,0,10" />
+        </Style>
+        <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}" >
+            <Setter Property="Padding" Value="0,5,0,5" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+        </Style>
+        <Style x:Key="Header" TargetType="{x:Type TextBlock}" >
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="20,10,20,10" />
+            <Setter Property="FontSize" Value="30"/>
         </Style>
     </Window.Resources>
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
@@ -28,9 +49,9 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
             <Image HorizontalAlignment="Left" Margin="20"  Height="100" Width="100" Source="{StaticResource ZuehlkeLogo}" Stretch="Fill"/>
-            <TextBlock VerticalAlignment="Center" Margin="20,10,20,10" FontSize="30" >ZMapp - Zühlke Mitarbeiter App</TextBlock>
+            <TextBlock Style="{StaticResource Header}">ZMapp - Zühlke Mitarbeiter App</TextBlock>
         </StackPanel>
-        <GroupBox Grid.Row="1" Header="Usage" Padding="0,5,0,5" Margin="20,0,0,0">
+        <GroupBox Grid.Row="1" Header="Usage" Style="{StaticResource GroupBoxStyle}">
             <Grid HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -41,19 +62,19 @@
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
                     <TextBlock Style="{StaticResource InputLabelStyle}">Customer:</TextBlock>
-                    <ComboBox VerticalAlignment="Center" Margin="20,10,10,10"></ComboBox>
-                    <TextBlock VerticalAlignment="Center" Margin="20,10,0,10">Reservation period for employee(s) starts on</TextBlock>
-                    <DatePicker VerticalAlignment="Center" Margin="5,10,0,10"></DatePicker>
-                    <TextBlock VerticalAlignment="Center" Margin="5,10,0,10">and ends at</TextBlock>
-                    <DatePicker VerticalAlignment="Center" Margin="5,10,10,10"></DatePicker>
+                    <ComboBox Style="{StaticResource ComboBoxStyle}"></ComboBox>
+                    <TextBlock  Style="{StaticResource InputLabelStyle}">Reservation period for employee(s) starts on</TextBlock>
+                    <DatePicker Style="{StaticResource DatePickerStyle}" />
+                    <TextBlock  Style="{StaticResource InputLabelStyle}">and ends at</TextBlock>
+                    <DatePicker Style="{StaticResource DatePickerStyle}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
-                    <TextBlock VerticalAlignment="Center" Margin="20,10,10,10">Customer:</TextBlock>
-                    <TextBlock FontWeight="Bold" VerticalAlignment="Center" Margin="20,10,10,10">Microsoft</TextBlock>
-                    <TextBlock VerticalAlignment="Center" Margin="20,10,0,10">Strasse:</TextBlock>
-                    <TextBlock FontWeight="Bold" VerticalAlignment="Center" Margin="20,10,10,10">Haupstrasse 123</TextBlock>
-                    <TextBlock VerticalAlignment="Center" Margin="5,10,0,10">Ort:</TextBlock>
-                    <TextBlock FontWeight="Bold" VerticalAlignment="Center" Margin="20,10,10,10">8000 Zürich</TextBlock>
+                    <TextBlock  Style="{StaticResource InputLabelStyle}">Customer:</TextBlock>
+                    <TextBlock Style="{StaticResource LabelCompanyInformation}">Microsoft</TextBlock>
+                    <TextBlock  Style="{StaticResource InputLabelStyle}">Strasse:</TextBlock>
+                    <TextBlock Style="{StaticResource LabelCompanyInformation}">Haupstrasse 123</TextBlock>
+                    <TextBlock  Style="{StaticResource InputLabelStyle}">Ort:</TextBlock>
+                    <TextBlock  Style="{StaticResource LabelCompanyInformation}">8000 Zürich</TextBlock>
                 </StackPanel>
             </Grid>
         </GroupBox >

@@ -1,8 +1,0 @@
-﻿<Window x:Class="Zuehlke.Zmapp.Wpf.Image"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Image" Height="300" Width="300">
-    
-    <Image HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Height="100" VerticalAlignment="Top" Width="100" Source="ZE_Logo.png" Stretch="Fill"/>
-
-</Window>
