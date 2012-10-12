@@ -16,7 +16,7 @@
             <Image HorizontalAlignment="Left" Margin="20"  Height="100" Width="100" Source="ZE_Logo.png" Stretch="Fill"/>
             <TextBlock VerticalAlignment="Center" Margin="20,10,20,10" FontSize="30" >ZMapp - Zühlke Mitarbeiter App</TextBlock>
         </StackPanel>
-        <GroupBox Grid.Row="1" Header="Usage" Padding="0,5,0,5">
+        <GroupBox Grid.Row="1" Header="Usage" Padding="0,5,0,5" Margin="20,0,0,0">
             <Grid HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -43,13 +43,13 @@
                 </StackPanel>
             </Grid>
         </GroupBox >
-        <Grid HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Top">
+        <Grid HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Top" Margin="20,20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -58,6 +58,20 @@
             <TextBlock Grid.Column="0" Grid.Row="0">Skills</TextBlock>
             <TextBlock Grid.Column="2" Grid.Row="0">Career Level</TextBlock>
             <TextBlock Grid.Column="4" Grid.Row="0">Available Employees</TextBlock>
+            <ListBox Grid.Column="0" Grid.Row="1" SelectionMode="Multiple">
+                <ListBoxItem>C#</ListBoxItem>
+                <ListBoxItem>WPF</ListBoxItem>
+                <ListBoxItem>WCF</ListBoxItem>
+            </ListBox>
+            <ListBox Grid.Column="2" Grid.Row="1" SelectionMode="Multiple">
+                <ListBoxItem>Junior Software Engineer</ListBoxItem>
+                <ListBoxItem>Software Engineer</ListBoxItem>
+                <ListBoxItem>Senior Software Engineer</ListBoxItem>
+            </ListBox>
+            <ListBox Grid.Column="4" Grid.Row="1" SelectionMode="Multiple" Width="300" HorizontalAlignment="Left">
+                <ListBoxItem>Developer Star, Senior Software Engineer, C#, SQL Server, NoSQL</ListBoxItem>
+                <ListBoxItem>Mister X, Junior Software Engineer, Java, PHP, MySQL</ListBoxItem>
+            </ListBox>
         </Grid>
     </Grid>
 </Window>

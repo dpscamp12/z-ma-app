@@ -26,11 +26,11 @@ namespace Zuehlke.Zmapp.Wpf
         public MainWindow()
         {
             InitializeComponent();
-            Console.WriteLine(typeof(IEmployeeEvaluationService).AssemblyQualifiedName);
-            var x = new Test();
-            x.Open();
-            var y = x.GetCustomers();
-            x.Close();
+            //Console.WriteLine(typeof(IEmployeeEvaluationService).AssemblyQualifiedName);
+            //var x = new Test();
+            //x.Open();
+            //var y = x.GetCustomers();
+            //x.Close();
         }
     }
 
