@@ -42,7 +42,7 @@ namespace Zuehlke.Zmapp.Wpf.Tests
             viewModel.Init();
 
             // Assert
-            Assert.AreEqual(1,viewModel.SelectedCustomer);
+            Assert.AreEqual(1, viewModel.SelectedCustomer.Id);
         }
 
         private static Mock<IEmployeeEvaluationService> GetMockedService()

@@ -6,9 +6,23 @@ namespace Zuehlke.Zmapp.Services.Contracts.Employee
         {
             return new[]
                        {
-                           new CustomerInfo() { Id = 1, Name = "Customer, First" }, 
-                           new CustomerInfo() { Id = 2, Name = "Customer, Second" },
-                           new CustomerInfo() { Id = 3, Name = "Customer, Third" }
+                           new CustomerInfo()
+                               {
+                                   Id = 1,
+                                   Name = "Customer, First",
+                                   City = "Zürich",
+                                   Street = "Strasse 1",
+                                   ZipCode = "8000"
+                               },
+                           new CustomerInfo()
+                               {
+                                   Id = 2,
+                                   Name = "Customer, Second",
+                                   City = "Schwerzenbach",
+                                   Street = "Strasse 2",
+                                   ZipCode = "8603"
+                               },
+                           new CustomerInfo() {Id = 3, Name = "Customer, Third"}
                        };
         }
 
@@ -20,10 +34,10 @@ namespace Zuehlke.Zmapp.Services.Contracts.Employee
                             EmployeeName = "Hans Wurst",
                             Id = 1,
                             Level = CareerLevel.SoftwareEngineer,
-                            Skills = new[] { Skill.WCF, Skill.AspDotNet, }
+                            Skills = new[] {Skill.WCF, Skill.AspDotNet,}
                         };
 
-            return new[] { e };
+            return new[] {e};
         }
     }
 }

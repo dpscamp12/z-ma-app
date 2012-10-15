@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Zuehlke.Zmapp.Wpf.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Converters="clr-namespace:Zuehlke.Zmapp.Wpf.Converters" mc:Ignorable="d" 
         Title="Zmapp - Zühlke Mitarbeiter App" SizeToContent="WidthAndHeight">
     <Window.Resources>
         <!--<DataTemplate x:Key="SkillListItemTemplate" />
@@ -41,6 +42,7 @@
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="Margin" Value="5,0,5,0" />
         </Style>
+        <Converters:CustomerToCityStringConverter x:Key="CustomerToCityConverter" />
     </Window.Resources>
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
@@ -75,13 +77,13 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Customer" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                    <ComboBox ItemsSource="{Binding Customers}" DisplayMemberPath="Name" Style="{StaticResource ComboBoxStyle}" Grid.Column="1" Grid.Row="0"/>
+                    <ComboBox ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" Style="{StaticResource ComboBoxStyle}" Grid.Column="1" Grid.Row="0"/>
 
                     <TextBlock Text="Street" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="1" />
-                    <TextBox Style="{StaticResource InputFieldStyle}" Grid.Column="1" Grid.Row="1"/>
+                    <TextBox Text="{Binding SelectedCustomer.Street}" IsEnabled="False" Style="{StaticResource InputFieldStyle}" Grid.Column="1" Grid.Row="1"/>
 
                     <TextBlock Text="City" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="2" />
-                    <TextBox Style="{StaticResource InputFieldStyle}" Grid.Column="1" Grid.Row="2"/>
+                    <TextBox Text="{Binding SelectedCustomer, Converter={StaticResource CustomerToCityConverter}}" IsEnabled="False" Style="{StaticResource InputFieldStyle}" Grid.Column="1" Grid.Row="2"/>
                 </Grid>
             </GroupBox>
             <GroupBox Header="Reservation" Style="{StaticResource GroupBoxStyle}" Grid.Column="1">

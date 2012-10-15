@@ -10,5 +10,14 @@ namespace Zuehlke.Zmapp.Services.Contracts.Employee
 
         [DataMember]
         public string Name { get; set; }
+
+        [DataMember]
+        public string Street { get; set; }
+
+        [DataMember]
+        public string ZipCode { get; set; }
+
+        [DataMember]
+        public string City { get; set; }
     }
 }

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.Prism.ViewModel;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 
 namespace Zuehlke.Zmapp.Wpf
 {
-    public class EmployeeListViewModel
+    public class EmployeeListViewModel : NotificationObject
     {
         private readonly IEmployeeEvaluationService service = new EmployeeEvaluationServiceMock();
         private readonly List<CustomerInfo> customers = new List<CustomerInfo>();
@@ -27,6 +28,8 @@ namespace Zuehlke.Zmapp.Wpf
             this.customers.Clear();
             CustomerInfo[] customerInfos = this.service.GetCustomers();
             this.customers.AddRange(customerInfos);
+
+            this.selectedCustomer = this.customers.FirstOrDefault();
         }
 
         public IEnumerable<CustomerInfo> Customers
@@ -41,8 +44,15 @@ namespace Zuehlke.Zmapp.Wpf
 
         public CustomerInfo SelectedCustomer
         {
-            get { return this.selectedCustomer; }
-            set { this.selectedCustomer = value; }
+            get
+            {
+                return this.selectedCustomer;
+            }
+            set
+            {
+                this.selectedCustomer = value;
+                this.RaisePropertyChanged(() => this.SelectedCustomer);
+            }
         }
     }
 }
