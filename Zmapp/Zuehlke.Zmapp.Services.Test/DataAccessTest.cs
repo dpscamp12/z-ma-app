@@ -47,6 +47,11 @@ namespace Zuehlke.Zmapp.Services.Test
                              Id = 1,
                              FirstName = "Roger",
                              LastName = "Federerr",
+                             Street = "Schaffhauserstrasse 23",
+                             City = "Zürich",
+                             ZipCode = 8006,
+                             Phone = "+41 44 999 99 99",
+                             EMail = "dspcamp12@gmail.com",
                              Skills = new[] {Skill.CSharp, Skill.SqlServer},
                              CareerLevel = CareerLevel.SoftwareEngineer,
                              Reservations = new[]
@@ -69,6 +74,11 @@ namespace Zuehlke.Zmapp.Services.Test
                              Id = 2,
                              FirstName = "Pipilotti",
                              LastName = "Rist",
+                             Street = "Wiesenstrasse 10a",
+                             City = "Schlieren",
+                             ZipCode = 8952,
+                             Phone = "+41 44 999 99 99",
+                             EMail = "dspcamp12@gmail.com",
                              CareerLevel = CareerLevel.SoftwareEngineer
                          };
 

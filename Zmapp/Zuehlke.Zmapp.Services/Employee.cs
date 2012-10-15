@@ -15,6 +15,16 @@ namespace Zuehlke.Zmapp.Services
 
         public string LastName { get; set; }
 
+        public string Street { get; set; }
+
+        public string City { get; set; }
+
+        public int ZipCode { get; set; }
+
+        public string Phone { get; set; }
+
+        public string EMail { get; set; }
+
         public Skill[] Skills { get; set; }
 
         public CareerLevel CareerLevel { get; set; }
