@@ -1,0 +1,171 @@
+﻿@using System.Collections
+@using Zuehlke.Zmapp.Services.Contracts.Employee
+@model IEnumerable<Zuehlke.Zmapp.WebApp.Models.FoundEmployeeViewModel>
+
+<h2>Employees</h2>
+
+<table id="employeeList">
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td><button id="@item.Id" type="submit">Show Details</button></td>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+        </tr>    
+    }
+</table>
+ 
+
+
+<div id="details">
+    <table>
+        <tr>
+            <td>First Name</td>
+            <td><input type="text" id="firstName" /></td>
+        </tr>    
+        <tr>
+            <td>Last Name</td>
+            <td><input type="text" id="lastName" /></td>
+        </tr>    
+        <tr>
+            <td>Career Level</td>
+            <td>
+                <p>
+                    <select id="careerLevel">
+                        @foreach (var value in Enum.GetValues(typeof(CareerLevel)).Cast<CareerLevel>())
+                        {
+                            <option id="@((int)value)">@value</option>
+                        }
+                    </select>
+                </p>
+            </td>
+        </tr>    
+        <tr>
+            <td>Skills</td>
+            <td>
+                <p>
+                    @foreach (var value in Enum.GetValues(typeof(Skill)).Cast<Skill>())
+                    {
+                        <input type="checkbox" name="skill" value="@value" />@(value)
+                    }
+               </p>
+            </td>
+        </tr>    
+    </table>
+    
+    <button id="editButton" type="submit">Edit</button>        
+    <button id="saveButton" type="submit">Save</button>        
+    <button id="cancelButton" type="submit">Cancel</button>        
+
+</div>
+
+<script type="text/javascript">
+
+    displayMode = {
+        NoEmployeeSelected: 0,
+        DisplayEmployeeDetails: 1,
+        EditEmployeeDetails: 2
+    };
+    
+    $(function () {
+
+        var employeeId = 0;
+        setDisplayMode(displayMode.NoEmployeeSelected);
+       
+        $('#employeeList button').click(function (event) {
+            employeeId = event.target.id;
+            loadEmployee();
+            setDisplayMode(displayMode.DisplayEmployeeDetails);
+        });
+        
+        $('#editButton').click(function () {
+            setDisplayMode(displayMode.EditEmployeeDetails);            
+        });
+
+        $('#cancelButton').click(function () {
+            loadEmployee();
+            setDisplayMode(displayMode.DisplayEmployeeDetails);
+        });
+
+        $('#saveButton').click(function () {
+            saveEmployee();
+            setDisplayMode(displayMode.DisplayEmployeeDetails);
+           // location.reload();  //reload page...
+            // reload page
+            
+      //      loadEmployee();
+         //   setDisplayMode(displayMode.DisplayEmployeeDetails);
+        });
+
+        function setDisplayMode(mode) {
+            if (mode == displayMode.NoEmployeeSelected) {
+                $('#details').hide();
+            }
+            else {
+                $('#details').show();
+                if (mode == displayMode.DisplayEmployeeDetails) {
+                    $('#editButton').show();
+                    $('#saveButton').hide();
+                    $('#cancelButton').hide();
+                    
+                    $('#details input').attr('readonly', true);
+                }
+                else if (mode == displayMode.EditEmployeeDetails) {
+                    $('#editButton').hide();
+                    $('#saveButton').show();
+                    $('#cancelButton').show();
+                    
+                    $('#details input').attr('readonly', false);
+                }
+            }
+        }
+        
+        function loadEmployee() {
+             $.getJSON("/Home/Employee", { 'id': employeeId })
+                   .success(function (data) {
+                       $('#firstName').val(data.FirstName);
+                       $('#lastName').val(data.LastName);
+                       setSkills(data.Skills);
+                   })
+                    .error(function() {
+                        alert("Error loading data for employee with ID " + employeeId);
+                    });
+        };
+        
+        function setSkills(skills) {
+            alert(skills);
+        }
+
+        function saveEmployee() {
+
+            //var employee = {
+            //    Id: employeeId,
+            //    FirstName: $('#firstName').val(),
+            //    LastName: $('#lastName').val()
+            //};
+            var employee = { };
+            employee["FirstName"] = $('#firstName').val();
+            employee["LastName"] = $('#lastName').val();
+
+
+           // var ob = { text: "Frida" };
+           // var employeeJsonText = window.JSON.stringify(ob);
+
+            //$.ajax({
+            //    type: 'POST',
+            //    url: "/Home/Employee",
+            //    dataType: 'json',
+            //    contentType: 'application/json; charset=utf-8',
+            //    data: employeeJsonText
+            //})
+            $.post("/Home/Employee", employee)
+                .success(function() {
+                    alert('success');
+                    loadEmployee();
+                })
+                .error(function(xhr, ajaxOptions, thrownError) {
+                    alert('Error saving data [Status-code:' + xhr.status + ']');
+                });
+        }
+    });
+</script>

@@ -29,7 +29,7 @@ namespace Zuehlke.Zmapp.Services
 
         public static void WriteCustomersToFile(string fileName, IEnumerable<Customer> customers)
         {
-            var serializer = new XmlSerializer(typeof(EmployeeList));
+            var serializer = new XmlSerializer(typeof(CustomerList));
             using (TextWriter writer = new StreamWriter(fileName))
             {
                 serializer.Serialize(writer, new CustomerList() { Customers = customers.ToArray() });

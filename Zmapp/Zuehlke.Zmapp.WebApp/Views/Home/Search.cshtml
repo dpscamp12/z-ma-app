@@ -1,0 +1,55 @@
+﻿@model Zuehlke.Zmapp.WebApp.Models.SearchViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+
+
+Das wars
+
+
+@using (Html.BeginForm())
+{
+
+    <fieldset>
+
+        <legend>Multi-Select Demo</legend>
+
+        <div>
+            @Html.LabelFor(m => m.Customers)
+       
+                @Html.DropDownListFor(m => m.SelectedCustomer, Model.Customers, "-- Please select a customer --")
+            @Html.ValidationMessageFor(m => m.SelectedCustomer)
+        </div>
+        
+        <hr/>
+
+        <div>
+            @Html.LabelFor(m => m.StartDate)
+            @Html.EditorFor(m => m.StartDate)
+            @Html.ValidationMessageFor(m => m.StartDate)
+
+            @Html.LabelFor(m => m.EndDate)
+            @Html.EditorFor(m => m.EndDate)
+            @Html.ValidationMessageFor(m => m.EndDate)
+        </div>
+        
+        <hr/>
+
+        <div>
+            @Html.LabelFor(m => m.SelectedSkills)
+        @*    @Html.ListBoxFor(m => m.SelectedSkills, Model.Skills)*@
+            @Html.ListBoxFor(x => x.SelectedSkills, Model.Skills)
+            @Html.ValidationMessageFor(m => m.SelectedSkills)
+        </div>
+
+
+        <p>
+            <input type="submit" value="Search" />
+        </p>
+
+    </fieldset>
+
+}

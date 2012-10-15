@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Zuehlke.Zmapp.WebApp.Models.FoundEmployeeViewModel>
+
+<h4>The following Employees match your criterias:</h4>
+
+<ul id="employeeList">
+    @foreach(var item in Model)
+    {
+        <li id="@item.Id">@item.Name</li>    
+    }
+</ul>
+
+<div id="details">
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#employeeList > li').click(function (event) {
+            var employeeId = event.target.id;
+            var url = "EmployeeDetail?id=" + employeeId;
+            $('#details').load(url);
+        });
+    });
+</script>
+  

@@ -10,12 +10,12 @@ namespace Zuehlke.Zmapp.Services.Test
     [TestClass]
     public class DataAccessTest
     {
-        [Ignore]
-        //[TestMethod]
+        // [Ignore]
+        [TestMethod]
         public void CreateTestData()
         {
-            const string fileName = "C:/Temp/Employees.xml";
-            DataAccess.WriteEmployeesToFile(fileName, CreateEmployeeList());
+            DataAccess.WriteEmployeesToFile("C:/Temp/Employees.xml", CreateEmployeeList());
+            DataAccess.WriteCustomersToFile("C:/Temp/Customers.xml", CreateCustomerList());
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace Zuehlke.Zmapp.Services.Test
             {
                 List<Employee> initialEmployees = CreateEmployeeList();
                 DataAccess.WriteEmployeesToFile(fileName, initialEmployees);
-                
+
                 List<Employee> restoredEmployees = DataAccess.ReadEmployeesFromFile(fileName).ToList();
                 Assert.AreEqual(initialEmployees.Count, restoredEmployees.Count);
             }
@@ -37,7 +37,7 @@ namespace Zuehlke.Zmapp.Services.Test
                 {
                     File.Delete(fileName);
                 }
-           }
+            }
         }
 
         private static List<Employee> CreateEmployeeList()
@@ -73,6 +73,16 @@ namespace Zuehlke.Zmapp.Services.Test
                          };
 
             return new List<Employee> {e1, e2};
+        }
+
+        private static List<Customer> CreateCustomerList()
+        {
+            return new List<Customer>
+                       {
+                           new Customer() {Id = 1, Name = "Phonaxis"},
+                           new Customer() {Id = 34, Name = "BAA"},
+                           new Customer() {Id = 4, Name = "Vereinigte Bank"}
+                       };
         }
     }
 }
