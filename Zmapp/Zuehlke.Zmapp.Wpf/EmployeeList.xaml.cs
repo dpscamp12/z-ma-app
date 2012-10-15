@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Zuehlke.Zmapp.Services.Contracts.Employee;
 
 namespace Zuehlke.Zmapp.Wpf
 {
@@ -27,26 +25,9 @@ namespace Zuehlke.Zmapp.Wpf
 
         public MainWindow()
         {
-            InitializeComponent();
-            //Console.WriteLine(typeof(IEmployeeEvaluationService).AssemblyQualifiedName);
-            //var x = new Test();
-            //x.Open();
-            //var y = x.GetCustomers();
-            //x.Close();
+            this.InitializeComponent();
+            this.viewModel.Init();
             this.DataContext = this.viewModel;
-        }
-    }
-
-    public class Test : ClientBase<IEmployeeEvaluationService>, IEmployeeEvaluationService
-    {
-        public CustomerInfo[] GetCustomers()
-        {
-            return Channel.GetCustomers();
-        }
-
-        public EmployeeSearchResult[] FindPotentialEmployeesForCustomer(EmployeeQuery query)
-        {
-            return Channel.FindPotentialEmployeesForCustomer(query);
         }
     }
 }

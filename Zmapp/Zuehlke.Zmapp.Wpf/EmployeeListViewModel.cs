@@ -10,6 +10,8 @@ namespace Zuehlke.Zmapp.Wpf
     public class EmployeeListViewModel
     {
         private readonly IEmployeeEvaluationService service = new EmployeeEvaluationServiceMock();
+        private readonly List<CustomerInfo> customers = new List<CustomerInfo>();
+        private CustomerInfo selectedCustomer;
 
         public EmployeeListViewModel()
         {
@@ -20,17 +22,27 @@ namespace Zuehlke.Zmapp.Wpf
             this.service = injectedService;
         }
 
+        public void Init()
+        {
+            this.customers.Clear();
+            CustomerInfo[] customerInfos = this.service.GetCustomers();
+            this.customers.AddRange(customerInfos);
+        }
+
         public IEnumerable<CustomerInfo> Customers
         {
-            get
-            {
-                return service.GetCustomers();
-            }
+            get { return this.customers; }
         }
 
         public IEnumerable<Skill> Skills
         {
             get { return typeof(Skill).GetEnumValues().Cast<Skill>(); }
+        }
+
+        public CustomerInfo SelectedCustomer
+        {
+            get { return this.selectedCustomer; }
+            set { this.selectedCustomer = value; }
         }
     }
 }
