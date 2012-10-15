@@ -22,8 +22,8 @@ namespace Zuehlke.Zmapp.Services
             var serializer = new XmlSerializer(typeof(EmployeeList));
             using (var fs = new FileStream(fileName, FileMode.Open))
             {
-                var recipe = (EmployeeList)serializer.Deserialize(fs);
-                return recipe.Employees;
+                var employeeList = (EmployeeList)serializer.Deserialize(fs);
+                return employeeList.Employees;
             }
         }
 
@@ -41,8 +41,8 @@ namespace Zuehlke.Zmapp.Services
             var serializer = new XmlSerializer(typeof(CustomerList));
             using (var fs = new FileStream(fileName, FileMode.Open))
             {
-                var recipe = (CustomerList)serializer.Deserialize(fs);
-                return recipe.Customers;
+                var customerList = (CustomerList)serializer.Deserialize(fs);
+                return customerList.Customers;
             }
         }
 

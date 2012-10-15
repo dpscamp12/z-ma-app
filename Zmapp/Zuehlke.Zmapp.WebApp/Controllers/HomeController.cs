@@ -16,30 +16,15 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+       
 
         [HttpGet]
         public ActionResult Employees()
         {
-            var employees = Repository.Instance.GetEmployees();
-            var foundEmployees = employees.Select(e => new FoundEmployeeViewModel { Id = e.Id, Name = String.Format("{0} {1}", e.FirstName, e.LastName) });
-            return View(foundEmployees);
+            return View();
         }
 
         [HttpGet]

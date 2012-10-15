@@ -1,6 +1,4 @@
-﻿@using System.Collections
-@using Zuehlke.Zmapp.Services.Contracts.Employee
-@model IEnumerable<Zuehlke.Zmapp.WebApp.Models.FoundEmployeeViewModel>
+﻿@using Zuehlke.Zmapp.Services.Contracts.Employee
 
 <h2>List of Employees</h2>
 
@@ -127,7 +125,9 @@
         });
 
         $('#cancelButton').click(function () {
-            loadEmployee();
+            // reload existing employee
+            var employeeId = $('#employeeId').text();
+            loadEmployee(employeeId);
             setDisplayMode(displayMode.DisplayEmployeeDetails);
         });
 
@@ -205,8 +205,6 @@
             });
         }
         
-     
-
         function setDisplayMode(mode) {
             currentDisplayMode = mode;
             
@@ -249,14 +247,11 @@
         }
         
         function setCareerLevel(careerLevel) {
-            $('#careerLevel option').each(function() {
-                var optionValue = parseInt($(this).val());
-                $(this).attr('selected', optionValue == careerLevel);
-            });
+            $('#careerLevel').val(careerLevel);
         }
         
         function getCareerLevel() {
-            return parseInt($('#careerLevel option:selected').val());
+            return parseInt($('#careerLevel').val());
         }
         
         function setSkills(skills) {
@@ -291,7 +286,7 @@
                 for (var i = 0; i < reservations.length; i++) {
                     var start = new Date(parseInt(reservations[i].Start.substr(6)));
                     var end = new Date(parseInt(reservations[i].End.substr(6)));
-                    var customerId = reservations[i].CustomerId
+                    var customerId = reservations[i].CustomerId;
                     appendReservationToTable(start, end, customerId);
                 }
             }
@@ -325,7 +320,7 @@
                         } else if (i == 1) {
                             reservation['End'] = getDateFromRfc3339FormattedString($(input).val());
                         } else if (i == 2) {
-                            reservation['Id'] = parseInt($(input).val());
+                            reservation['CustomerId'] = parseInt($(input).val());
                         }
                     });
                     reservations.push(reservation);
