@@ -91,6 +91,7 @@ h5, h6 {
     }
 
 
+
 /* main layout
 ----------------------------------------------------------*/
 .content-wrapper {
@@ -447,6 +448,25 @@ textarea {
         background: transparent;
         border: inherit;
         width: auto;
+    }
+
+    input[type="text"][readonly="readonly"]
+    {
+        background:#dddddd;
+    }
+    input[type="text"][disabled="disabled"]
+    {
+        background:#dddddd;
+    }
+    input[type="date"][disabled="disabled"]
+    {
+        background:#dddddd;
+    }
+    select[disabled="disabled"] {
+        background:#dddddd;
+    }
+    option[disabled="disabled"] {
+        background:#dddddd;
     }
 
     input[type="submit"],

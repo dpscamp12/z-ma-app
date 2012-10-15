@@ -10,8 +10,8 @@ namespace Zuehlke.Zmapp.Services.Test
     [TestClass]
     public class DataAccessTest
     {
-        // [Ignore]
-        [TestMethod]
+        [Ignore]
+       // [TestMethod]
         public void CreateTestData()
         {
             DataAccess.WriteEmployeesToFile("C:/Temp/Employees.xml", CreateEmployeeList());
@@ -59,12 +59,14 @@ namespace Zuehlke.Zmapp.Services.Test
                                                     new Reservation
                                                         {
                                                             Start = new DateTime(2013, 1, 1),
-                                                            End = new DateTime(2013, 2, 5)
+                                                            End = new DateTime(2013, 2, 5),
+                                                            CustomerId = 1
                                                         },
                                                     new Reservation
                                                         {
                                                             Start = new DateTime(2013, 1, 1),
-                                                            End = new DateTime(2013, 2, 5)
+                                                            End = new DateTime(2013, 2, 5),
+                                                            
                                                         }
                                                 },
                          };

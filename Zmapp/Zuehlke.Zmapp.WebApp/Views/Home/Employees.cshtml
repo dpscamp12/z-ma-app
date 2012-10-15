@@ -2,23 +2,29 @@
 @using Zuehlke.Zmapp.Services.Contracts.Employee
 @model IEnumerable<Zuehlke.Zmapp.WebApp.Models.FoundEmployeeViewModel>
 
-<h2>Employees</h2>
+<h2>List of Employees</h2>
 
 <table id="employeeList">
-    @foreach(var item in Model)
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+ @*   @foreach(var item in Model)
     {
         <tr>
-            <td><button id="@item.Id" type="submit">Show Details</button></td>
             <td>@item.Id</td>
             <td>@item.Name</td>
+            <td><button id="@item.Id" type="submit">Show Details</button></td>
         </tr>    
-    }
+    }*@
 </table>
  
-
+ <hr/>
 
 <div id="details">
     <table>
+       
         <tr>
             <td>First Name</td>
             <td><input type="text" id="firstName" /></td>
@@ -28,13 +34,25 @@
             <td><input type="text" id="lastName" /></td>
         </tr>    
         <tr>
+            <td>Street and Number</td>
+            <td><input type="text" id="street" /></td>
+        </tr>    
+        <tr>
+            <td>City</td>
+            <td><input type="text" id="city" /></td>
+        </tr>    
+        <tr>
+            <td>Zip-Code</td>
+            <td><input type="text" id="zipCode" /></td>
+        </tr>    
+        <tr>
             <td>Career Level</td>
             <td>
                 <p>
                     <select id="careerLevel">
                         @foreach (var value in Enum.GetValues(typeof(CareerLevel)).Cast<CareerLevel>())
                         {
-                            <option id="@((int)value)">@value</option>
+                            <option value="@((int)value)">@value</option>
                         }
                     </select>
                 </p>
@@ -43,16 +61,37 @@
         <tr>
             <td>Skills</td>
             <td>
-                <p>
-                    @foreach (var value in Enum.GetValues(typeof(Skill)).Cast<Skill>())
-                    {
-                        <input type="checkbox" name="skill" value="@value" />@(value)
-                    }
-               </p>
+                <div id="skills">
+                    <p>
+                        @foreach (var value in Enum.GetValues(typeof(Skill)).Cast<Skill>())
+                        {
+                            <input type="checkbox" name="skill" value="@((int)value)" />@(value)
+                        }
+                    </p>
+                </div>
             </td>
         </tr>    
+        <tr>
+            <td>Reservations</td>
+            <td>
+                <div id="reservations">
+                    <table id="reservationsTable">
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Customer</th>
+                            <th> </th>
+                        </tr>
+                        @* rows inserted by code *@
+                    </table>
+                    <button id="addReservationButton">Add</button>
+                </div>
+            </td>
+        </tr>
     </table>
     
+    <hr/>
+
     <button id="editButton" type="submit">Edit</button>        
     <button id="saveButton" type="submit">Save</button>        
     <button id="cancelButton" type="submit">Cancel</button>        
@@ -70,16 +109,13 @@
     $(function () {
 
         var employeeId = 0;
+        var currentDisplayMode = displayMode.NoEmployeeSelected;
+
         setDisplayMode(displayMode.NoEmployeeSelected);
-       
-        $('#employeeList button').click(function (event) {
-            employeeId = event.target.id;
-            loadEmployee();
-            setDisplayMode(displayMode.DisplayEmployeeDetails);
-        });
+        loadEmployeeList();
         
         $('#editButton').click(function () {
-            setDisplayMode(displayMode.EditEmployeeDetails);            
+            setDisplayMode(displayMode.EditEmployeeDetails);
         });
 
         $('#cancelButton').click(function () {
@@ -90,14 +126,60 @@
         $('#saveButton').click(function () {
             saveEmployee();
             setDisplayMode(displayMode.DisplayEmployeeDetails);
-           // location.reload();  //reload page...
-            // reload page
-            
-      //      loadEmployee();
-         //   setDisplayMode(displayMode.DisplayEmployeeDetails);
         });
 
+        $('#addReservationButton').click(function () {
+            appendReservationToTable(new Date(2013, 0, 1), new Date(2013, 11, 31), 0); // Javascript month start with 0 == Jan
+        });
+        
+        function loadEmployeeList() {
+            $.getJSON("/Home/EmployeeIdentifiers")
+                .success(function(employees) {
+                    initEmployeeTable(employees);
+                })
+                .error(function() {
+                    alert("Error loading data for employee with ID " + employeeId);
+                });
+        }
+        
+        function initEmployeeTable(employees) {
+            clearEmployeeTable();
+            
+            for (var i = 0; i < employees.length; i++) {
+                appendEmployeeToEmployeeTable(employees[i].Id, employees[i].FirstName + ' ' + employees[i].LastName);
+            }
+        }
+       
+        function clearEmployeeTable() {
+            $('#employeeList tr').each(function (index, row) {
+                if (index > 0) { // index 0 is header row
+                    $(row).remove();
+                }
+            });
+        }
+        
+        function appendEmployeeToEmployeeTable(id, name) {
+            var htmlRow = '<tr>' +
+                '<td>' + id + '</td>' +
+                '<td>' + name + '</td>' +
+                '<td><button id="' + id + '" type="submit">Show Details</button></td>' +
+                '</tr>';
+            
+            $('#employeeList tr:last').after(htmlRow);
+            
+            // button handling in row
+            $('#employeeList button').click(function () {
+                employeeId = $(this).attr('id');
+                loadEmployee();
+                setDisplayMode(displayMode.DisplayEmployeeDetails);
+            });
+        }
+        
+     
+
         function setDisplayMode(mode) {
+            currentDisplayMode = mode;
+            
             if (mode == displayMode.NoEmployeeSelected) {
                 $('#details').hide();
             }
@@ -107,61 +189,181 @@
                     $('#editButton').show();
                     $('#saveButton').hide();
                     $('#cancelButton').hide();
-                    
-                    $('#details input').attr('readonly', true);
                 }
                 else if (mode == displayMode.EditEmployeeDetails) {
                     $('#editButton').hide();
                     $('#saveButton').show();
                     $('#cancelButton').show();
-                    
-                    $('#details input').attr('readonly', false);
                 }
+                
+                var isReadonly = (mode == displayMode.DisplayEmployeeDetails);
+                $('#details input').attr('readonly', isReadonly);
+                $('#careerLevel option').attr('disabled', isReadonly);
+                $('#skills input').attr('disabled', isReadonly);
+                $('#careerLevel').attr('disabled', isReadonly);
+
+                updateReservationsForCurrentDisplayMode();
             }
         }
         
-        function loadEmployee() {
-             $.getJSON("/Home/Employee", { 'id': employeeId })
-                   .success(function (data) {
-                       $('#firstName').val(data.FirstName);
-                       $('#lastName').val(data.LastName);
-                       setSkills(data.Skills);
-                   })
-                    .error(function() {
-                        alert("Error loading data for employee with ID " + employeeId);
-                    });
-        };
+        function updateReservationsForCurrentDisplayMode() {
+            if (currentDisplayMode == displayMode.EditEmployeeDetails) {
+                $('#reservations button').show();
+                
+                $('#reservationsTable input').attr('disabled', false);
+            }
+            else {
+                $('#reservations button').hide();
+                $('#reservationsTable input').attr('disabled', true);
+            }
+        }
+        
+        function setCareerLevel(careerLevel) {
+            $('#careerLevel option').each(function() {
+                var optionValue = parseInt($(this).val());
+                $(this).attr('selected', optionValue == careerLevel);
+            });
+        }
+        
+        function getCareerLevel() {
+            return parseInt($('#careerLevel option:selected').val());
+        }
         
         function setSkills(skills) {
-            alert(skills);
+            $("#skills input:checkbox").each(function () {
+                var checkboxId = parseInt($(this).val());
+                var found = $.inArray(checkboxId, skills);
+                $(this).attr('checked', found != -1);
+            });
+        }
+        
+        function getSkills() {
+            var skills = new Array();
+            $("#skills input:checked").each(function () {
+                var skillId = parseInt($(this).val());
+                skills.push(skillId);
+            });
+            return skills;
         }
 
+        function clearReservations() {
+            $('#reservationsTable tr').each(function (index, row) {
+                if (index > 0) { // index 0 is header row
+                    $(row).remove();
+                }
+            });
+        }
+        
+        function setReservations(reservations) {
+            clearReservations();
+            
+            if (reservations) {                
+                for (var i = 0; i < reservations.length; i++) {
+                    var start = new Date(parseInt(reservations[i].Start.substr(6)));
+                    var end = new Date(parseInt(reservations[i].End.substr(6)));
+                    var customerId = reservations[i].CustomerId
+                    appendReservationToTable(start, end, customerId);
+                }
+            }
+
+            updateReservationsForCurrentDisplayMode();
+        }
+        
+        function appendReservationToTable(startDate, endDate, customerId) {
+           var htmlRow = '<tr>' +
+                '<td><input type="date" name="start" value="' + getRfc3339FormattedStringFromDate(startDate) + '"/></td>' +
+                '<td><input type="date" name="end" value="' + getRfc3339FormattedStringFromDate(endDate) + '"/></td>' +
+                '<td><input type="text" name="customer" value="' + customerId + '"/></td>' +
+                '<td><button>Delete</button></td>';
+            
+            $('#reservationsTable tr:last').after(htmlRow);
+            
+            // button handling in row
+            $('#reservationsTable button').click(function () {
+                $(this).parent().parent().remove();
+            });
+        }
+        
+        function getReservations() {
+            var reservations = new Array();
+            $('#reservationsTable tr').each(function(index, row) {
+                if (index > 0) {  // index 0 is header row
+                    var reservation = { };
+                    $('input', row).each(function (i, input) {
+                        if (i == 0) {
+                            reservation['Start'] = getDateFromRfc3339FormattedString($(input).val());
+                        } else if (i == 1) {
+                            reservation['End'] = getDateFromRfc3339FormattedString($(input).val());
+                        } else if (i == 2) {
+                            reservation['Id'] = parseInt($(input).val());
+                        }
+                    });
+                    reservations.push(reservation);
+                }
+            });
+            return reservations;
+        }
+        
+        function getRfc3339FormattedStringFromDate(date) {
+            var month = date.getMonth() + 1;
+            if (month < 10) {
+                month = '0' + month;
+            } 
+            var day = date.getDate();
+            if (day < 10) {
+                day = '0' + day;
+            }
+
+            return date.getFullYear() + '-' + month + '-' + day;
+        }
+
+        function getDateFromRfc3339FormattedString(text) {
+            var parts = text.split('-');
+            return new Date(parts[0], parts[1] - 1, parts[2]);
+        }
+
+        function loadEmployee() {
+            $.getJSON("/Home/Employee", { 'id': employeeId })
+                  .success(function (data) {
+                      $('#firstName').val(data.FirstName);
+                      $('#lastName').val(data.LastName);
+                      $('#street').val(data.Street);
+                      $('#city').val(data.City);
+                      $('#zipCode').val(data.ZipCode);
+                      setCareerLevel(data.CareerLevel);
+                      setSkills(data.Skills);
+                      setReservations(data.Reservations);
+                  })
+                   .error(function () {
+                       alert("Error loading data for employee with ID " + employeeId);
+                   });
+        };
+        
         function saveEmployee() {
 
-            //var employee = {
-            //    Id: employeeId,
-            //    FirstName: $('#firstName').val(),
-            //    LastName: $('#lastName').val()
-            //};
-            var employee = { };
-            employee["FirstName"] = $('#firstName').val();
-            employee["LastName"] = $('#lastName').val();
+            var employee = {
+                "FirstName": $('#firstName').val(),
+                "LastName": $('#lastName').val(),
+                "Street": $('#street').val(),
+                "City": $('#city').val(),
+                "ZipCode": $('#zipCode').val(),
+                "Skills": getSkills(),
+                "CareerLevel": getCareerLevel(),
+                "Reservations": getReservations()
+            };
+            var employeeJsonText = window.JSON.stringify(employee);
 
-
-           // var ob = { text: "Frida" };
-           // var employeeJsonText = window.JSON.stringify(ob);
-
-            //$.ajax({
-            //    type: 'POST',
-            //    url: "/Home/Employee",
-            //    dataType: 'json',
-            //    contentType: 'application/json; charset=utf-8',
-            //    data: employeeJsonText
-            //})
-            $.post("/Home/Employee", employee)
-                .success(function() {
-                    alert('success');
-                    loadEmployee();
+            $.ajax({
+                type: 'POST',
+                url: "/Home/Employee",
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: employeeJsonText
+            })
+                .success(function (e) {
+                    alert('SUCCESS');
+                    loadEmployeeList();
+                    loadEmployee(e.Id);
                 })
                 .error(function(xhr, ajaxOptions, thrownError) {
                     alert('Error saving data [Status-code:' + xhr.status + ']');

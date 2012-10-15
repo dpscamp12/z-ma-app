@@ -43,21 +43,28 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
         }
 
         [HttpGet]
+        public JsonResult EmployeeIdentifiers()
+        {
+            var employees = Repository.Instance.GetEmployees();
+            var employeeIdentifiers = employees.Select(e => new { e.Id, e.FirstName, e.LastName });
+
+            return Json(employeeIdentifiers, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
         public JsonResult Employee(int id)
         {
             var employee = Repository.Instance.GetEmployee(id);
-
-            employee.Skills = new [] { Skill.SqlServer, Skill.CSharp };
             return Json(employee, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult Employee(Employee text)
+        public JsonResult Employee(Employee employee)
         {
-            if (ModelState.IsValid)
+          //  Repository.Instance.SetEmployee(employee);
             Thread.Sleep(1000);
             //  throw new ArgumentException("Bad things happended");
-            return Json("Hallo");
+            return Json(employee);
         }        
 
 
