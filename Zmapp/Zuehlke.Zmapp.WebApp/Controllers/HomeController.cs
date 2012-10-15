@@ -47,7 +47,6 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
         {
             var employees = Repository.Instance.GetEmployees();
             var employeeIdentifiers = employees.Select(e => new { e.Id, e.FirstName, e.LastName });
-
             return Json(employeeIdentifiers, JsonRequestBehavior.AllowGet);
         }
 
@@ -61,12 +60,16 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
         [HttpPost]
         public JsonResult Employee(Employee employee)
         {
-          //  Repository.Instance.SetEmployee(employee);
-            Thread.Sleep(1000);
-            //  throw new ArgumentException("Bad things happended");
+            Repository.Instance.SetEmployee(employee);
             return Json(employee);
-        }        
+        }
 
+        [HttpDelete]
+        public HttpStatusCodeResult DeleteEmployee(int id)
+        {
+            bool success = Repository.Instance.RemoveEmployee(id);
+            return new HttpStatusCodeResult(success ? 200 : 400);  // are these good status codes? 
+        }
 
         [HttpGet]
         public ActionResult Search()

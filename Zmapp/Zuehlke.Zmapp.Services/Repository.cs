@@ -30,19 +30,37 @@ namespace Zuehlke.Zmapp.Services
         {    
         }
 
-        public IEnumerable<Employee> GetEmployees()
+        public IList<Employee> GetEmployees()
         {
-            if (_employees == null)
-            {
-                _employees = DataAccess.ReadEmployeesFromFile(EmployeeListFileName).ToList();
-            }
-
-            return _employees;
+            return Employees;
         }
 
         public Employee GetEmployee(int id)
         {
-            return GetEmployees().FirstOrDefault(e => e.Id == id);
+            return Employees.FirstOrDefault(e => e.Id == id);
+        }
+
+        public bool RemoveEmployee(int employeeId)
+        {
+            bool isValid = RemoveEmployee(Employees, employeeId);
+            if (isValid)
+            {
+                DataAccess.WriteEmployeesToFile(EmployeeListFileName, Employees);
+            }
+            return isValid;
+        }
+
+        public void SetEmployee(Employee employee)
+        {
+            if (employee.Id <= 0)
+            {
+                throw new ArgumentException("Employee ID is invalid.");
+            }
+
+            RemoveEmployee(Employees, employee.Id);
+            Employees.Add(employee);
+
+            DataAccess.WriteEmployeesToFile(EmployeeListFileName, Employees);
         }
 
         public IEnumerable<Customer> GetCustomers()
@@ -58,6 +76,24 @@ namespace Zuehlke.Zmapp.Services
         public Customer GetCustomer(int id)
         {
             return GetCustomers().First(e => e.Id == id);
-        }        
+        }
+
+        private static bool RemoveEmployee(IList<Employee> employees, int employeeId)
+        {
+            for (int i = employees.Count - 1; i >= 0; i--)
+            {
+                if (employees[i].Id == employeeId)
+                {
+                    employees.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private IList<Employee> Employees
+        {
+            get { return _employees ?? (_employees = DataAccess.ReadEmployeesFromFile(EmployeeListFileName).ToList()); }
+        }
     }
 }

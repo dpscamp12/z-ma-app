@@ -4,27 +4,25 @@
 
 <h2>List of Employees</h2>
 
-<table id="employeeList">
+<table id="employeeTable">
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th></th>
+        <th></th>
     </tr>
- @*   @foreach(var item in Model)
-    {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.Name</td>
-            <td><button id="@item.Id" type="submit">Show Details</button></td>
-        </tr>    
-    }*@
+    @* rows inserted by code *@
 </table>
+<button id="addEmployeeButton">Add Employee</button>
  
  <hr/>
 
 <div id="details">
     <table>
-       
+        <tr>
+            <td>First Name</td>
+            <td id="employeeId"></td>
+        </tr>    
         <tr>
             <td>First Name</td>
             <td><input type="text" id="firstName" /></td>
@@ -108,11 +106,21 @@
     
     $(function () {
 
-        var employeeId = 0;
         var currentDisplayMode = displayMode.NoEmployeeSelected;
 
         setDisplayMode(displayMode.NoEmployeeSelected);
         loadEmployeeList();
+        
+        $('#addEmployeeButton').click(function () {
+            var newEmployee = {
+                Id: Math.floor(Math.random() * 1000),
+                FirstName: '',
+                LastName: '',
+                CareerLevel: 1
+            };
+            initEmployeeDetails(newEmployee);
+            setDisplayMode(displayMode.EditEmployeeDetails);
+        });
         
         $('#editButton').click(function () {
             setDisplayMode(displayMode.EditEmployeeDetails);
@@ -133,12 +141,12 @@
         });
         
         function loadEmployeeList() {
-            $.getJSON("/Home/EmployeeIdentifiers")
+            $.getJSON("/Home/EmployeeIdentifiers", { 'seed': new Date().getTime() })  // date avoids that call only hits cache... AUTSCH.
                 .success(function(employees) {
                     initEmployeeTable(employees);
                 })
                 .error(function() {
-                    alert("Error loading data for employee with ID " + employeeId);
+                    alert("Error loading employee list");
                 });
         }
         
@@ -151,7 +159,7 @@
         }
        
         function clearEmployeeTable() {
-            $('#employeeList tr').each(function (index, row) {
+            $('#employeeTable tr').each(function (index, row) {
                 if (index > 0) { // index 0 is header row
                     $(row).remove();
                 }
@@ -162,16 +170,38 @@
             var htmlRow = '<tr>' +
                 '<td>' + id + '</td>' +
                 '<td>' + name + '</td>' +
-                '<td><button id="' + id + '" type="submit">Show Details</button></td>' +
+                '<td><button id="' + id + '" data-action="show" type="submit">Show Details</button></td>' +
+                '<td><button id="' + id + '" data-action="delete" type="submit">Delete</button></td>' +
                 '</tr>';
             
-            $('#employeeList tr:last').after(htmlRow);
+            $('#employeeTable tr:last').after(htmlRow);
             
-            // button handling in row
-            $('#employeeList button').click(function () {
-                employeeId = $(this).attr('id');
-                loadEmployee();
+            // 'show'-button handling 
+            $('#employeeTable button[data-action=show]:last').click(function () {
+                var employeeId = $(this).attr('id');
+                loadEmployee(employeeId);
                 setDisplayMode(displayMode.DisplayEmployeeDetails);
+            });
+
+            // 'delete'-button handling 
+            $('#employeeTable button[data-action=delete]:last').click(function () {
+                setDisplayMode(displayMode.NoEmployeeSelected);
+
+                var employeeId = $(this).attr('id');
+                var jsonText = window.JSON.stringify({ id: employeeId });
+                $.ajax({
+                    type: 'DELETE',
+                    url: "/Home/DeleteEmployee",
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: jsonText
+                })
+               .success(function (e) {
+                   loadEmployeeList();
+               })
+               .error(function (xhr, ajaxOptions, thrownError) {
+                   alert('Error deleting employee [Status-code:' + xhr.status + ']');
+               });
             });
         }
         
@@ -279,7 +309,7 @@
             $('#reservationsTable tr:last').after(htmlRow);
             
             // button handling in row
-            $('#reservationsTable button').click(function () {
+            $('#reservationsTable button:last').click(function () {
                 $(this).parent().parent().remove();
             });
         }
@@ -322,26 +352,32 @@
             return new Date(parts[0], parts[1] - 1, parts[2]);
         }
 
-        function loadEmployee() {
-            $.getJSON("/Home/Employee", { 'id': employeeId })
+        function loadEmployee(employeeId) {
+            $.getJSON("/Home/Employee", { 'id': employeeId, 'seed': new Date().getTime() })  // date avoids that call only hits cache... AUTSCH.
                   .success(function (data) {
-                      $('#firstName').val(data.FirstName);
-                      $('#lastName').val(data.LastName);
-                      $('#street').val(data.Street);
-                      $('#city').val(data.City);
-                      $('#zipCode').val(data.ZipCode);
-                      setCareerLevel(data.CareerLevel);
-                      setSkills(data.Skills);
-                      setReservations(data.Reservations);
+                      initEmployeeDetails(data);
                   })
                    .error(function () {
                        alert("Error loading data for employee with ID " + employeeId);
                    });
         };
         
+        function initEmployeeDetails(employee) {
+            $('#employeeId').html(employee.Id);
+            $('#firstName').val(employee.FirstName);
+            $('#lastName').val(employee.LastName);
+            $('#street').val(employee.Street);
+            $('#city').val(employee.City);
+            $('#zipCode').val(employee.ZipCode);
+            setCareerLevel(employee.CareerLevel);
+            setSkills(employee.Skills);
+            setReservations(employee.Reservations);
+        }
+        
         function saveEmployee() {
 
             var employee = {
+                "id": $('#employeeId').text(),
                 "FirstName": $('#firstName').val(),
                 "LastName": $('#lastName').val(),
                 "Street": $('#street').val(),
@@ -361,7 +397,6 @@
                 data: employeeJsonText
             })
                 .success(function (e) {
-                    alert('SUCCESS');
                     loadEmployeeList();
                     loadEmployee(e.Id);
                 })

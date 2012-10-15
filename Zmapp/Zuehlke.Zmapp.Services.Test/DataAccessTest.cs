@@ -10,8 +10,8 @@ namespace Zuehlke.Zmapp.Services.Test
     [TestClass]
     public class DataAccessTest
     {
-        [Ignore]
-       // [TestMethod]
+       // [Ignore]
+        [TestMethod]
         public void CreateTestData()
         {
             DataAccess.WriteEmployeesToFile("C:/Temp/Employees.xml", CreateEmployeeList());
