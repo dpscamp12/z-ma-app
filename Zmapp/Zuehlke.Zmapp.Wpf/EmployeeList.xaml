@@ -11,102 +11,171 @@
                 <ItemsControl ItemsSource="{Binding Skills}" ItemTemplate="{StaticResource SkillListItemTemplate}" />
             </StackPanel>
         </DataTemplate>-->
-        <Style x:Key="InputLabelStyle" TargetType="{x:Type TextBlock}" >
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="20,10,10,10" />
+        <Style x:Key="BaseInputFieldStyle">
+            <Setter Property="FrameworkElement.Margin" Value="5,5,5,5" />
         </Style>
-        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}"  >
+        <Style x:Key="InputLabelStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseInputFieldStyle}" >
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="20,10,10,10" />
         </Style>
-        <Style x:Key="LabelCompanyInformation" TargetType="{x:Type TextBlock}" >
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="10,10,10,10" />
-            <Setter Property="FontWeight" Value="Bold"/>
+        <Style x:Key="InputFieldStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseInputFieldStyle}">
+            <Setter Property="VerticalAlignment" Value="Stretch" />
         </Style>
-        <Style x:Key="DatePickerStyle" TargetType="{x:Type DatePicker}" >
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="5,10,0,10" />
+        <Style x:Key="ComboBoxStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource BaseInputFieldStyle}" >
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+        <Style x:Key="DatePickerStyle" TargetType="{x:Type DatePicker}" BasedOn="{StaticResource BaseInputFieldStyle}">
+            <Setter Property="VerticalAlignment" Value="Stretch" />
         </Style>
         <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}" >
-            <Setter Property="Padding" Value="0,5,0,5" />
-            <Setter Property="Margin" Value="20,0,0,0" />
+            <Setter Property="Padding" Value="0,0,0,5" />
+            <Setter Property="Margin" Value="20,0,20,20" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
         <Style x:Key="Header" TargetType="{x:Type TextBlock}" >
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="20,10,20,10" />
             <Setter Property="FontSize" Value="30"/>
         </Style>
+        <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}" >
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="5,0,5,0" />
+        </Style>
     </Window.Resources>
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="140"/>
-            <RowDefinition Height="140"/>
+            <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
             <Image HorizontalAlignment="Left" Margin="20"  Height="100" Width="100" Source="{StaticResource ZuehlkeLogo}" Stretch="Fill"/>
             <TextBlock Style="{StaticResource Header}">ZMapp - Zühlke Mitarbeiter App</TextBlock>
         </StackPanel>
-        <GroupBox Grid.Row="1" Header="Usage" Style="{StaticResource GroupBoxStyle}">
-            <Grid HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
+
+        <Grid Grid.Row="1" Grid.IsSharedSizeScope="True" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="Customer" Style="{StaticResource GroupBoxStyle}" Grid.Column="0">
+                <Grid  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" SharedSizeGroup="InputRow" />
+                        <RowDefinition Height="Auto" SharedSizeGroup="InputRow"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="InputRow"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Customer" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="0" />
+                    <ComboBox Style="{StaticResource ComboBoxStyle}" Grid.Column="1" Grid.Row="0"/>
+
+                    <TextBlock Text="Street" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="1" />
+                    <TextBox Style="{StaticResource InputFieldStyle}" Grid.Column="1" Grid.Row="1"/>
+
+                    <TextBlock Text="City" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="2" />
+                    <TextBox Style="{StaticResource InputFieldStyle}" Grid.Column="1" Grid.Row="2"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Reservation" Style="{StaticResource GroupBoxStyle}" Grid.Column="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn"/>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" SharedSizeGroup="InputRow"/>
+                        <RowDefinition Height="Auto" SharedSizeGroup="InputRow"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Period starts on" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="0" />
+                    <DatePicker Style="{StaticResource DatePickerStyle}" Grid.Column="1" Grid.Row="0"/>
+
+                    <TextBlock Text="and ends on" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="1" />
+                    <DatePicker Style="{StaticResource DatePickerStyle}" Grid.Column="1" Grid.Row="1"/>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <GroupBox Header="Employees" Grid.Row="2" Style="{StaticResource GroupBoxStyle}" VerticalAlignment="Stretch" >
+            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"  >
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Skills" Grid.Column="0" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
+                <TextBlock Text="Career Level" Grid.Column="1" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
+                <TextBlock Text="Available Employees" Grid.Column="3" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
+                <ListBox Grid.Column="0" Grid.Row="1" SelectionMode="Multiple" Style="{StaticResource ListBoxStyle}">
+                    <ListBoxItem>C#</ListBoxItem>
+                    <ListBoxItem>WPF</ListBoxItem>
+                    <ListBoxItem>WCF</ListBoxItem>
+                </ListBox>
+                <ListBox Grid.Column="1" Grid.Row="1" SelectionMode="Multiple" Style="{StaticResource ListBoxStyle}">
+                    <ListBoxItem>Junior Software Engineer</ListBoxItem>
+                    <ListBoxItem>Software Engineer</ListBoxItem>
+                    <ListBoxItem>Senior Software Engineer</ListBoxItem>
+                </ListBox>
+                <ListBox Grid.Column="3" Grid.Row="1" Style="{StaticResource ListBoxStyle}">
+                    <ListBoxItem>Developer Star, Senior Software Engineer, C#, SQL Server, NoSQL</ListBoxItem>
+                    <ListBoxItem>Mister X, Junior Software Engineer, Java, PHP, MySQL</ListBoxItem>
+                </ListBox>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
+
+    <!--
+                <Grid ShowGridLines="True">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100*"/>
-                    <RowDefinition Height="100*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
-                    <TextBlock Style="{StaticResource InputLabelStyle}">Customer:</TextBlock>
-                    <ComboBox Style="{StaticResource ComboBoxStyle}"></ComboBox>
-                    <TextBlock  Style="{StaticResource InputLabelStyle}">Reservation period for employee(s) starts on</TextBlock>
-                    <DatePicker Style="{StaticResource DatePickerStyle}" />
-                    <TextBlock  Style="{StaticResource InputLabelStyle}">and ends at</TextBlock>
-                    <DatePicker Style="{StaticResource DatePickerStyle}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
-                    <TextBlock  Style="{StaticResource InputLabelStyle}">Customer:</TextBlock>
-                    <TextBlock Style="{StaticResource LabelCompanyInformation}">Microsoft</TextBlock>
-                    <TextBlock  Style="{StaticResource InputLabelStyle}">Strasse:</TextBlock>
-                    <TextBlock Style="{StaticResource LabelCompanyInformation}">Haupstrasse 123</TextBlock>
-                    <TextBlock  Style="{StaticResource InputLabelStyle}">Ort:</TextBlock>
-                    <TextBlock  Style="{StaticResource LabelCompanyInformation}">8000 Zürich</TextBlock>
-                </StackPanel>
+                <Grid Grid.RowSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Skills" Grid.Column="0" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
+                    <TextBlock Text="Career Level" Grid.Column="1" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
+                    <ListBox Grid.Column="0" Grid.Row="1" SelectionMode="Multiple" Style="{StaticResource ListBoxStyle}">
+                        <ListBoxItem>C#</ListBoxItem>
+                        <ListBoxItem>WPF</ListBoxItem>
+                        <ListBoxItem>WCF</ListBoxItem>
+                    </ListBox>
+                    <ListBox Grid.Column="1" Grid.Row="1" SelectionMode="Multiple" Style="{StaticResource ListBoxStyle}">
+                        <ListBoxItem>Junior Software Engineer</ListBoxItem>
+                        <ListBoxItem>Software Engineer</ListBoxItem>
+                        <ListBoxItem>Senior Software Engineer</ListBoxItem>
+                    </ListBox>
+
+                </Grid>
+                <TextBlock Text="Available Employees" Grid.Column="2" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
+                <ListBox Grid.Column="2" Grid.Row="1" SelectionMode="Multiple" Style="{StaticResource ListBoxStyle}">
+                    <ListBoxItem>Developer Star, Senior Software Engineer, C#, SQL Server, NoSQL</ListBoxItem>
+                    <ListBoxItem>Mister X, Junior Software Engineer, Java, PHP, MySQL</ListBoxItem>
+                </ListBox>
             </Grid>
-        </GroupBox >
-        <Grid HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Top" Margin="20,20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0">Skills</TextBlock>
-            <TextBlock Grid.Column="2" Grid.Row="0">Career Level</TextBlock>
-            <TextBlock Grid.Column="4" Grid.Row="0">Available Employees</TextBlock>
-            <ListBox Grid.Column="0" Grid.Row="1" SelectionMode="Multiple">
-                <ListBoxItem>C#</ListBoxItem>
-                <ListBoxItem>WPF</ListBoxItem>
-                <ListBoxItem>WCF</ListBoxItem>
-            </ListBox>
-            <ListBox Grid.Column="2" Grid.Row="1" SelectionMode="Multiple">
-                <ListBoxItem>Junior Software Engineer</ListBoxItem>
-                <ListBoxItem>Software Engineer</ListBoxItem>
-                <ListBoxItem>Senior Software Engineer</ListBoxItem>
-            </ListBox>
-            <ListBox Grid.Column="4" Grid.Row="1" SelectionMode="Multiple" Width="300" HorizontalAlignment="Left">
-                <ListBoxItem>Developer Star, Senior Software Engineer, C#, SQL Server, NoSQL</ListBoxItem>
-                <ListBoxItem>Mister X, Junior Software Engineer, Java, PHP, MySQL</ListBoxItem>
-            </ListBox>
-        </Grid>
-    </Grid>
-</Window>
+    -->

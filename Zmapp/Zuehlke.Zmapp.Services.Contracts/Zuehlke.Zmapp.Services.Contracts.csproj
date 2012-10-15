@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Employee\CareerLevel.cs" />
     <Compile Include="Employee\CustomerInfo.cs" />
+    <Compile Include="Employee\EmployeeEvaluationServiceMock.cs" />
     <Compile Include="Employee\EmployeeQuery.cs" />
     <Compile Include="Employee\EmployeeSearchResult.cs" />
     <Compile Include="Employee\IEmployeeEvaluationService.cs" />
