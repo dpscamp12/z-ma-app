@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,10 +13,10 @@ namespace Zuehlke.Zmapp.Services
         private static Repository _instance;
 
         private static IList<Employee> _employees;
-        private const string EmployeeListFileName = "C:/Temp/Employees.xml";
+        private readonly string EmployeeListFileName;
 
         private static IList<Customer> _customers;
-        private const string CustomersListFileName = "C:/Temp/Customers.xml";
+        private readonly string CustomersListFileName;
 
         static Repository()
         {
@@ -27,7 +29,10 @@ namespace Zuehlke.Zmapp.Services
         }
 
         private Repository()
-        {    
+        {
+            var path = AppDomain.CurrentDomain.BaseDirectory;
+            EmployeeListFileName = Path.Combine(path, "bin", "Employees.xml");
+            CustomersListFileName = Path.Combine(path, "bin", "Customers.xml");      
         }
 
         public IList<Employee> GetEmployees()

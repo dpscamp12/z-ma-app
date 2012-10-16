@@ -92,9 +92,9 @@ namespace Zuehlke.Zmapp.Services.Test
         {
             return new List<Customer>
                        {
-                           new Customer() {Id = 1, Name = "Phonaxis"},
-                           new Customer() {Id = 2, Name = "BAA"},
-                           new Customer() {Id = 3, Name = "Vereinigte Bank"}
+                           new Customer() {Id = 1, Name = "Phonaxis", City = "Stäfa" },
+                           new Customer() {Id = 2, Name = "BAA", City = "Baden"},
+                           new Customer() {Id = 3, Name = "Vereinigte Bank", City= "Zürich" }
                        };
         }
     }

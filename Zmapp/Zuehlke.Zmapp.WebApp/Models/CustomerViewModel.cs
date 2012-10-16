@@ -19,9 +19,6 @@ namespace Zuehlke.Zmapp.WebApp.Models
         public string Name { get; set; }
 
         [DisplayName("City")]
-        [Required]
-        [MaxLength(20, ErrorMessage = "City name must be less than 20 characters")]
-        [MinLength(2, ErrorMessage = "City name must be at least 2 characters")]
         public string City { get; set; }
     }
 }

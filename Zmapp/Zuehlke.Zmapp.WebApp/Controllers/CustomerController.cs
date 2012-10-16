@@ -18,7 +18,7 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
                                                                              {
                                                                                  Id = c.Id,
                                                                                  Name = c.Name,
-                                                                                 City = "Zürich"
+                                                                                 City = c.City
                                                                              });
             return View(model);
         }
@@ -42,7 +42,7 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 
             if (String.Equals(submit, "Save", StringComparison.InvariantCultureIgnoreCase))
             {
-                Repository.Instance.SetCustomer(new Customer {Id = model.Id, Name = model.Name});
+                Repository.Instance.SetCustomer(new Customer {Id = model.Id, Name = model.Name, City = model.City});
             }
 
             return RedirectToAction("Index", "Customer");
