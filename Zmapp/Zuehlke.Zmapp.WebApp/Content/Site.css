@@ -144,38 +144,6 @@ footer {
 }
 
 
-/* login
-----------------------------------------------------------*/
-#login {
-    display: block;
-    font-size: .85em;
-    margin: 0 0 10px;
-    text-align: right;
-}
-
-    #login a {
-        background-color: #d3dce0;
-        margin-left: 10px;
-        margin-right: 3px;
-        padding: 2px 3px;
-        text-decoration: none;
-    }
-
-    #login a.username {
-        background: none;
-        margin: 0;
-        padding: 0;
-        text-decoration: underline;
-    }
-
-    #login ul {
-        margin: 0;
-    }
-
-    #login li {
-        display: inline;
-        list-style: none;
-    }
 
 
 /* menu
@@ -329,71 +297,6 @@ aside {
     font-weight: 700;
 }
 
-/* login page */
-#loginForm {
-    border-right: solid 2px #c8c8c8;
-    float: left;
-    width: 55%;
-}
-
-    #loginForm .validation-error {
-        display: block;
-        margin-left: 15px;
-    }
-
-    #loginForm .validation-summary-errors ul {
-        margin: 0;
-        padding: 0;
-    }
-
-    #loginForm .validation-summary-errors li {
-        display: inline;
-        list-style: none;
-        margin: 0;
-    }
-
-    #loginForm input {
-        width: 250px;
-    }
-
-    #loginForm input[type="checkbox"],
-    #loginForm input[type="submit"],
-    #loginForm input[type="button"],
-    #loginForm button {
-        width: auto;
-    }
-
-#socialLoginForm {
-    margin-left: 40px;
-    float: left;
-    width: 40%;
-}
-
-    #socialLoginForm h2 {
-        margin-bottom:  5px;
-    }
-
-#socialLoginList button {
-    margin-bottom: 12px;
-}
-
-#logoutForm {
-    display: inline;
-}
-
-/* contact */
-.contact h3 {
-    font-size: 1.2em;
-}
-
-.contact p {
-    margin: 5px 0 0 10px;
-}
-
-.contact iframe {
-    border: 1px solid #333;
-    margin: 5px 0 0 10px;
-}
 
 /* forms */
 fieldset {
@@ -417,7 +320,7 @@ fieldset {
 
 label {
     display: block;
-    font-size: 1.2em;
+    font-size: 1.0em;
     font-weight: 600;
 }
 
@@ -429,10 +332,10 @@ input, textarea {
     border: 1px solid #e2e2e2;
     background: #fff;
     color: #333;
-    font-size: 1.2em;
-    margin: 5px 0 6px 0;
-    padding: 5px;
-    width: 300px;
+    font-size: 1.0em;
+    margin: 2px 0 3px 0;
+    padding: 2px;
+    width: 200px;
 }
 
 textarea {
@@ -475,10 +378,10 @@ textarea {
         background-color: #d3dce0;
         border: 1px solid #787878;
         cursor: pointer;
-        font-size: 1.2em;
-        font-weight: 600;
-        padding: 7px;
-        margin-right: 8px;
+        font-size: 1.0em;
+        font-weight: 500;
+        padding: 4px;
+        margin-right: 4px;
         width: auto;
     }
 
@@ -555,7 +458,7 @@ table {
 }
 
 th {
-    font-size: 1.2em;
+    font-size: 1.0em;
     text-align: left;
     border: none 0px;
     padding-left: 0;
@@ -598,7 +501,7 @@ th {
     }
 
 td {
-    padding: 0.25em 2em 0.25em 0em;
+    padding: 0.25em 1.5em 0.25em 0em;
     border: 0 none;
 }
 
