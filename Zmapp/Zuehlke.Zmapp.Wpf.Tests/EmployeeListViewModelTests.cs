@@ -13,7 +13,7 @@ namespace Zuehlke.Zmapp.Wpf.Tests
         public void Skills_AllEnumValuesReturned()
         {
             var viewModel = new EmployeeListViewModel(new EmployeeEvaluationServiceMock());
-            Assert.AreEqual(6, viewModel.Skills.Count());
+            Assert.AreEqual(6, viewModel.Skills.Count);
             Assert.IsTrue(viewModel.Skills.Contains(Skill.WCF));
         }
 
