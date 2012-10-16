@@ -2,29 +2,35 @@
 @using Zuehlke.Zmapp.WebApp.Models
 @model IEnumerable<EmployeeIdentifierViewModel>
 
-<h4>The following Employees match your criterias:</h4>
-
-@using (Html.BeginForm("BookEmployee", "Search"))
+@if (!Model.Any()) 
 {
-    @Html.Serialize("searchParam", ViewData["SearchParamViewModel"])
-
-    <table>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <button type="submit" name="employeeId" value="@item.EmployeeId">Book</button>      
-                </td>
-                <td>
-                    @item.EmployeeId
-                </td>
-                <td>
-                    @item.EmployeeName
-                </td>
-            </tr>
-        }
-    </table>
+    <h4>No employee matches your criterias.</h4>
 }
+else
+{
+    <h4>The following Employees match your criterias:</h4>
 
+    using (Html.BeginForm("BookEmployee", "Search"))
+    {
+        @Html.Serialize("searchParam", ViewData["SearchParamViewModel"])
+
+        <table>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <button type="submit" name="employeeId" value="@item.EmployeeId">Book</button>      
+                    </td>
+                    <td>
+                        @item.EmployeeId
+                    </td>
+                    <td>
+                        @item.EmployeeName
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+}
 
 
