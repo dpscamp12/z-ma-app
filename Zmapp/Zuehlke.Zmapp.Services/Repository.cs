@@ -65,17 +65,35 @@ namespace Zuehlke.Zmapp.Services
 
         public IEnumerable<Customer> GetCustomers()
         {
-            if (_customers == null)
-            {
-                _customers = DataAccess.ReadCustomersFromFile(CustomersListFileName).ToList();
-            }
-
-            return _customers;
+            return Customers;
         }
 
         public Customer GetCustomer(int id)
         {
-            return GetCustomers().First(e => e.Id == id);
+            return Customers.First(e => e.Id == id);
+        }
+
+        public void SetCustomer(Customer customer)
+        {
+            if (customer.Id <= 0)
+            {
+                throw new ArgumentException("Customer ID is invalid.");
+            }
+
+            RemoveCustomer(Customers, customer.Id);
+            Customers.Add(customer);
+
+            DataAccess.WriteCustomersToFile(CustomersListFileName, Customers);
+        }
+
+        public bool RemoveCustomer(int customerId)
+        {
+            bool isValid = RemoveCustomer(Customers, customerId);
+            if (isValid)
+            {
+                DataAccess.WriteCustomersToFile(CustomersListFileName, Customers);
+            }
+            return isValid;
         }
 
         private static bool RemoveEmployee(IList<Employee> employees, int employeeId)
@@ -91,9 +109,27 @@ namespace Zuehlke.Zmapp.Services
             return false;
         }
 
+        private static bool RemoveCustomer(IList<Customer> customers, int customerId)
+        {
+            for (int i = customers.Count - 1; i >= 0; i--)
+            {
+                if (customers[i].Id == customerId)
+                {
+                    customers.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private IList<Employee> Employees
         {
             get { return _employees ?? (_employees = DataAccess.ReadEmployeesFromFile(EmployeeListFileName).ToList()); }
+        }
+
+        private IList<Customer> Customers
+        {
+            get { return _customers ?? (_customers = DataAccess.ReadCustomersFromFile(CustomersListFileName).ToList()); }
         }
     }
 }

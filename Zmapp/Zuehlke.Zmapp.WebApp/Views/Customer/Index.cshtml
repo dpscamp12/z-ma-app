@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Zuehlke.Zmapp.WebApp.Models.CustomerViewModel>
+
+<h3>Customers</h3>
+
+<table id="employeeTable">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>City</th>
+        <th></th>
+    </tr>
+    
+    @foreach (var customer in Model)
+    {
+        <tr>
+            <td>
+                @customer.Id
+            </td>
+            <td>
+                @customer.Name
+            </td>
+            <td>
+                @customer.City
+            </td>
+            <td>
+                <button name="button" type="button" onclick="document.location.href='/Customer/Delete?customerId=@customer.Id'">Delete</button>
+            </td>
+        </tr>
+    }
+    @* rows inserted by code *@
+</table>
+
+<p>    
+    <form method="get" action="/Customer/New/">
+        <input type="submit" value="Add Customer" />
+    </form>
+</p>
