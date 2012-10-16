@@ -2,8 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Converters="clr-namespace:Zuehlke.Zmapp.Wpf.Converters" mc:Ignorable="d" 
+        xmlns:local="clr-namespace:Zuehlke.Zmapp.Wpf.Tools"
+        xmlns:Converters="clr-namespace:Zuehlke.Zmapp.Wpf.Converters" xmlns:root="clr-namespace:Zuehlke.Zmapp.Wpf"
+        mc:Ignorable="d" 
         Title="Zmapp - Zühlke Mitarbeiter App">
+    <Window.DataContext>
+        <root:EmployeeListViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <!--<DataTemplate x:Key="SkillListItemTemplate" />
         <DataTemplate x:Key="EmployeeListItemTemplate">
@@ -121,19 +126,14 @@
                 <TextBlock Text="Skills" Grid.Column="0" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
                 <TextBlock Text="Career Level" Grid.Column="1" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
                 <TextBlock Text="Available Employees" Grid.Column="3" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
-                <ListBox Grid.Column="0" Grid.Row="1" SelectionMode="Multiple" Style="{StaticResource ListBoxStyle}">
-                    <ListBoxItem>C#</ListBoxItem>
-                    <ListBoxItem>WPF</ListBoxItem>
-                    <ListBoxItem>WCF</ListBoxItem>
-                </ListBox>
-                <ListBox Grid.Column="1" Grid.Row="1" SelectionMode="Multiple" Style="{StaticResource ListBoxStyle}">
-                    <ListBoxItem>Junior Software Engineer</ListBoxItem>
-                    <ListBoxItem>Software Engineer</ListBoxItem>
-                    <ListBoxItem>Senior Software Engineer</ListBoxItem>
-                </ListBox>
-                <ListBox Grid.Column="3" Grid.Row="1" Style="{StaticResource ListBoxStyle}">
-                    <ListBoxItem>Developer Star, Senior Software Engineer, C#, SQL Server, NoSQL</ListBoxItem>
-                    <ListBoxItem>Mister X, Junior Software Engineer, Java, PHP, MySQL</ListBoxItem>
+                <ListBox ItemsSource="{Binding Skills}" Grid.Column="0" Grid.Row="1" SelectionMode="Multiple"  Style="{StaticResource ListBoxStyle}" local:MultiSelect.IsEnabled="True" />
+                <ListBox ItemsSource="{Binding CareerLevels}" Grid.Column="1" Grid.Row="1" SelectionMode="Multiple" local:MultiSelect.IsEnabled="True" Style="{StaticResource ListBoxStyle}" />
+                <ListBox ItemsSource="{Binding AvailableEmployees}" Grid.Column="3" Grid.Row="1" Style="{StaticResource ListBoxStyle}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                                <TextBlock Text="{Binding EmployeeName}" FontWeight="Bold"  />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
         </GroupBox>

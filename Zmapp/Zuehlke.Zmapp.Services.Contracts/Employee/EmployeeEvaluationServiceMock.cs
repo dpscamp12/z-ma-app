@@ -34,10 +34,19 @@ namespace Zuehlke.Zmapp.Services.Contracts.Employee
                             EmployeeName = "Hans Wurst",
                             Id = 1,
                             Level = CareerLevel.SoftwareEngineer,
-                            Skills = new[] {Skill.WCF, Skill.AspDotNet,}
+                            Skills = new[] { Skill.WCF, Skill.AspDotNet, }
                         };
 
-            return new[] {e};
+            var f = new EmployeeSearchResult()
+            {
+                Distance = 5.1f,
+                EmployeeName = "Super Dev",
+                Id = 1,
+                Level = CareerLevel.JuniorSoftwareEngineer,
+                Skills = new[] { Skill.WCF, Skill.CSharp, }
+            };
+
+            return new[] { e, f };
         }
     }
 }
