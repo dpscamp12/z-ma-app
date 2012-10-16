@@ -13,12 +13,14 @@ namespace Zuehlke.Zmapp.Wpf
 	{
 		private readonly IEmployeeEvaluationService service = new EmployeeEvaluationServiceProxy();
 		private readonly List<CustomerInfo> customers = new List<CustomerInfo>();
-		private CustomerInfo selectedCustomer;
 		private readonly ObservableCollection<EmployeeSearchResult> availableEmployees = new ObservableCollection<EmployeeSearchResult>();
 		private readonly List<Skill> availableSkills = new List<Skill>(typeof(Skill).GetEnumValues().Cast<Skill>());
 		private readonly List<CareerLevel> availableCareerLevels = new List<CareerLevel>(typeof(CareerLevel).GetEnumValues().Cast<CareerLevel>());
+
 		private DateTime beginOfWorkPeriod;
 		private DateTime endOfWorkPeriod;
+		private CustomerInfo selectedCustomer;
+
 		private readonly DelegateCommand<EmployeeSearchResult> reserveEmployeeCommand;
 
 		public EmployeeListViewModel()
@@ -66,6 +68,11 @@ namespace Zuehlke.Zmapp.Wpf
 			}
 			set
 			{
+				if (value > this.endOfWorkPeriod)
+				{
+					throw new ArgumentException("End value must be higher as begin date.");
+				}
+
 				this.beginOfWorkPeriod = value;
 				this.RaisePropertyChanged(() => this.BeginOfWorkPeriod);
 			}
@@ -81,7 +88,7 @@ namespace Zuehlke.Zmapp.Wpf
 			{
 				if (value < this.beginOfWorkPeriod)
 				{
-					throw new InvalidOperationException("End value must be higher as begin date.");
+					throw new ArgumentException("End value must be higher as begin date.");
 				}
 
 				this.endOfWorkPeriod = value;

@@ -25,6 +25,11 @@
         </Style>
         <Style x:Key="DatePickerStyle" TargetType="{x:Type DatePicker}" BasedOn="{StaticResource BaseInputFieldStyle}">
             <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding Path=(Validation.Errors)[0].ErrorContent, RelativeSource={x:Static RelativeSource.Self}}" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="GroupBoxStyle" TargetType="{x:Type GroupBox}" >
             <Setter Property="Padding" Value="0,0,0,5" />
@@ -102,7 +107,7 @@
                     <DatePicker SelectedDate="{Binding BeginOfWorkPeriod, ValidatesOnExceptions=True}" Style="{StaticResource DatePickerStyle}" Grid.Column="1" Grid.Row="0"/>
 
                     <TextBlock Text="and ends on" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="1" />
-                    <DatePicker SelectedDate="{Binding EndOfWorkPeriod, ValidatesOnExceptions=True}" ToolTip="{Binding Child.AdornedElement.(Validation.Errors)[0].ErrorContent,RelativeSource={RelativeSource Self}}" Style="{StaticResource DatePickerStyle}" Grid.Column="1" Grid.Row="1"/>
+                    <DatePicker SelectedDate="{Binding EndOfWorkPeriod, ValidatesOnExceptions=True}" Style="{StaticResource DatePickerStyle}" Grid.Column="1" Grid.Row="1"/>
                 </Grid>
             </GroupBox>
         </Grid>
