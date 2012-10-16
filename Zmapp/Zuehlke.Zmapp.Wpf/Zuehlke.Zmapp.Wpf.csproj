@@ -80,7 +80,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\CustomerToCityStringConverter.cs" />
-    <Compile Include="EmployeeEvluationServiceProxy.cs" />
+    <Compile Include="EmployeeEvaluationServiceProxy.cs" />
     <Compile Include="EmployeeListViewModel.cs" />
     <Compile Include="EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>

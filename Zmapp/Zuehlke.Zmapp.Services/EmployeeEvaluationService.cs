@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 
 namespace Zuehlke.Zmapp.Services
@@ -14,7 +12,7 @@ namespace Zuehlke.Zmapp.Services
         public CustomerInfo[] GetCustomers()
         {
             return Repository.Instance.GetCustomers()
-                .Select(c => new CustomerInfo {Id = c.Id, Name = c.Name})
+                .Select(c => new CustomerInfo { Id = c.Id, Name = c.Name })
                 .ToArray();
         }
 
@@ -24,9 +22,11 @@ namespace Zuehlke.Zmapp.Services
             return foundEmployees
                 .Select(e => new EmployeeSearchResult
                                  {
+                                     Id = e.Id,
                                      Distance = 10.1F,
                                      EmployeeName = String.Format("{0} {1}", e.FirstName, e.LastName),
-                                     Skills = new[] {Skill.SqlServer, Skill.CSharp}
+                                     Skills = e.Skills,
+                                     Level = e.CareerLevel
                                  })
                 .ToArray();
         }
@@ -55,16 +55,16 @@ namespace Zuehlke.Zmapp.Services
                 {
                     continue;
                 }
-               
+
                 // free time
                 if (!employee.HasAnyAvailableTime(query.BeginOfWorkPeriod, query.EndOfWorkPeriod))
                 {
                     continue;
                 }
-            
+
                 foundEmployees.Add(employee);
             }
-            
+
             return foundEmployees;
         }
     }

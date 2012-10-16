@@ -10,7 +10,7 @@ namespace Zuehlke.Zmapp.Wpf
 {
     public class EmployeeListViewModel : NotificationObject
     {
-        private readonly IEmployeeEvaluationService service = new EmployeeEvaluationServiceMock();
+        private readonly IEmployeeEvaluationService service = new EmployeeEvaluationServiceProxy();
         private readonly List<CustomerInfo> customers = new List<CustomerInfo>();
         private CustomerInfo selectedCustomer;
         private readonly ObservableCollection<EmployeeSearchResult> availableEmployees = new ObservableCollection<EmployeeSearchResult>();
