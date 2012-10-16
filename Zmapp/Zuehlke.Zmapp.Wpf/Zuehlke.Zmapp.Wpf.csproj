@@ -92,6 +92,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tools\EnumerableExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
