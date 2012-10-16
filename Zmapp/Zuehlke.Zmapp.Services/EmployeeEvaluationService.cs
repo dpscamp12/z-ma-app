@@ -31,7 +31,12 @@ namespace Zuehlke.Zmapp.Services
                 .ToArray();
         }
 
-        public IEnumerable<Employee> FindEmployees(EmployeeQuery query)
+	    public void ReserveEmployeeForCustomer(int employeeId, int customerId, DateTime beginOfPeriod, DateTime endOfPeriod)
+	    {
+		    throw new NotImplementedException();
+	    }
+
+	    public IEnumerable<Employee> FindEmployees(EmployeeQuery query)
         {
             return FindEmployees(Repository.Instance.GetEmployees(), query);
         }

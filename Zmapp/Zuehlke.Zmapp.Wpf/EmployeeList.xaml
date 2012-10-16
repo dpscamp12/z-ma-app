@@ -4,19 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zuehlke.Zmapp.Wpf.Tools"
         xmlns:Converters="clr-namespace:Zuehlke.Zmapp.Wpf.Converters" xmlns:root="clr-namespace:Zuehlke.Zmapp.Wpf"
+        xmlns:commands="clr-namespace:Microsoft.Practices.Prism.Commands;assembly=Microsoft.Practices.Prism"
         mc:Ignorable="d" 
         Title="Zmapp - Zühlke Mitarbeiter App">
     <Window.DataContext>
         <root:EmployeeListViewModel/>
     </Window.DataContext>
     <Window.Resources>
-        <!--<DataTemplate x:Key="SkillListItemTemplate" />
-        <DataTemplate x:Key="EmployeeListItemTemplate">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Name}" />
-                <ItemsControl ItemsSource="{Binding Skills}" ItemTemplate="{StaticResource SkillListItemTemplate}" />
-            </StackPanel>
-        </DataTemplate>-->
         <Style x:Key="BaseInputFieldStyle">
             <Setter Property="FrameworkElement.Margin" Value="5,5,5,5" />
         </Style>
@@ -46,6 +40,7 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="Margin" Value="5,0,5,0" />
+            <Setter Property="SelectionMode" Value="Extended"/>
         </Style>
         <Converters:CustomerToCityStringConverter x:Key="CustomerToCityConverter" />
     </Window.Resources>
@@ -104,10 +99,10 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="Period starts on" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="0" />
-                    <DatePicker Style="{StaticResource DatePickerStyle}" Grid.Column="1" Grid.Row="0"/>
+                    <DatePicker SelectedDate="{Binding BeginOfWorkPeriod, ValidatesOnExceptions=True}" Style="{StaticResource DatePickerStyle}" Grid.Column="1" Grid.Row="0"/>
 
                     <TextBlock Text="and ends on" Style="{StaticResource InputLabelStyle}" Grid.Column="0" Grid.Row="1" />
-                    <DatePicker Style="{StaticResource DatePickerStyle}" Grid.Column="1" Grid.Row="1"/>
+                    <DatePicker SelectedDate="{Binding EndOfWorkPeriod, ValidatesOnExceptions=True}" ToolTip="{Binding Child.AdornedElement.(Validation.Errors)[0].ErrorContent,RelativeSource={RelativeSource Self}}" Style="{StaticResource DatePickerStyle}" Grid.Column="1" Grid.Row="1"/>
                 </Grid>
             </GroupBox>
         </Grid>
@@ -126,12 +121,21 @@
                 <TextBlock Text="Skills" Grid.Column="0" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
                 <TextBlock Text="Career Level" Grid.Column="1" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
                 <TextBlock Text="Available Employees" Grid.Column="3" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
-                <ListBox ItemsSource="{Binding Skills}" Grid.Column="0" Grid.Row="1" SelectionMode="Multiple"  Style="{StaticResource ListBoxStyle}" local:MultiSelect.IsEnabled="True" />
-                <ListBox ItemsSource="{Binding CareerLevels}" Grid.Column="1" Grid.Row="1" SelectionMode="Multiple" local:MultiSelect.IsEnabled="True" Style="{StaticResource ListBoxStyle}" />
-                <ListBox ItemsSource="{Binding AvailableEmployees}" Grid.Column="3" Grid.Row="1" Style="{StaticResource ListBoxStyle}">
+                <ListBox ItemsSource="{Binding Skills}" Grid.Column="0" Grid.Row="1" Style="{StaticResource ListBoxStyle}" local:MultiSelect.IsEnabled="True" />
+                <ListBox ItemsSource="{Binding CareerLevels}" Grid.Column="1" Grid.Row="1"  local:MultiSelect.IsEnabled="True" Style="{StaticResource ListBoxStyle}" />
+                <ListBox ItemsSource="{Binding AvailableEmployees}" Grid.Column="3" Grid.Row="1" Style="{StaticResource ListBoxStyle}" Grid.IsSharedSizeScope="True" HorizontalContentAlignment="Stretch" ItemContainerStyle="{DynamicResource ListBoxWithNonSelectableItemsStyle}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                                <TextBlock Text="{Binding EmployeeName}" FontWeight="Bold"  />
+                            <Grid HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" SharedSizeGroup="EmployeeListShared"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding EmployeeName}" FontWeight="Bold" Grid.Column="0" />
+                                <Button Content="Reserve" Padding="10,0,10,0"
+                                        commands:Click.Command="{Binding DataContext.ReserveEmployeeCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                                        commands:Click.CommandParameter="{Binding}" Grid.Column="1"/>
+                            </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
