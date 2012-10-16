@@ -8,6 +8,7 @@
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
         @Scripts.Render("~/bundles/jquery")
+        @RenderSection("JavaScript", required: false)
     </head>
     <body>
         <header>
@@ -16,9 +17,6 @@
                     <p class="site-title">@Html.ActionLink("Zühlke MA App", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
                     <nav>
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
