@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 
-namespace Zuehlke.Zmapp.WebApp.Controllers
+namespace Zuehlke.Zmapp.WebApp.Models
 {
     public sealed class DateStartAttribute : ValidationAttribute
     {
