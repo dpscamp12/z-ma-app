@@ -24,6 +24,7 @@ zmapp.employees = (function () {
     
     // local variables
     var currentDisplayMode = displayMode.NoEmployeeSelected;
+    var isNewEmployee = false;
 
     return {
         // public methods
@@ -44,6 +45,7 @@ zmapp.employees = (function () {
                 LastName: '',
                 CareerLevel: 1
             };
+            isNewEmployee = true;
             initEmployeeDetails(newEmployee);
             setDisplayMode(displayMode.EditEmployeeDetails);
         });
@@ -52,20 +54,27 @@ zmapp.employees = (function () {
             setDisplayMode(displayMode.EditEmployeeDetails);
         });
 
-        $('#cancelButton').click(function() {
-            // reload existing employee
-            var employeeId = $('#employeeId').text();
-            loadEmployee(employeeId);
-            setDisplayMode(displayMode.DisplayEmployeeDetails);
+        $('#cancelButton').click(function () {
+            if (isNewEmployee) {
+                isNewEmployee = false;
+                setDisplayMode(displayMode.NoEmployeeSelected);
+            }
+            else {
+                // reload existing employee
+                var employeeId = $('#employeeId').text();
+                loadEmployee(employeeId);
+                setDisplayMode(displayMode.DisplayEmployeeDetails);
+            }
         });
 
-        $('#saveButton').click(function() {
+        $('#saveButton').click(function () {
+            isNewEmployee = false;
             saveEmployee();
             setDisplayMode(displayMode.DisplayEmployeeDetails);
         });
 
         $('#addReservationButton').click(function() {
-            appendReservationToTable(new Date(2013, 0, 1), new Date(2013, 11, 31), 0); // Javascript month start with 0 == Jan
+            appendReservationToTable(new Date(2013, 0, 1), new Date(2013, 11, 31), ""); // Javascript month start with 0 == Jan
         });
     }
 
@@ -215,19 +224,20 @@ zmapp.employees = (function () {
             for (var i = 0; i < reservations.length; i++) {
                 var start = new Date(parseInt(reservations[i].Start.substr(6)));
                 var end = new Date(parseInt(reservations[i].End.substr(6)));
-                var customerId = reservations[i].CustomerId;
-                appendReservationToTable(start, end, customerId);
+                var customerName = reservations[i].CustomerName;
+                appendReservationToTable(start, end, customerName);
             }
         }
 
         updateReservationsForCurrentDisplayMode();
     }
         
-    function appendReservationToTable(startDate, endDate, customerId) {
+    function appendReservationToTable(startDate, endDate, customerName) {
+
         var htmlRow = '<tr>' +
                 '<td><input type="date" name="start" value="' + getRfc3339FormattedStringFromDate(startDate) + '"/></td>' +
                 '<td><input type="date" name="end" value="' + getRfc3339FormattedStringFromDate(endDate) + '"/></td>' +
-                '<td><input type="text" name="customer" value="' + customerId + '"/></td>' +
+                '<td><input type="text" name="customer" value="' + customerName + '"/></td>' +
                 '<td><button>Delete</button></td>';
             
         $('#reservationsTable tr:last').after(htmlRow);
@@ -249,7 +259,7 @@ zmapp.employees = (function () {
                     } else if (i == 1) {
                         reservation['End'] = getDateFromRfc3339FormattedString($(input).val());
                     } else if (i == 2) {
-                        reservation['CustomerId'] = parseInt($(input).val());
+                        reservation['CustomerName'] = $(input).val();
                     }
                 });
                 reservations.push(reservation);

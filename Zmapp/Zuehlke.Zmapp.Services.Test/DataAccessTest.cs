@@ -66,6 +66,7 @@ namespace Zuehlke.Zmapp.Services.Test
                                                         {
                                                             Start = new DateTime(2013, 1, 1),
                                                             End = new DateTime(2013, 2, 5),
+                                                            CustomerId = 2
                                                             
                                                         }
                                                 },
@@ -92,8 +93,8 @@ namespace Zuehlke.Zmapp.Services.Test
             return new List<Customer>
                        {
                            new Customer() {Id = 1, Name = "Phonaxis"},
-                           new Customer() {Id = 34, Name = "BAA"},
-                           new Customer() {Id = 4, Name = "Vereinigte Bank"}
+                           new Customer() {Id = 2, Name = "BAA"},
+                           new Customer() {Id = 3, Name = "Vereinigte Bank"}
                        };
         }
     }
