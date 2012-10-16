@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Converters="clr-namespace:Zuehlke.Zmapp.Wpf.Converters" mc:Ignorable="d" 
-        Title="Zmapp - Zühlke Mitarbeiter App" SizeToContent="WidthAndHeight">
+        Title="Zmapp - Zühlke Mitarbeiter App">
     <Window.Resources>
         <!--<DataTemplate x:Key="SkillListItemTemplate" />
         <DataTemplate x:Key="EmployeeListItemTemplate">

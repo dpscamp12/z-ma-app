@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Practices.Prism.ViewModel;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 
 namespace Zuehlke.Zmapp.Wpf
@@ -13,6 +12,7 @@ namespace Zuehlke.Zmapp.Wpf
         private readonly IEmployeeEvaluationService service = new EmployeeEvaluationServiceMock();
         private readonly List<CustomerInfo> customers = new List<CustomerInfo>();
         private CustomerInfo selectedCustomer;
+        private readonly ObservableCollection<EmployeeSearchResult> availableEmployees = new ObservableCollection<EmployeeSearchResult>();
 
         public EmployeeListViewModel()
         {
@@ -40,6 +40,19 @@ namespace Zuehlke.Zmapp.Wpf
         public IEnumerable<Skill> Skills
         {
             get { return typeof(Skill).GetEnumValues().Cast<Skill>(); }
+        }
+
+        public IEnumerable<Skill> SelectedSkills { get; set; }
+
+        public IEnumerable<CareerLevel> SelectedLevels { get; set; }
+
+        public DateTime BeginOfWorkPeriod { get; set; }
+
+        public DateTime EndOfWorkPeriod { get; set; }
+
+        public ObservableCollection<EmployeeSearchResult> AvailableEmployees
+        {
+            get { return this.availableEmployees; }
         }
 
         public CustomerInfo SelectedCustomer
