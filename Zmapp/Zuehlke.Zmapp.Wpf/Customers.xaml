@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Customers" Height="300" Width="300">
     <Grid>
-        <DataGrid HorizontalAlignment="Left" Margin="47,76,0,0" VerticalAlignment="Top" >
+        <DataGrid ItemsSource="{Binding Customers}" HorizontalAlignment="Left" VerticalAlignment="Top" >
             
         </DataGrid>
     </Grid>
