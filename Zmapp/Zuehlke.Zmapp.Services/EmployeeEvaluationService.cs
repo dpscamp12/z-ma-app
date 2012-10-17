@@ -15,7 +15,7 @@ namespace Zuehlke.Zmapp.Services
 		{
 		}
 
-		public EmployeeEvaluationService(IRepository repository)
+		internal EmployeeEvaluationService(IRepository repository)
 		{
 			if (repository == null) throw new ArgumentNullException("repository");
 
@@ -59,12 +59,12 @@ namespace Zuehlke.Zmapp.Services
 			this.repository.SetEmployee(employee);
 		}
 
-		public IEnumerable<Employee> FindEmployees(EmployeeQuery query)
+		internal IEnumerable<Employee> FindEmployees(EmployeeQuery query)
 		{
 			return FindEmployees(this.repository.GetEmployees(), query);
 		}
 
-		public static IEnumerable<Employee> FindEmployees(IEnumerable<Employee> employees, EmployeeQuery query)
+		internal static IEnumerable<Employee> FindEmployees(IEnumerable<Employee> employees, EmployeeQuery query)
 		{
 			var foundEmployees = new List<Employee>();
 

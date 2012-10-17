@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace Zuehlke.Zmapp.Services
 {
-    public static class DataAccess
+    internal static class DataAccess
     {
         private readonly static object syncRoot = new object();
 
