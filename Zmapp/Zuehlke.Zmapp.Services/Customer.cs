@@ -3,7 +3,7 @@
 namespace Zuehlke.Zmapp.Services
 {
 	[Serializable]
-	internal class Customer
+	public class Customer
 	{
 		public int Id { get; set; }
 

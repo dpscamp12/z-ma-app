@@ -6,7 +6,7 @@ using Zuehlke.Zmapp.Services.Contracts.Employee;
 namespace Zuehlke.Zmapp.Services
 {
 	[Serializable]
-	internal class Employee
+	public class Employee
 	{
 		private readonly List<Reservation> reservations = new List<Reservation>();
 		private readonly List<Skill> skills = new List<Skill>();

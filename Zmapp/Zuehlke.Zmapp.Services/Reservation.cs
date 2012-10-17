@@ -3,7 +3,7 @@ using System;
 namespace Zuehlke.Zmapp.Services
 {
 	[Serializable]
-	internal class Reservation
+	public class Reservation
 	{
 		private DateTime _start;
 		private DateTime _end;

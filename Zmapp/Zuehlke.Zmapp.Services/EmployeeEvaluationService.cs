@@ -9,9 +9,10 @@ namespace Zuehlke.Zmapp.Services
 	[ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
 	public class EmployeeEvaluationService : IEmployeeEvaluationService
 	{
-		private readonly IRepository repository = Repository.Instance;
+		private readonly IRepository repository;
 
 		public EmployeeEvaluationService()
+			: this(Repository.Instance)
 		{
 		}
 
@@ -22,6 +23,7 @@ namespace Zuehlke.Zmapp.Services
 			this.repository = repository;
 		}
 
+		#region IEmployeeEvaluationService members
 		public CustomerInfo[] GetCustomers()
 		{
 			return Repository.Instance.GetCustomers()
@@ -58,42 +60,11 @@ namespace Zuehlke.Zmapp.Services
 
 			this.repository.SetEmployee(employee);
 		}
+		#endregion
 
-		internal IEnumerable<Employee> FindEmployees(EmployeeQuery query)
+		private IEnumerable<Employee> FindEmployees(EmployeeQuery query)
 		{
-			return FindEmployees(this.repository.GetEmployees(), query);
-		}
-
-		internal static IEnumerable<Employee> FindEmployees(IEnumerable<Employee> employees, EmployeeQuery query)
-		{
-			var foundEmployees = new List<Employee>();
-
-			foreach (Employee employee in employees)
-			{
-				// skills
-				if (query.RequestedSkills != null && query.RequestedSkills.Length > 0 &&
-					!query.RequestedSkills.Any(employee.HasSkill))
-				{
-					continue;
-				}
-
-				// career level
-				if (query.RequestedCareerLevels != null && query.RequestedCareerLevels.Length > 0 &&
-					!query.RequestedCareerLevels.Any(requestedCareerLevel => employee.CareerLevel == requestedCareerLevel))
-				{
-					continue;
-				}
-
-				// free time
-				if (!employee.HasAnyAvailableTime(query.BeginOfWorkPeriod, query.EndOfWorkPeriod))
-				{
-					continue;
-				}
-
-				foundEmployees.Add(employee);
-			}
-
-			return foundEmployees;
+			return EmployeeEvaluationServiceHelper.FindEmployees(this.repository.GetEmployees(), query);
 		}
 	}
 }
