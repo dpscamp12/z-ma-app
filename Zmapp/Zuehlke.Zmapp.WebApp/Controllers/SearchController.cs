@@ -78,7 +78,7 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
                                                  ? new List<Reservation>()
                                                  : employee.Reservations.ToList();
             reservations.Add(reservation);
-            employee.Reservations = reservations.ToArray();
+            employee.Reservations.AddRange(reservations);
             Repository.Instance.SetEmployee(employee);
             return true;
         }

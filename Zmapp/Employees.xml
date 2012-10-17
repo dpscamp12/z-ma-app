@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EmployeeList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Employees>
+    <Employee>
+      <Id>2</Id>
+      <FirstName>Pipilotti</FirstName>
+      <LastName>Rist</LastName>
+      <Street>Wiesenstrasse 10a</Street>
+      <City>Schlieren</City>
+      <ZipCode>8952</ZipCode>
+      <Phone>+41 44 999 99 99</Phone>
+      <EMail>dspcamp12@gmail.com</EMail>
+      <Skills />
+      <Reservations>
+        <Reservation>
+          <Start>2012-10-17T00:00:00</Start>
+          <End>2012-10-17T23:59:59.999</End>
+          <CustomerId>1</CustomerId>
+        </Reservation>
+      </Reservations>
+      <CareerLevel>SoftwareEngineer</CareerLevel>
+    </Employee>
+    <Employee>
+      <Id>1</Id>
+      <FirstName>Roger</FirstName>
+      <LastName>Federer</LastName>
+      <Street>Schaffhauserstrasse 23</Street>
+      <City>Zürich</City>
+      <ZipCode>8006</ZipCode>
+      <Phone>+41 44 999 99 99</Phone>
+      <EMail>dspcamp12@gmail.com</EMail>
+      <Skills>
+        <Skill>CSharp</Skill>
+        <Skill>SqlServer</Skill>
+      </Skills>
+      <Reservations>
+        <Reservation>
+          <Start>2013-01-01T00:00:00</Start>
+          <End>2013-02-05T23:59:59.999</End>
+          <CustomerId>1</CustomerId>
+        </Reservation>
+        <Reservation>
+          <Start>2013-01-01T00:00:00</Start>
+          <End>2013-02-05T23:59:59.999</End>
+          <CustomerId>2</CustomerId>
+        </Reservation>
+        <Reservation>
+          <Start>2012-10-17T00:00:00</Start>
+          <End>2012-10-17T23:59:59.999</End>
+          <CustomerId>1</CustomerId>
+        </Reservation>
+      </Reservations>
+      <CareerLevel>SoftwareEngineer</CareerLevel>
+    </Employee>
+  </Employees>
+</EmployeeList>

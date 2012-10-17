@@ -139,6 +139,10 @@
       <Project>{c67b9670-075b-4196-b868-cabaad068941}</Project>
       <Name>Zuehlke.Zmapp.Services.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zuehlke.Zmapp.Services\Zuehlke.Zmapp.Services.csproj">
+      <Project>{b7ec1cf4-0ab3-43dc-b299-eb7d41ada67c}</Project>
+      <Name>Zuehlke.Zmapp.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\ZE_Logo.png" />

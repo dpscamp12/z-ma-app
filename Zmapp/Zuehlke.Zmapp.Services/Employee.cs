@@ -1,69 +1,77 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 
 namespace Zuehlke.Zmapp.Services
 {
-    [Serializable]
-    public class Employee
-    {
-        public int Id { get; set; }
+	[Serializable]
+	public class Employee
+	{
+		private readonly List<Reservation> reservations = new List<Reservation>();
+		private readonly List<Skill> skills = new List<Skill>();
 
-        public string FirstName { get; set; }
+		public int Id { get; set; }
 
-        public string LastName { get; set; }
+		public string FirstName { get; set; }
 
-        public string Street { get; set; }
+		public string LastName { get; set; }
 
-        public string City { get; set; }
+		public string Street { get; set; }
 
-        public int ZipCode { get; set; }
+		public string City { get; set; }
 
-        public string Phone { get; set; }
+		public int ZipCode { get; set; }
 
-        public string EMail { get; set; }
+		public string Phone { get; set; }
 
-        public Skill[] Skills { get; set; }
+		public string EMail { get; set; }
 
-        public CareerLevel CareerLevel { get; set; }
+		public List<Skill> Skills
+		{
+			get { return this.skills; }
+		}
 
-        public Reservation[] Reservations { get; set; }
+		public List<Reservation> Reservations
+		{
+			get { return this.reservations; }
+		}
 
-        public bool HasSkill(Skill requestedSkill)
-        {
-            if (Skills == null)
-            {
-                return false;
-            }
-            return Skills.Any(skill => skill == requestedSkill);
-        }
+		public CareerLevel CareerLevel { get; set; }
 
-        public bool HasReservation(DateTime date)
-        {
-            if (Reservations == null)
-            {
-                return false;
-            }
-            return Reservations.Any(reservation => reservation.Contains(date));
-        }
+		public bool HasSkill(Skill requestedSkill)
+		{
+			if (Skills == null)
+			{
+				return false;
+			}
+			return Skills.Any(skill => skill == requestedSkill);
+		}
 
-        public bool IsAvailable(DateTime date)
-        {
-            return !HasReservation(date);
-        }
+		public bool HasReservation(DateTime date)
+		{
+			if (Reservations == null)
+			{
+				return false;
+			}
+			return Reservations.Any(reservation => reservation.Contains(date));
+		}
 
-        public bool HasAnyAvailableTime(DateTime beginOfPeriod, DateTime endOfPeriod)
-        {
-            for (DateTime date = beginOfPeriod; date <= endOfPeriod; date = date.AddDays(1))
-            {
-                if (IsAvailable(date))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
+		public bool IsAvailable(DateTime date)
+		{
+			return !HasReservation(date);
+		}
+
+		public bool HasAnyAvailableTime(DateTime beginOfPeriod, DateTime endOfPeriod)
+		{
+			for (DateTime date = beginOfPeriod; date <= endOfPeriod; date = date.AddDays(1))
+			{
+				if (IsAvailable(date))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+	}
 }

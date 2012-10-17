@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Zuehlke.Zmapp.Services;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 using Zuehlke.Zmapp.Wpf.Tools;
 
@@ -11,7 +12,7 @@ namespace Zuehlke.Zmapp.Wpf
 {
 	public class EmployeeListViewModel : NotificationObject
 	{
-		private readonly IEmployeeEvaluationService service = new EmployeeEvaluationServiceProxy();
+		private readonly IEmployeeEvaluationService service = new EmployeeEvaluationService(); //new EmployeeEvaluationServiceProxy();
 		private readonly List<CustomerInfo> customers = new List<CustomerInfo>();
 		private readonly ObservableCollection<EmployeeSearchResult> availableEmployees = new ObservableCollection<EmployeeSearchResult>();
 		private readonly List<Skill> availableSkills = new List<Skill>(typeof(Skill).GetEnumValues().Cast<Skill>());
@@ -121,7 +122,12 @@ namespace Zuehlke.Zmapp.Wpf
 
 		void OnFilterSelectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			var x = CareerLevels.SelectedItems.Count;
+			this.RefreshValues();
+		}
+
+		private void RefreshValues()
+		{
+			var x = this.CareerLevels.SelectedItems.Count;
 
 			var employeeQuery = new EmployeeQuery()
 									{
@@ -140,6 +146,7 @@ namespace Zuehlke.Zmapp.Wpf
 		private void OnReservationTriggered(EmployeeSearchResult obj)
 		{
 			service.ReserveEmployeeForCustomer(obj.Id, this.SelectedCustomer.Id, this.BeginOfWorkPeriod, this.EndOfWorkPeriod);
+			this.RefreshValues();
 		}
 	}
 }
