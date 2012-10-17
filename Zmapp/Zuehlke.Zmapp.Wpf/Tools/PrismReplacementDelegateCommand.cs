@@ -1,7 +1,7 @@
-using System;
 using Microsoft.Practices.Prism.Commands;
+using System;
 
-namespace Zuehlke.Zmapp.Wpf
+namespace Zuehlke.Zmapp.Wpf.Tools
 {
 	/// <summary>
 	/// This class is needed to prevent a binding issue inside Prism.

@@ -25,7 +25,37 @@
     <Customer>
       <Id>4</Id>
       <Name>asap1</Name>
-      <City>xxxx</City>
+      <Street>Teststrasse 3</Street>
+      <ZipCode>5678</ZipCode>
+      <City>Testingen</City>
+    </Customer>
+    <Customer>
+      <Id>5</Id>
+      <Name>asap2</Name>
+      <Street>Teststrasse 2</Street>
+      <ZipCode>5678</ZipCode>
+      <City>Testingen</City>
+    </Customer>
+    <Customer>
+      <Id>6</Id>
+      <Name>aspsa</Name>
+      <Street>sdf</Street>
+      <ZipCode>56</ZipCode>
+      <City>hjfg</City>
+    </Customer>
+    <Customer>
+      <Id>7</Id>
+      <Name>sdf</Name>
+      <Street>hkg</Street>
+      <ZipCode>hg</ZipCode>
+      <City>jhg</City>
+    </Customer>
+    <Customer>
+      <Id>8</Id>
+      <Name>khg</Name>
+      <Street>jhg</Street>
+      <ZipCode>hg</ZipCode>
+      <City>g</City>
     </Customer>
   </Customers>
 </CustomerList>

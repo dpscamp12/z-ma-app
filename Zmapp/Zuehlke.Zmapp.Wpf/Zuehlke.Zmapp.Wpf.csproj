@@ -107,6 +107,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tools\PrismReplacementDelegateCommand.cs" />
     <Compile Include="ServiceProxy.cs" />
     <Compile Include="Tools\SelectorSelectedCommandBehavior.cs" />
     <Compile Include="Tools\Selected.cs" />
