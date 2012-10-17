@@ -4,13 +4,6 @@ using System.Linq;
 
 namespace Zuehlke.Zmapp.Services
 {
-	public interface IRepository
-	{
-		IList<Employee> GetEmployees();
-		Employee GetEmployee(int id);
-		void SetEmployee(Employee employee);
-	}
-
 	public class Repository : IRepository
 	{
 		private static Repository _instance;
