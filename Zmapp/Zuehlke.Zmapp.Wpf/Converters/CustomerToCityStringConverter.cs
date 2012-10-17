@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using Zuehlke.Zmapp.Services.Contracts.Customers;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 
 namespace Zuehlke.Zmapp.Wpf.Converters

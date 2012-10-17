@@ -1,5 +1,6 @@
 using System.Globalization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Zuehlke.Zmapp.Services.Contracts.Customers;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 using Zuehlke.Zmapp.Wpf.Converters;
 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Zuehlke.Zmapp.Services;
+using Zuehlke.Zmapp.Services.Contracts.Customers;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 using Zuehlke.Zmapp.Wpf.Tools;
 
@@ -12,7 +13,8 @@ namespace Zuehlke.Zmapp.Wpf
 {
 	public class EmployeeListViewModel : NotificationObject
 	{
-		private readonly IEmployeeEvaluationService service = new EmployeeEvaluationService(); //new EmployeeEvaluationServiceProxy();
+		private readonly ICustomerService customerService;
+		private readonly IEmployeeEvaluationService service;
 		private readonly List<CustomerInfo> customers = new List<CustomerInfo>();
 		private readonly ObservableCollection<EmployeeSearchResult> availableEmployees = new ObservableCollection<EmployeeSearchResult>();
 		private readonly List<Skill> availableSkills = new List<Skill>(typeof(Skill).GetEnumValues().Cast<Skill>());
@@ -25,7 +27,18 @@ namespace Zuehlke.Zmapp.Wpf
 		private readonly DelegateCommand<EmployeeSearchResult> reserveEmployeeCommand;
 
 		public EmployeeListViewModel()
+			:this(new CustomerServiceProxy(), new EmployeeEvaluationServiceProxy())
 		{
+		}
+
+		public EmployeeListViewModel(ICustomerService customerService, IEmployeeEvaluationService injectedService)
+		{
+			if (customerService == null) throw new ArgumentNullException("customerService");
+			if (injectedService == null) throw new ArgumentNullException("injectedService");
+
+			this.customerService = customerService;
+			this.service = injectedService;
+
 			this.Init();
 			this.Skills = new MultiSelectCollectionView<Skill>(availableSkills);
 			this.CareerLevels = new MultiSelectCollectionView<CareerLevel>(availableCareerLevels);
@@ -37,17 +50,11 @@ namespace Zuehlke.Zmapp.Wpf
 			this.reserveEmployeeCommand = new DelegateCommand<EmployeeSearchResult>(this.OnReservationTriggered);
 		}
 
-		public EmployeeListViewModel(IEmployeeEvaluationService injectedService)
-			: this()
-		{
-			this.service = injectedService;
-		}
-
 		public void Init()
 		{
 			this.beginOfWorkPeriod = this.endOfWorkPeriod = DateTime.Now;
 			this.customers.Clear();
-			CustomerInfo[] customerInfos = this.service.GetCustomers();
+			CustomerInfo[] customerInfos = this.customerService.GetCustomers();
 			this.customers.AddRange(customerInfos);
 
 			this.selectedCustomer = this.customers.FirstOrDefault();

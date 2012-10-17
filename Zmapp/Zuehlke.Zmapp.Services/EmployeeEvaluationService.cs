@@ -24,12 +24,6 @@ namespace Zuehlke.Zmapp.Services
 		}
 
 		#region IEmployeeEvaluationService members
-		public CustomerInfo[] GetCustomers()
-		{
-			return Repository.Instance.GetCustomers()
-				.Select(c => new CustomerInfo { Id = c.Id, Name = c.Name, Street = c.Street, City = c.City, ZipCode = c.ZipCode })
-				.ToArray();
-		}
 
 		public EmployeeSearchResult[] FindPotentialEmployeesForCustomer(EmployeeQuery query)
 		{

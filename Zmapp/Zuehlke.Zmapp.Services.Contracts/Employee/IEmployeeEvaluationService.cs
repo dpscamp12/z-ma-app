@@ -7,9 +7,6 @@ namespace Zuehlke.Zmapp.Services.Contracts.Employee
 	public interface IEmployeeEvaluationService
 	{
 		[OperationContract]
-		CustomerInfo[] GetCustomers();
-
-		[OperationContract]
 		EmployeeSearchResult[] FindPotentialEmployeesForCustomer(EmployeeQuery query);
 
 		[OperationContract]

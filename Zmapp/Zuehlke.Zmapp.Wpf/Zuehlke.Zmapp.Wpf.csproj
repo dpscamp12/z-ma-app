@@ -86,6 +86,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\CustomerToCityStringConverter.cs" />
+    <Compile Include="CustomerServiceProxy.cs" />
     <Compile Include="EmployeeEvaluationServiceProxy.cs" />
     <Compile Include="EmployeeListViewModel.cs" />
     <Compile Include="EmployeeList.xaml.cs">
@@ -98,6 +99,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ServiceProxy.cs" />
     <Compile Include="Tools\SelectorSelectedCommandBehavior.cs" />
     <Compile Include="Tools\Selected.cs" />
     <Compile Include="Tools\MultiSelect.cs" />
