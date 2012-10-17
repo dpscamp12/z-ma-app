@@ -8,22 +8,30 @@ namespace Zuehlke.Zmapp.Services
 {
     public static class DataAccess
     {
+        private readonly static object syncRoot = new object();
+
         public static void WriteEmployeesToFile(string fileName, IEnumerable<Employee> employees)
         {
-            var serializer = new XmlSerializer(typeof(EmployeeList));
-            using (TextWriter writer = new StreamWriter(fileName))
+            lock (syncRoot)
             {
-                serializer.Serialize(writer, new EmployeeList {Employees = employees.ToArray()});
+                var serializer = new XmlSerializer(typeof (EmployeeList));
+                using (TextWriter writer = new StreamWriter(fileName))
+                {
+                    serializer.Serialize(writer, new EmployeeList {Employees = employees.ToArray()});
+                }
             }
         }
 
         public static IEnumerable<Employee> ReadEmployeesFromFile(string fileName)
         {
-            var serializer = new XmlSerializer(typeof(EmployeeList));
-            using (var fs = new FileStream(fileName, FileMode.Open))
+            lock (syncRoot)
             {
-                var employeeList = (EmployeeList)serializer.Deserialize(fs);
-                return employeeList.Employees;
+                var serializer = new XmlSerializer(typeof (EmployeeList));
+                using (var fs = new FileStream(fileName, FileMode.Open))
+                {
+                    var employeeList = (EmployeeList) serializer.Deserialize(fs);
+                    return employeeList.Employees;
+                }
             }
         }
 
