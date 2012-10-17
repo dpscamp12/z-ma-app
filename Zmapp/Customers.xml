@@ -4,16 +4,22 @@
     <Customer>
       <Id>1</Id>
       <Name>Phonaxis</Name>
+      <Street>Teststrasse 1</Street>
+      <ZipCode>1234</ZipCode>
       <City>Stäfa</City>
     </Customer>
     <Customer>
       <Id>2</Id>
       <Name>BAA</Name>
+      <Street>Teststrasse 1</Street>
+      <ZipCode>1234</ZipCode>
       <City>Baden</City>
     </Customer>
     <Customer>
       <Id>3</Id>
       <Name>Vereinigte Bank</Name>
+      <Street>Teststrasse 1</Street>
+      <ZipCode>1234</ZipCode>
       <City>Zürich</City>
     </Customer>
   </Customers>

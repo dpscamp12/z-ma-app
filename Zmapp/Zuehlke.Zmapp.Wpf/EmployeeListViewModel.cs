@@ -32,6 +32,7 @@ namespace Zuehlke.Zmapp.Wpf
 
 			this.CareerLevels.SelectedItems.CollectionChanged += this.OnFilterSelectionChanged;
 			this.Skills.SelectedItems.CollectionChanged += this.OnFilterSelectionChanged;
+			this.PropertyChanged += (o, e) => this.RefreshValues();
 
 			this.reserveEmployeeCommand = new DelegateCommand<EmployeeSearchResult>(this.OnReservationTriggered);
 		}

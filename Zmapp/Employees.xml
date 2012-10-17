@@ -14,7 +14,7 @@
       <Reservations>
         <Reservation>
           <Start>2012-10-17T00:00:00</Start>
-          <End>2012-10-17T23:59:59.999</End>
+          <End>2012-10-17T00:00:00</End>
           <CustomerId>1</CustomerId>
         </Reservation>
       </Reservations>
@@ -36,17 +36,22 @@
       <Reservations>
         <Reservation>
           <Start>2013-01-01T00:00:00</Start>
-          <End>2013-02-05T23:59:59.999</End>
+          <End>2013-02-05T00:00:00</End>
           <CustomerId>1</CustomerId>
         </Reservation>
         <Reservation>
           <Start>2013-01-01T00:00:00</Start>
-          <End>2013-02-05T23:59:59.999</End>
+          <End>2013-02-05T00:00:00</End>
           <CustomerId>2</CustomerId>
         </Reservation>
         <Reservation>
           <Start>2012-10-17T00:00:00</Start>
-          <End>2012-10-17T23:59:59.999</End>
+          <End>2012-10-17T00:00:00</End>
+          <CustomerId>1</CustomerId>
+        </Reservation>
+        <Reservation>
+          <Start>2012-10-18T00:00:00</Start>
+          <End>2012-10-18T00:00:00</End>
           <CustomerId>1</CustomerId>
         </Reservation>
       </Reservations>

@@ -25,7 +25,7 @@ namespace Zuehlke.Zmapp.Services
 		public CustomerInfo[] GetCustomers()
 		{
 			return Repository.Instance.GetCustomers()
-				.Select(c => new CustomerInfo { Id = c.Id, Name = c.Name })
+				.Select(c => new CustomerInfo { Id = c.Id, Name = c.Name, Street = c.Street, City = c.City, ZipCode = c.ZipCode })
 				.ToArray();
 		}
 
