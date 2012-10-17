@@ -8,5 +8,11 @@ namespace Zuehlke.Zmapp.Services.Contracts.Customers
 	{
 		[OperationContract]
 		CustomerInfo[] GetCustomers();
+
+		[OperationContract]
+		void SetCustomer(CustomerInfo customer);
+
+		[OperationContract]
+		void RemoveCustomer(int customerId);
 	}
 }

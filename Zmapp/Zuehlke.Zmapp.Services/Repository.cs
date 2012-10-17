@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Zuehlke.Zmapp.Services
@@ -27,8 +28,8 @@ namespace Zuehlke.Zmapp.Services
 		private Repository()
 		{
 			var path = AppDomain.CurrentDomain.BaseDirectory;
-			EmployeeListFileName = @".\..\..\..\Employees.xml";
-			CustomersListFileName = @".\..\..\..\Customers.xml";
+			EmployeeListFileName = Path.Combine(path, @".\..\Employees.xml");
+			CustomersListFileName = Path.Combine(path, @".\..\Customers.xml");
 		}
 
 		public IList<Employee> GetEmployees()

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <CustomerList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Customers>
     <Customer>
@@ -21,6 +21,11 @@
       <Street>Teststrasse 1</Street>
       <ZipCode>1234</ZipCode>
       <City>Zürich</City>
+    </Customer>
+    <Customer>
+      <Id>4</Id>
+      <Name>asap</Name>
+      <City>xxxx</City>
     </Customer>
   </Customers>
 </CustomerList>
