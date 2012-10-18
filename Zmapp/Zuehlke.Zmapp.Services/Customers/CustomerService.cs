@@ -42,6 +42,21 @@ namespace Zuehlke.Zmapp.Services.Customers
 			this.repository.SetCustomer(customerEnity);
 		}
 
+		public void SetCustomers(CustomerInfo[] customers)
+		{
+			var customersEntities = customers.Select((ci) =>
+			new Customer
+			{
+				Id = ci.Id,
+				Name = ci.Name,
+				Street = ci.Street,
+				City = ci.City,
+				ZipCode = ci.ZipCode
+			});
+
+			this.repository.SetCustomerBatch(customersEntities);
+		}
+
 		public bool RemoveCustomer(int customerId)
 		{
 			return this.repository.RemoveCustomer(customerId);
