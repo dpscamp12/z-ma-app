@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 
-namespace Zuehlke.Zmapp.Services.Embolyee
+namespace Zuehlke.Zmapp.Services.Employees
 {
 	public class EmployeeService : IEmployeeService
 	{
@@ -38,7 +38,7 @@ namespace Zuehlke.Zmapp.Services.Embolyee
 
 		public void SetEmployee(EmployeeInfo employee)
 		{
-			Employee employeeEntity = CreateEmployeeEntity(employee);
+			Employee employeeEntity = this.CreateEmployeeEntity(employee);
 			this.repository.SetEmployee(employeeEntity);
 		}
 
@@ -51,8 +51,7 @@ namespace Zuehlke.Zmapp.Services.Embolyee
 		{
 			Employee employee = this.repository.GetEmployee(employeeId);
 
-			return employee.Reservations
-				.Select(CreateReservationInfo)
+			return Enumerable.Select<Reservation, ReservationInfo>(employee.Reservations, CreateReservationInfo)
 				.ToArray();
 		}
 
@@ -60,7 +59,7 @@ namespace Zuehlke.Zmapp.Services.Embolyee
 		{
 			Employee employeeEntity = this.repository.GetEmployee(employeeId);
 
-			IEnumerable<Reservation> reservationEntities = reservations.Select(CreateReservationEntity);
+			IEnumerable<Reservation> reservationEntities = reservations.Select(this.CreateReservationEntity);
 			employeeEntity.Reservations.AddRange(reservationEntities);
 
 			this.repository.SetEmployee(employeeEntity);
