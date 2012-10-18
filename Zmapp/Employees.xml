@@ -20,21 +20,6 @@
       <CareerLevel>SoftwareEngineer</CareerLevel>
     </Employee>
     <Employee>
-      <Id>529</Id>
-      <FirstName>Hans</FirstName>
-      <LastName>Muster</LastName>
-      <Street>Musterstrasse 23</Street>
-      <City>Zürich</City>
-      <ZipCode>0</ZipCode>
-      <Skills>
-        <Skill>CSharp</Skill>
-        <Skill>WPF</Skill>
-        <Skill>WCF</Skill>
-      </Skills>
-      <Reservations />
-      <CareerLevel>JuniorSoftwareEngineer</CareerLevel>
-    </Employee>
-    <Employee>
       <Id>869</Id>
       <FirstName>Michael</FirstName>
       <LastName>Angelo</LastName>
@@ -62,6 +47,39 @@
       <CareerLevel>SoftwareEngineer</CareerLevel>
     </Employee>
     <Employee>
+      <Id>529</Id>
+      <FirstName>Hans</FirstName>
+      <LastName>Muster</LastName>
+      <Street>Musterstrasse 23</Street>
+      <City>Zürich</City>
+      <ZipCode>8000</ZipCode>
+      <Skills>
+        <Skill>CSharp</Skill>
+        <Skill>WPF</Skill>
+        <Skill>WCF</Skill>
+      </Skills>
+      <Reservations />
+      <CareerLevel>JuniorSoftwareEngineer</CareerLevel>
+    </Employee>
+    <Employee>
+      <Id>263</Id>
+      <FirstName>Fausto</FirstName>
+      <LastName>Samuelli</LastName>
+      <Street>Landstrasse 24</Street>
+      <City>Kasachstan</City>
+      <ZipCode>1234</ZipCode>
+      <Skills>
+        <Skill>CSharp</Skill>
+      </Skills>
+      <Reservations>
+        <Reservation>
+          <Start>2013-01-01T00:00:00+01:00</Start>
+          <End>2013-12-31T00:00:00+01:00</End>
+          <CustomerId>4</CustomerId>
+        </Reservation>
+      </Reservations>
+      <CareerLevel>SoftwareEngineer</CareerLevel>
+    </Employee>
       <Id>3</Id>
       <FirstName>Tom</FirstName>
       <LastName>Jones</LastName>
