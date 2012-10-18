@@ -7,6 +7,7 @@ namespace Zuehlke.Zmapp.Services
 		IList<Employee> GetEmployees();
 		Employee GetEmployee(int id);
 		void SetEmployee(Employee employee);
+		void SetEmployeeBatch(IEnumerable<Employee> employees);
 		bool RemoveEmployee(int employeeId);
 		IEnumerable<Customer> GetCustomers();
 		Customer GetCustomer(int id);

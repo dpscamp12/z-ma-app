@@ -26,6 +26,11 @@ namespace Zuehlke.Zmapp.Services.Client
 			this.ExecuteRemoteCall((service) => service.SetEmployee(employee));
 		}
 
+		public void SetEmployees(EmployeeInfo[] employees)
+		{
+			this.ExecuteRemoteCall((service) => service.SetEmployees(employees));
+		}
+
 		public bool RemoveEmployee(int employeeId)
 		{
 			return this.ExecuteRemoteCall((service) => service.RemoveEmployee(employeeId));
