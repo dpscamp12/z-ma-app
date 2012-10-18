@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 using Zuehlke.Zmapp.Services.Customers;
+using Zuehlke.Zmapp.Services.Employees;
 using Zuehlke.Zmapp.WebApp.Models;
 
 namespace Zuehlke.Zmapp.WebApp.Controllers
