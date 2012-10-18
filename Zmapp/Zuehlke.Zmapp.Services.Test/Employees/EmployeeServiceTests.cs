@@ -14,6 +14,13 @@ namespace Zuehlke.Zmapp.Services.Test.Employees
 	public class EmployeeServiceTests
 	{
 		[TestMethod]
+		[ExpectedException(typeof(ArgumentNullException))]
+		public void Constructor_RepositoryNullReference_ThrowsException()
+		{
+			new EmployeeService(null);
+		}
+
+		[TestMethod]
 		public void GetEmployees_ReturnsAllAvailableEmployees()
 		{
 			// arrange
@@ -39,6 +46,18 @@ namespace Zuehlke.Zmapp.Services.Test.Employees
 
 			// assert
 			Assert.AreEqual("Roger", employee.FirstName);
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentException))]
+		public void GetEmployee_RequestNotExistingEmployeeId_ThrowsException()
+		{
+			// arrange
+			Mock<IRepository> mockedRepository = CreateMockedRepository();
+			var service = new EmployeeService(mockedRepository.Object);
+
+			// act
+			service.GetEmployee(0);
 		}
 
 		[TestMethod]
@@ -76,6 +95,18 @@ namespace Zuehlke.Zmapp.Services.Test.Employees
 		}
 
 		[TestMethod]
+		[ExpectedException(typeof(ArgumentNullException))]
+		public void SetEmployee_EmployeeNullReference_ThrowsException()
+		{
+			// arrange
+			Mock<IRepository> mockedRepository = CreateMockedRepository();
+			var service = new EmployeeService(mockedRepository.Object);
+
+			// act
+			service.SetEmployee(null);
+		}
+
+		[TestMethod]
 		public void SetEmployees_RequestNotExistingEmployees_SetsEmployeesInRepository()
 		{
 			// arrange
@@ -98,6 +129,18 @@ namespace Zuehlke.Zmapp.Services.Test.Employees
 			mockedRepository.Verify(p => p.SetEmployeeBatch(It.Is<IEnumerable<Employee>>(es => es.Count() == 2)));
 		}
 
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentNullException))]
+		public void SetEmployees_EmployeesNullReference_ThrowsException()
+		{
+			// arrange
+			Mock<IRepository> mockedRepository = CreateMockedRepository();
+			var service = new EmployeeService(mockedRepository.Object);
+
+			// act
+			service.SetEmployees(null);
+		}
+
 		private static Mock<IRepository> CreateMockedRepository()
 		{
 			var mock = new Mock<IRepository>();
@@ -105,6 +148,7 @@ namespace Zuehlke.Zmapp.Services.Test.Employees
 			IEnumerable<Employee> employees = CreateEmployees();
 			mock.Setup(p => p.GetEmployees()).Returns(employees);
 			mock.Setup(p => p.GetEmployee(It.IsAny<int>())).Returns<int>((id) => employees.ElementAt(id - 1));
+			mock.Setup(p => p.GetEmployee(0)).Returns<int>(null);
 
 			return mock;
 		}

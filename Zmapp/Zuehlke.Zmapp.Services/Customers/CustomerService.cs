@@ -32,6 +32,8 @@ namespace Zuehlke.Zmapp.Services.Customers
 
 		public void SetCustomer(CustomerInfo customer)
 		{
+			if (customer == null) throw new ArgumentNullException("customer");
+
 			var customerEnity = new Customer
 									{
 										Id = customer.Id,
@@ -46,6 +48,8 @@ namespace Zuehlke.Zmapp.Services.Customers
 
 		public void SetCustomers(CustomerInfo[] customers)
 		{
+			if (customers == null) throw new ArgumentNullException("customers");
+
 			var customersEntities = customers.Select((ci) =>
 			new Customer
 			{

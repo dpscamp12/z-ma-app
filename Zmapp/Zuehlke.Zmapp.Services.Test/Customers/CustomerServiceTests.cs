@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Linq;
@@ -12,6 +13,13 @@ namespace Zuehlke.Zmapp.Services.Test.Customers
 	[TestClass]
 	public class CustomerServiceTests
 	{
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentNullException))]
+		public void Constructor_RepositoryNullReference_ThrowsException()
+		{
+			new CustomerService(null);
+		}
+
 		[TestMethod]
 		public void GetCustomers_ReturnsAllAvailableCustomers()
 		{
@@ -61,7 +69,19 @@ namespace Zuehlke.Zmapp.Services.Test.Customers
 		}
 
 		[TestMethod]
-		public void SetEmployees_RequestNotExistingEmployees_SetsEmployeesInRepository()
+		[ExpectedException(typeof(ArgumentNullException))]
+		public void SetCustomer_CustomerNullReference_ThrowsException()
+		{
+			// arrange
+			Mock<IRepository> mockedRepository = CreateMockedRepository();
+			var service = new CustomerService(mockedRepository.Object);
+
+			// act
+			service.SetCustomer(null);
+		}
+
+		[TestMethod]
+		public void SetCustomers_RequestNotExistingEmployees_SetsEmployeesInRepository()
 		{
 			// arrange
 			Mock<IRepository> mockedRepository = CreateMockedRepository();
@@ -81,6 +101,18 @@ namespace Zuehlke.Zmapp.Services.Test.Customers
 
 			// assert
 			mockedRepository.Verify(p => p.SetCustomerBatch(It.Is<IEnumerable<Customer>>(c => c.Count() == 2)));
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentNullException))]
+		public void SetCustomers_CustomerNullReference_ThrowsException()
+		{
+			// arrange
+			Mock<IRepository> mockedRepository = CreateMockedRepository();
+			var service = new CustomerService(mockedRepository.Object);
+
+			// act
+			service.SetCustomers(null);
 		}
 
 		private Mock<IRepository> CreateMockedRepository()
