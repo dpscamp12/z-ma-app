@@ -88,6 +88,22 @@ namespace Zuehlke.Zmapp.Services
 			DataAccess.WriteCustomersToFile(CustomersListFileName, Customers);
 		}
 
+		public void SetCustomerBatch(IEnumerable<Customer> customers)
+		{
+			foreach (var customer in customers)
+			{
+				if (customer.Id <= 0)
+				{
+					throw new ArgumentException("Customer ID is invalid.");
+				}
+
+				RemoveCustomer(Customers, customer.Id);
+				Customers.Add(customer);
+			}
+
+			DataAccess.WriteCustomersToFile(CustomersListFileName, Customers);
+		}
+
 		public bool RemoveCustomer(int customerId)
 		{
 			bool isValid = RemoveCustomer(Customers, customerId);

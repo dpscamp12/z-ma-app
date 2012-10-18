@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.ViewModel;
+﻿using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.ViewModel;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Zuehlke.Zmapp.Services.Client;
@@ -13,12 +14,13 @@ namespace Zuehlke.Zmapp.Wpf
 		private readonly ObservableCollection<CustomerInfo> customers = new ObservableCollection<CustomerInfo>();
 		private CustomerInfo selectedCustomer;
 
-		private readonly PrismReplacementDelegateCommand<CustomerInfo> saveCustomer;
+		//private readonly PrismReplacementDelegateCommand<CustomerInfo> saveCustomer;
+		private readonly DelegateCommand saveCustomer;
 
 		public CustomersViewModel()
 		{
-			this.saveCustomer = new PrismReplacementDelegateCommand<CustomerInfo>(this.OnSave);
-
+			//this.saveCustomer = new PrismReplacementDelegateCommand<CustomerInfo>(this.OnSave);
+			this.saveCustomer = new DelegateCommand(this.OnSave);
 			this.Init();
 		}
 
@@ -28,13 +30,12 @@ namespace Zuehlke.Zmapp.Wpf
 			this.service = injectedService;
 		}
 
-		private void OnSave(CustomerInfo obj)
+		private void OnSave() //CustomerInfo obj)
 		{
-			if (obj == null) return;
-			this.service.SetCustomer(obj);
+			this.service.SetCustomers(this.customers.ToArray());
 		}
 
-		public PrismReplacementDelegateCommand<CustomerInfo> SaveCustomerCommand
+		public DelegateCommand SaveCustomerCommand //PrismReplacementDelegateCommand<CustomerInfo> SaveCustomerCommand
 		{
 			get { return this.saveCustomer; }
 		}

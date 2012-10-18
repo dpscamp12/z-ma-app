@@ -11,6 +11,7 @@ namespace Zuehlke.Zmapp.Services
 		IEnumerable<Customer> GetCustomers();
 		Customer GetCustomer(int id);
 		void SetCustomer(Customer customer);
+		void SetCustomerBatch(IEnumerable<Customer> customer);
 		bool RemoveCustomer(int customerId);
 	}
 }

@@ -51,7 +51,7 @@ namespace Zuehlke.Zmapp.Services.Employees
 		{
 			Employee employee = this.repository.GetEmployee(employeeId);
 
-			return Enumerable.Select<Reservation, ReservationInfo>(employee.Reservations, CreateReservationInfo)
+			return employee.Reservations.Select(CreateReservationInfo)
 				.ToArray();
 		}
 
