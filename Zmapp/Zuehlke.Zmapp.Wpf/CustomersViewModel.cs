@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.ViewModel;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Zuehlke.Zmapp.Services.Client;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
 using Zuehlke.Zmapp.Wpf.Tools;
 

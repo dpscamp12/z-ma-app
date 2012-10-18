@@ -93,9 +93,7 @@
     <Compile Include="Customers.xaml.cs">
       <DependentUpon>Customers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomerServiceProxy.cs" />
     <Compile Include="CustomersViewModel.cs" />
-    <Compile Include="EmployeeEvaluationServiceProxy.cs" />
     <Compile Include="EmployeeListViewModel.cs" />
     <Compile Include="EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
@@ -107,9 +105,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmployeeListViewModel.cs" />
     <Compile Include="Tools\PrismReplacementDelegateCommand.cs" />
-    <Compile Include="ServiceProxy.cs" />
     <Compile Include="Tools\SelectorSelectedCommandBehavior.cs" />
     <Compile Include="Tools\Selected.cs" />
     <Compile Include="Tools\MultiSelect.cs" />
