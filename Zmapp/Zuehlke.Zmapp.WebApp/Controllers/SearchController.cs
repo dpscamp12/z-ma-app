@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.Web.Mvc;
-using Zuehlke.Zmapp.Services;
+using Zuehlke.Zmapp.Services.Client;
+using Zuehlke.Zmapp.Services.Contracts.Customers;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 using Zuehlke.Zmapp.WebApp.Models;
 
@@ -12,16 +13,21 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 {
 	public class SearchController : Controller
 	{
-		private readonly IEmployeeEvaluationService employeeService;
+		private readonly ICustomerService customerService;
+		private readonly IEmployeeReservationService reservationService;
 
 		public SearchController()
-			: this(new EmployeeEvaluationService())
+			: this(new CustomerServiceProxy(), new EmployeeReservationServiceProxy())
 		{
 		}
 
-		public SearchController(IEmployeeEvaluationService employeeService)
+		public SearchController(ICustomerService customerService, IEmployeeReservationService reservationService)
 		{
-			this.employeeService = employeeService;
+			if (customerService == null) throw new ArgumentNullException("customerService");
+			if (reservationService == null) throw new ArgumentNullException("reservationService");
+
+			this.customerService = customerService;
+			this.reservationService = reservationService;
 		}
 
 		[HttpGet]
@@ -33,7 +39,9 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 				EndDate = DateTime.Now + TimeSpan.FromDays(90),
 			};
 
-			ViewData["Customers"] = new SelectList(Repository.Instance.GetCustomers(), "Id", "Name");
+			IEnumerable<CustomerInfo> customers = this.customerService.GetCustomers();
+
+			ViewData["Customers"] = new SelectList(customers, "Id", "Name");
 			ViewData["Skills"] = GetSkillSelectList(model.SelectedSkills);
 			ViewData["CareerLevels"] = GetCareerLevelsSelectList(model.SelectedCareerLevels);
 
@@ -45,8 +53,10 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
+				IEnumerable<CustomerInfo> customers = this.customerService.GetCustomers();
+
 				// send back search-view with validation errors.
-				ViewData["Customers"] = new SelectList(Repository.Instance.GetCustomers(), "Id", "Name");
+				ViewData["Customers"] = new SelectList(customers, "Id", "Name");
 				ViewData["Skills"] = GetSkillSelectList(searchParams.SelectedSkills);
 				ViewData["CareerLevels"] = GetCareerLevelsSelectList(searchParams.SelectedCareerLevels);
 				return View("Index", searchParams);
@@ -67,31 +77,12 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 		[HttpPost]
 		public ActionResult BookEmployee(int employeeId, [Deserialize]SearchParamViewModel searchParam)
 		{
-			var reservation = new Reservation
-			{
-				CustomerId = searchParam.SelectedCustomer,
-				Start = searchParam.StartDate,
-				End = searchParam.EndDate
-			};
-			BookEmployee(employeeId, reservation);
+			this.reservationService.ReserveEmployeeForCustomer(
+				employeeId,
+				searchParam.SelectedCustomer,
+				searchParam.StartDate,
+				 searchParam.EndDate);
 			return Result(searchParam);
-		}
-
-		private bool BookEmployee(int employeeId, Reservation reservation)
-		{
-			Employee employee = Repository.Instance.GetEmployee(employeeId);
-			if (employee == null)
-			{
-				return false;
-			}
-
-			List<Reservation> reservations = employee.Reservations == null
-												 ? new List<Reservation>()
-												 : employee.Reservations.ToList();
-			reservations.Add(reservation);
-			employee.Reservations.AddRange(reservations);
-			Repository.Instance.SetEmployee(employee);
-			return true;
 		}
 
 		private IEnumerable<EmployeeSearchResult> SearchEmployees(SearchParamViewModel searchParamViewModel)
@@ -105,7 +96,7 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 				RequestedSkills = searchParamViewModel.SelectedSkills.Select(i => (Skill)i).ToArray()
 			};
 
-			return this.employeeService.FindPotentialEmployeesForCustomer(query);
+			return this.reservationService.FindPotentialEmployeesForCustomer(query);
 		}
 
 		private static MultiSelectList GetSkillSelectList(int[] selectedSkillIds)

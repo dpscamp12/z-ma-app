@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Zuehlke.Zmapp.Services.Client;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
-using Zuehlke.Zmapp.Services.Customers;
 using Zuehlke.Zmapp.WebApp.Models;
 
 namespace Zuehlke.Zmapp.WebApp.Controllers
@@ -13,13 +13,14 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 		private readonly ICustomerService customerService;
 
 		public CustomerController()
-			: this(new CustomerService())
+			: this(new CustomerServiceProxy())
 		{
 		}
 
 		public CustomerController(ICustomerService customerService)
 		{
 			if (customerService == null) throw new ArgumentNullException("customerService");
+
 			this.customerService = customerService;
 		}
 

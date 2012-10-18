@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Zuehlke.Zmapp.Services.Client;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 using Zuehlke.Zmapp.Services.Customers;
@@ -14,18 +15,22 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 	{
 		private readonly IEmployeeService employeeService;
 		private readonly ICustomerService customerService;
+		private readonly IEmployeeReservationService reservationService;
 
 		public EmployeeController()
-			: this(new EmployeeService(), new CustomerService())
+			: this(new EmployeeServiceProxy(), new CustomerServiceProxy(), new EmployeeReservationServiceProxy())
 		{
 		}
 
-		public EmployeeController(IEmployeeService employeeService, ICustomerService customerService)
+		public EmployeeController(IEmployeeService employeeService, ICustomerService customerService, IEmployeeReservationService reservationService)
 		{
 			if (employeeService == null) throw new ArgumentNullException("employeeService");
+			if (customerService == null) throw new ArgumentNullException("customerService");
+			if (reservationService == null) throw new ArgumentNullException("reservationService");
 
 			this.employeeService = employeeService;
 			this.customerService = customerService;
+			this.reservationService = reservationService;
 		}
 
 		[HttpGet]
@@ -47,7 +52,7 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 		public JsonResult Employee(int id)
 		{
 			EmployeeInfo employee = this.employeeService.GetEmployee(id);
-			IEnumerable<ReservationInfo> reservations = this.employeeService.GetReservationsOfEmployee(employee.Id);
+			IEnumerable<ReservationInfo> reservations = this.reservationService.GetReservationsOfEmployee(employee.Id);
 
 			EmployeeViewModel employeeViewModel = this.ConvertToViewModel(employee, reservations);
 			return Json(employeeViewModel, JsonRequestBehavior.AllowGet);
@@ -64,7 +69,7 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 				ReservationInfo[] reservations = employeeViewModel.Reservations
 					.Select(this.ConvertToDataObject)
 					.ToArray();
-				this.employeeService.SetReservationsOfEmployee(employee.Id, reservations);
+				this.reservationService.SetReservationsOfEmployee(employee.Id, reservations);
 			}
 
 			return Json(employeeViewModel);

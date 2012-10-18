@@ -80,7 +80,7 @@ namespace Zuehlke.Zmapp.Services.Test
 		[TestMethod]
 		public void FindEmployees_FromDateAndEndDateAreEqual_FilterCorrectlyAppliedToOneDay()
 		{
-			//var service = new EmployeeEvaluationService();
+			//var service = new EmployeeReservationService();
 			//service.FindEmployees()
 
 			Employee employee = new Employee();

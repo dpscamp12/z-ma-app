@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 
-namespace Zuehlke.Zmapp.Services
+namespace Zuehlke.Zmapp.Services.Embloyee
 {
-	internal static class EmployeeEvaluationServiceHelper
+	internal static class EmployeeReservationServiceHelper
 	{
 		public static IEnumerable<Employee> FindEmployees(IEnumerable<Employee> employees, EmployeeQuery query)
 		{
