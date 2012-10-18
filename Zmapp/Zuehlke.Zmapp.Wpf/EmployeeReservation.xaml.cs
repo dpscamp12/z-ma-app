@@ -6,7 +6,7 @@ namespace Zuehlke.Zmapp.Wpf
 	/// </summary>
 	public partial class EmployeeReservation
 	{
-		private readonly EmployeeListViewModel viewModel = new EmployeeListViewModel();
+		private readonly EmployeeReservationViewModel viewModel = new EmployeeReservationViewModel();
 
 		public EmployeeReservation()
 		{
