@@ -4,6 +4,8 @@ using System.Linq;
 using System.ServiceModel;
 
 using Zuehlke.Zmapp.Services.Contracts.Employees;
+using Zuehlke.Zmapp.Services.Data;
+using Zuehlke.Zmapp.Services.DomainModel;
 
 namespace Zuehlke.Zmapp.Services.Employees
 {

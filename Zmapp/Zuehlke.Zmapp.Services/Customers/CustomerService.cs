@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
+using Zuehlke.Zmapp.Services.Data;
+using Zuehlke.Zmapp.Services.DomainModel;
 
 namespace Zuehlke.Zmapp.Services.Customers
 {

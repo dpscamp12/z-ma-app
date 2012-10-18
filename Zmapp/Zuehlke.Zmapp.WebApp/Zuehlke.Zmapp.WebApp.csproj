@@ -162,6 +162,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="Models\ReservationViewModel.cs" />
     <Compile Include="Models\ValidationAttributes.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

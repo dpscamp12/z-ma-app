@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using Zuehlke.Zmapp.Services.Contracts.Employees;
+using Zuehlke.Zmapp.Services.Data;
+using Zuehlke.Zmapp.Services.DomainModel;
 
 namespace Zuehlke.Zmapp.Services.Employees
 {
@@ -52,7 +55,6 @@ namespace Zuehlke.Zmapp.Services.Employees
 		{
 			return this.repository.RemoveEmployee(employeeId);
 		}
-
 		#endregion
 
 		private Employee CreateEmployeeEntity(EmployeeInfo employeeInfo)
@@ -91,7 +93,7 @@ namespace Zuehlke.Zmapp.Services.Employees
 				Phone = employee.Phone,
 				EMail = employee.EMail,
 				CareerLevel = employee.CareerLevel,
-				Skills = employee.Skills.ToArray()
+				Skills = (employee.Skills ?? new List<Skill>()).ToArray()
 			};
 		}
 

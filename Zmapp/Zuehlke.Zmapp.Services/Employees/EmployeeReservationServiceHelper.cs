@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Zuehlke.Zmapp.Services.Contracts.Employees;
+using Zuehlke.Zmapp.Services.DomainModel;
 
 namespace Zuehlke.Zmapp.Services.Employees
 {

@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Zuehlke.Zmapp.Services.DomainModel;
 
-namespace Zuehlke.Zmapp.Services.Test
+namespace Zuehlke.Zmapp.Services.Test.Data
 {
     [TestClass]
-    public class ReservationTest
+    public class ReservationTests
     {       
         [TestMethod]
         public void Contains1Test()

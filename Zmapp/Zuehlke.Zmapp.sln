@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuehlke.Zmapp.Services.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuehlke.Zmapp.WebApp", "Zuehlke.Zmapp.WebApp\Zuehlke.Zmapp.WebApp.csproj", "{985CEB0E-FFEF-40BB-8F01-A79040FD903F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuehlke.Zmapp.Wpf.Tests", "Zuehlke.Zmapp.Wpf.Tests\Zuehlke.Zmapp.Wpf.Tests.csproj", "{0890954D-311C-42AA-97A0-2DC0AFE65415}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuehlke.Zmapp.Wpf.Test", "Zuehlke.Zmapp.Wpf.Tests\Zuehlke.Zmapp.Wpf.Test.csproj", "{0890954D-311C-42AA-97A0-2DC0AFE65415}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{67C7BA1C-235F-40CD-98BF-922365F2D394}"
 	ProjectSection(SolutionItems) = preProject
