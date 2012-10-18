@@ -2,7 +2,7 @@ using System;
 
 namespace Zuehlke.Zmapp.Services.Contracts.Employee
 {
-	public class EmployeeEvaluationServiceMock : IEmployeeEvaluationService
+	public class EmployeeReservationServiceMock : IEmployeeReservationService
 	{
 		public EmployeeSearchResult[] FindPotentialEmployeesForCustomer(EmployeeQuery query)
 		{
@@ -28,6 +28,16 @@ namespace Zuehlke.Zmapp.Services.Contracts.Employee
 		}
 
 		public void ReserveEmployeeForCustomer(int employeeId, int customerId, DateTime beginOfPeriod, DateTime endOfPeriod)
+		{
+			throw new NotImplementedException();
+		}
+
+		public ReservationInfo[] GetReservationsOfEmployee(int employeeId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void SetReservationsOfEmployee(int employeeId, ReservationInfo[] reservations)
 		{
 			throw new NotImplementedException();
 		}

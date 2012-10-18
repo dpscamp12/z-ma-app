@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
 
-namespace Zuehlke.Zmapp.Services.Embolyee
+namespace Zuehlke.Zmapp.Services.Embloyee
 {
 	public class EmployeeService : IEmployeeService
 	{
@@ -38,32 +38,13 @@ namespace Zuehlke.Zmapp.Services.Embolyee
 
 		public void SetEmployee(EmployeeInfo employee)
 		{
-			Employee employeeEntity = CreateEmployeeEntity(employee);
+			Employee employeeEntity = this.CreateEmployeeEntity(employee);
 			this.repository.SetEmployee(employeeEntity);
 		}
 
 		public bool RemoveEmployee(int employeeId)
 		{
 			return this.repository.RemoveEmployee(employeeId);
-		}
-
-		public ReservationInfo[] GetReservationsOfEmployee(int employeeId)
-		{
-			Employee employee = this.repository.GetEmployee(employeeId);
-
-			return employee.Reservations
-				.Select(CreateReservationInfo)
-				.ToArray();
-		}
-
-		public void SetReservationsOfEmployee(int employeeId, ReservationInfo[] reservations)
-		{
-			Employee employeeEntity = this.repository.GetEmployee(employeeId);
-
-			IEnumerable<Reservation> reservationEntities = reservations.Select(CreateReservationEntity);
-			employeeEntity.Reservations.AddRange(reservationEntities);
-
-			this.repository.SetEmployee(employeeEntity);
 		}
 
 		#endregion
@@ -91,16 +72,6 @@ namespace Zuehlke.Zmapp.Services.Embolyee
 			return employee;
 		}
 
-		private Reservation CreateReservationEntity(ReservationInfo reservation)
-		{
-			return new Reservation
-			{
-				CustomerId = reservation.CustomerId,
-				Start = reservation.Start,
-				End = reservation.End
-			};
-		}
-
 		private static EmployeeInfo CreateEmployeeInfo(Employee employee)
 		{
 			return new EmployeeInfo
@@ -118,14 +89,14 @@ namespace Zuehlke.Zmapp.Services.Embolyee
 			};
 		}
 
-		private static ReservationInfo CreateReservationInfo(Reservation reservation)
+		private Reservation CreateReservationEntity(ReservationInfo reservation)
 		{
-			return new ReservationInfo
-			{
-				CustomerId = reservation.CustomerId,
-				Start = reservation.Start,
-				End = reservation.End
-			};
+			return new Reservation
+				       {
+					       CustomerId = reservation.CustomerId,
+					       Start = reservation.Start,
+					       End = reservation.End
+				       };
 		}
 	}
 }

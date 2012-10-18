@@ -14,7 +14,7 @@ namespace Zuehlke.Zmapp.Wpf.Tests
 		public void Skills_AllEnumValuesReturned()
 		{
 			var customerServiceMock = GetMockedCustomerService();
-			var viewModel = new EmployeeListViewModel(customerServiceMock.Object, new EmployeeEvaluationServiceMock());
+			var viewModel = new EmployeeListViewModel(customerServiceMock.Object, new EmployeeReservationServiceMock());
 			Assert.AreEqual(7, viewModel.Skills.Count);
 			Assert.IsTrue(viewModel.Skills.Contains(Skill.WCF));
 		}
@@ -49,9 +49,9 @@ namespace Zuehlke.Zmapp.Wpf.Tests
 			Assert.AreEqual(1, viewModel.SelectedCustomer.Id);
 		}
 
-		private static Mock<IEmployeeEvaluationService> GetMockedService()
+		private static Mock<IEmployeeReservationService> GetMockedService()
 		{
-			var mockedService = new Mock<IEmployeeEvaluationService>();
+			var mockedService = new Mock<IEmployeeReservationService>();
 
 			return mockedService;
 		}

@@ -284,13 +284,13 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zuehlke.Zmapp.Services.Client\Zuehlke.Zmapp.Services.Client.csproj">
+      <Project>{45924065-7CA6-4445-B34D-28C371B7F7E3}</Project>
+      <Name>Zuehlke.Zmapp.Services.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zuehlke.Zmapp.Services.Contracts\Zuehlke.Zmapp.Services.Contracts.csproj">
       <Project>{c67b9670-075b-4196-b868-cabaad068941}</Project>
       <Name>Zuehlke.Zmapp.Services.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zuehlke.Zmapp.Services\Zuehlke.Zmapp.Services.csproj">
-      <Project>{b7ec1cf4-0ab3-43dc-b299-eb7d41ada67c}</Project>
-      <Name>Zuehlke.Zmapp.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

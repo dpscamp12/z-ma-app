@@ -14,7 +14,7 @@ namespace Zuehlke.Zmapp.Wpf
 	public class EmployeeListViewModel : NotificationObject
 	{
 		private readonly ICustomerService customerService;
-		private readonly IEmployeeEvaluationService service;
+		private readonly IEmployeeReservationService service;
 		private readonly List<CustomerInfo> customers = new List<CustomerInfo>();
 		private readonly ObservableCollection<EmployeeSearchResult> availableEmployees = new ObservableCollection<EmployeeSearchResult>();
 		private readonly List<Skill> availableSkills = new List<Skill>(typeof(Skill).GetEnumValues().Cast<Skill>());
@@ -27,11 +27,11 @@ namespace Zuehlke.Zmapp.Wpf
 		private readonly DelegateCommand<EmployeeSearchResult> reserveEmployeeCommand;
 
 		public EmployeeListViewModel()
-			:this(new CustomerServiceProxy(), new EmployeeEvaluationServiceProxy())
+			:this(new CustomerServiceProxy(), new EmployeeReservationServiceProxy())
 		{
 		}
 
-		public EmployeeListViewModel(ICustomerService customerService, IEmployeeEvaluationService injectedService)
+		public EmployeeListViewModel(ICustomerService customerService, IEmployeeReservationService injectedService)
 		{
 			if (customerService == null) throw new ArgumentNullException("customerService");
 			if (injectedService == null) throw new ArgumentNullException("injectedService");

@@ -41,8 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerServiceProxy.cs" />
-    <Compile Include="EmployeeEvaluationServiceProxy.cs" />
-    <Compile Include="EmplyeeServiceproxy.cs" />
+    <Compile Include="EmployeeReservationServiceProxy.cs" />
+    <Compile Include="EmployeeServiceproxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceProxy.cs" />
   </ItemGroup>

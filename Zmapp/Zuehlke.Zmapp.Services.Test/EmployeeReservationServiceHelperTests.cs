@@ -2,11 +2,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 using Zuehlke.Zmapp.Services.Contracts.Employee;
+using Zuehlke.Zmapp.Services.Embloyee;
 
 namespace Zuehlke.Zmapp.Services.Test
 {
 	[TestClass]
-	public class EmployeeEvaluationServiceHelperTests
+	public class EmployeeReservationServiceHelperTests
 	{
 		[TestMethod]
 		public void FindEmployeesTest()
@@ -45,21 +46,21 @@ namespace Zuehlke.Zmapp.Services.Test
 							};
 
 			// no requested skill/careerLevel
-			Assert.IsTrue(EmployeeEvaluationServiceHelper.FindEmployees(employees, query).Count() == 2);
+			Assert.IsTrue(EmployeeReservationServiceHelper.FindEmployees(employees, query).Count() == 2);
 
 			// set skill
 			query.RequestedSkills = new[] { Skill.SqlServer };
-			Assert.IsTrue(EmployeeEvaluationServiceHelper.FindEmployees(employees, query).Count() == 1);
+			Assert.IsTrue(EmployeeReservationServiceHelper.FindEmployees(employees, query).Count() == 1);
 
 			query.RequestedSkills = new[] { Skill.SqlServer, Skill.CSharp, };
-			Assert.IsTrue(EmployeeEvaluationServiceHelper.FindEmployees(employees, query).Count() == 2);
+			Assert.IsTrue(EmployeeReservationServiceHelper.FindEmployees(employees, query).Count() == 2);
 
 			// set career-level
 			query.RequestedCareerLevels = new[] { CareerLevel.JuniorSoftwareEngineer };
-			Assert.IsTrue(EmployeeEvaluationServiceHelper.FindEmployees(employees, query).Count() == 1);
+			Assert.IsTrue(EmployeeReservationServiceHelper.FindEmployees(employees, query).Count() == 1);
 
 			query.RequestedCareerLevels = new[] { CareerLevel.JuniorSoftwareEngineer, CareerLevel.SoftwareEngineer, };
-			Assert.IsTrue(EmployeeEvaluationServiceHelper.FindEmployees(employees, query).Count() == 2);
+			Assert.IsTrue(EmployeeReservationServiceHelper.FindEmployees(employees, query).Count() == 2);
 		}
 
 	}
