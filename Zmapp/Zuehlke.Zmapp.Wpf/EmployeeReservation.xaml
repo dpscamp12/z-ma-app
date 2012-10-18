@@ -112,7 +112,7 @@
                 <TextBlock Text="Skills" Grid.Column="0" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
                 <TextBlock Text="Career Level" Grid.Column="1" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
                 <TextBlock Text="Available Employees" Grid.Column="3" Grid.Row="0" Style="{StaticResource InputLabelStyle}" />
-                <ListBox ItemsSource="{Binding Skills}" Grid.Column="0" Grid.Row="1" Style="{StaticResource ListBoxStyle}" local:MultiSelect.IsEnabled="True" />
+                <!--<ListBox ItemsSource="{Binding Skills}" Grid.Column="0" Grid.Row="1" Style="{StaticResource ListBoxStyle}" local:MultiSelect.IsEnabled="True" />
                 <ListBox ItemsSource="{Binding CareerLevels}" Grid.Column="1" Grid.Row="1"  local:MultiSelect.IsEnabled="True" Style="{StaticResource ListBoxStyle}" />
                 <ListBox ItemsSource="{Binding AvailableEmployees}" Grid.Column="3" Grid.Row="1" Style="{StaticResource ListBoxStyle}" Grid.IsSharedSizeScope="True" HorizontalContentAlignment="Stretch" ItemContainerStyle="{DynamicResource ListBoxWithNonSelectableItemsStyle}">
                     <ListBox.ItemTemplate>
@@ -129,7 +129,7 @@
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-                </ListBox>
+                </ListBox>-->
             </Grid>
         </GroupBox>
     </Grid>

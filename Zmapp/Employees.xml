@@ -17,7 +17,7 @@
         <Skill>WCF</Skill>
       </Skills>
       <Reservations />
-      <CareerLevel>SoftwareEngineer</CareerLevel>
+      <CareerLevel>SeniorSoftwareEngineer</CareerLevel>
     </Employee>
     <Employee>
       <Id>529</Id>
@@ -69,13 +69,7 @@
         <Skill>CSharp</Skill>
         <Skill>SqlServer</Skill>
       </Skills>
-      <Reservations>
-        <Reservation>
-          <Start>2012-10-18T00:00:00+02:00</Start>
-          <End>2012-10-18T00:00:00+02:00</End>
-          <CustomerId>1</CustomerId>
-        </Reservation>
-      </Reservations>
+      <Reservations />
       <CareerLevel>SoftwareEngineer</CareerLevel>
     </Employee>
   </Employees>
