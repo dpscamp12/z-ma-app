@@ -2,13 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Zuehlke.Zmapp.Services;
+using Zuehlke.Zmapp.Services.Contracts.Customers;
+using Zuehlke.Zmapp.Services.Contracts.Employee;
+using Zuehlke.Zmapp.Services.Customers;
+using Zuehlke.Zmapp.Services.Embolyee;
 using Zuehlke.Zmapp.WebApp.Models;
 
 namespace Zuehlke.Zmapp.WebApp.Controllers
 {
 	public class EmployeeController : Controller
 	{
+		private readonly IEmployeeService employeeService;
+		private readonly ICustomerService customerService;
+
+		public EmployeeController()
+			: this(new EmployeeService(), new CustomerService())
+		{
+		}
+
+		public EmployeeController(IEmployeeService employeeService, ICustomerService customerService)
+		{
+			if (employeeService == null) throw new ArgumentNullException("employeeService");
+
+			this.employeeService = employeeService;
+			this.customerService = customerService;
+		}
+
 		[HttpGet]
 		public ActionResult Index()
 		{
@@ -18,25 +37,35 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 		[HttpGet]
 		public JsonResult Identifiers()
 		{
-			var employees = Repository.Instance.GetEmployees();
+			IEnumerable<EmployeeInfo> employees = this.employeeService.GetEmployees();
 			var employeeIdentifiers = employees.Select(e => new { e.Id, e.FirstName, e.LastName });
+
 			return Json(employeeIdentifiers, JsonRequestBehavior.AllowGet);
 		}
 
 		[HttpGet]
 		public JsonResult Employee(int id)
 		{
-			Employee employee = Repository.Instance.GetEmployee(id);
+			EmployeeInfo employee = this.employeeService.GetEmployee(id);
+			IEnumerable<ReservationInfo> reservations = this.employeeService.GetReservationsOfEmployee(employee.Id);
 
-			EmployeeViewModel employeeViewModel = ConvertToViewModel(employee);
+			EmployeeViewModel employeeViewModel = this.ConvertToViewModel(employee, reservations);
 			return Json(employeeViewModel, JsonRequestBehavior.AllowGet);
 		}
 
 		[HttpPost]
 		public JsonResult Employee(EmployeeViewModel employeeViewModel)
 		{
-			Employee employee = ConvertToDomainEntity(employeeViewModel);
-			Repository.Instance.SetEmployee(employee);
+			EmployeeInfo employee = ConvertToDataObject(employeeViewModel);
+			this.employeeService.SetEmployee(employee);
+
+			if (employeeViewModel.Reservations != null)
+			{
+				ReservationInfo[] reservations = employeeViewModel.Reservations
+					.Select(this.ConvertToDataObject)
+					.ToArray();
+				this.employeeService.SetReservationsOfEmployee(employee.Id, reservations);
+			}
 
 			return Json(employeeViewModel);
 		}
@@ -44,23 +73,23 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 		[HttpDelete]
 		public HttpStatusCodeResult DeleteEmployee(int id)
 		{
-			bool success = Repository.Instance.RemoveEmployee(id);
+			bool success = this.employeeService.RemoveEmployee(id);
 			return new HttpStatusCodeResult(success ? 200 : 400);  // does this make sense? 
 		}
 
-		private static ReservationViewModel ConvertToViewModel(Reservation reservation)
+		private ReservationViewModel ConvertToViewModel(ReservationInfo reservation)
 		{
 			var reservationViewModel = new ReservationViewModel
 			{
 				Start = reservation.Start,
 				End = reservation.End,
-				CustomerName = ""
+				CustomerName = string.Empty,
 			};
 
 			if (reservation.CustomerId != null)
 			{
-				IEnumerable<Customer> customers = Repository.Instance.GetCustomers();
-				Customer customer = customers.FirstOrDefault(c => c.Id == reservation.CustomerId);
+				IEnumerable<CustomerInfo> customers = this.customerService.GetCustomers();
+				CustomerInfo customer = customers.FirstOrDefault(c => c.Id == reservation.CustomerId);
 				if (customer == null)
 				{
 					throw new ArgumentException("Unknown customer Id");
@@ -71,9 +100,9 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 			return reservationViewModel;
 		}
 
-		private static Reservation ConvertToDomainEntity(ReservationViewModel reservationViewModel)
+		private ReservationInfo ConvertToDataObject(ReservationViewModel reservationViewModel)
 		{
-			var reservation = new Reservation
+			var reservation = new ReservationInfo
 								  {
 									  Start = reservationViewModel.Start,
 									  End = reservationViewModel.End
@@ -81,8 +110,8 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 
 			if (!String.IsNullOrEmpty(reservationViewModel.CustomerName))
 			{
-				IEnumerable<Customer> customers = Repository.Instance.GetCustomers();
-				Customer customer = customers.FirstOrDefault(
+				IEnumerable<CustomerInfo> customers = this.customerService.GetCustomers();
+				CustomerInfo customer = customers.FirstOrDefault(
 					c => String.Compare(c.Name, reservationViewModel.CustomerName, StringComparison.InvariantCultureIgnoreCase) == 0);
 				if (customer == null)
 				{
@@ -94,14 +123,15 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 			return reservation;
 		}
 
-		private static EmployeeViewModel ConvertToViewModel(Employee employee)
+		private EmployeeViewModel ConvertToViewModel(EmployeeInfo employee, IEnumerable<ReservationInfo> reservations)
 		{
 			var reservationViewModels = new List<ReservationViewModel>();
-			if (employee.Reservations != null)
+			if (reservations != null)
 			{
-				IEnumerable<ReservationViewModel> reservations = employee.Reservations.Select(ConvertToViewModel);
-				reservationViewModels.AddRange(reservations);
+				IEnumerable<ReservationViewModel> reservationsViewModels = reservations.Select(this.ConvertToViewModel);
+				reservationViewModels.AddRange(reservationsViewModels);
 			}
+
 			return new EmployeeViewModel
 					   {
 						   Id = employee.Id,
@@ -118,15 +148,9 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 					   };
 		}
 
-		private static Employee ConvertToDomainEntity(EmployeeViewModel employeeViewModel)
+		private static EmployeeInfo ConvertToDataObject(EmployeeViewModel employeeViewModel)
 		{
-			var reservations = new List<Reservation>();
-			if (employeeViewModel.Reservations != null)
-			{
-				var domainReservations = employeeViewModel.Reservations.Select(ConvertToDomainEntity);
-				reservations.AddRange(domainReservations);
-			}
-			var e = new Employee
+			var e = new EmployeeInfo
 			{
 				Id = employeeViewModel.Id,
 				FirstName = employeeViewModel.FirstName,
@@ -137,14 +161,9 @@ namespace Zuehlke.Zmapp.WebApp.Controllers
 				Phone = employeeViewModel.Phone,
 				EMail = employeeViewModel.EMail,
 				CareerLevel = employeeViewModel.CareerLevel,
+				Skills = employeeViewModel.Skills
 			};
 
-			if (employeeViewModel.Skills.Any())
-			{
-				e.Skills.AddRange(employeeViewModel.Skills);
-			}
-
-			e.Reservations.AddRange(reservations);
 			return e;
 		}
 	}

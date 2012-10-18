@@ -1,9 +1,9 @@
 using System;
 using System.ServiceModel;
 
-namespace Zuehlke.Zmapp.Wpf
+namespace Zuehlke.Zmapp.Services.Client
 {
-	public class ServiceProxy
+	public class ServiceProxy<TService>
 	{
 		private readonly string endpointConfigurationName;
 
@@ -14,7 +14,7 @@ namespace Zuehlke.Zmapp.Wpf
 			this.endpointConfigurationName = endpointConfigurationName;
 		}
 
-		protected void ExecuteRemoteCall<TService>(Action<TService> action)
+		protected void ExecuteRemoteCall(Action<TService> action)
 		{
 			var fab = new ChannelFactory<TService>(this.endpointConfigurationName);
 			fab.Open();
@@ -32,7 +32,7 @@ namespace Zuehlke.Zmapp.Wpf
 			}
 		}
 
-		protected TResult ExecuteRemoteCall<TService, TResult>(Func<TService, TResult> function)
+		protected TResult ExecuteRemoteCall<TResult>(Func<TService, TResult> function)
 		{
 			var fab = new ChannelFactory<TService>(this.endpointConfigurationName);
 			fab.Open();

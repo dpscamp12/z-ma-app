@@ -1,5 +1,4 @@
 ﻿using System.ServiceModel;
-using Zuehlke.Zmapp.Services.Contracts.Employee;
 
 namespace Zuehlke.Zmapp.Services.Contracts.Customers
 {
@@ -13,6 +12,6 @@ namespace Zuehlke.Zmapp.Services.Contracts.Customers
 		void SetCustomer(CustomerInfo customer);
 
 		[OperationContract]
-		void RemoveCustomer(int customerId);
+		bool RemoveCustomer(int customerId);
 	}
 }

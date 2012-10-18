@@ -7,7 +7,7 @@ namespace Zuehlke.Zmapp.Services
 {
 	public class Repository : IRepository
 	{
-		private static Repository _instance;
+		private static readonly Repository _instance;
 
 		private static IList<Employee> _employees;
 		private readonly string EmployeeListFileName;

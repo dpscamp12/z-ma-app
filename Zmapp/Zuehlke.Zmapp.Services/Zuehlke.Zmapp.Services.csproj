@@ -44,6 +44,7 @@
     <Compile Include="Customer.cs" />
     <Compile Include="Customers\CustomerService.cs" />
     <Compile Include="DataAccess.cs" />
+    <Compile Include="Embolyee\EmployeeService.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeEvaluationService.cs" />
     <Compile Include="EmployeeEvaluationServiceHelper.cs" />

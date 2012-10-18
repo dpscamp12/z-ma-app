@@ -45,9 +45,12 @@
     <Compile Include="Employee\CareerLevel.cs" />
     <Compile Include="Customers\CustomerInfo.cs" />
     <Compile Include="Employee\EmployeeEvaluationServiceMock.cs" />
+    <Compile Include="Employee\EmployeeInfo.cs" />
     <Compile Include="Employee\EmployeeQuery.cs" />
     <Compile Include="Employee\EmployeeSearchResult.cs" />
     <Compile Include="Employee\IEmployeeEvaluationService.cs" />
+    <Compile Include="Employee\IEmployeeService.cs" />
+    <Compile Include="Employee\ReservationInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Employee\Skill.cs" />
   </ItemGroup>

@@ -24,8 +24,8 @@
     </Customer>
     <Customer>
       <Id>4</Id>
-      <Name>asap</Name>
-      <City>xxxx</City>
+      <Name>UBS</Name>
+      <City>Zürich</City>
     </Customer>
   </Customers>
 </CustomerList>

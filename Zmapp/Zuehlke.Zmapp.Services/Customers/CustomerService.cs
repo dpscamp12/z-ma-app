@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
-using Zuehlke.Zmapp.Services.Contracts.Employee;
 
 namespace Zuehlke.Zmapp.Services.Customers
 {
@@ -26,7 +25,7 @@ namespace Zuehlke.Zmapp.Services.Customers
 		{
 			return this.repository.GetCustomers()
 				.Select(c => new CustomerInfo { Id = c.Id, Name = c.Name, Street = c.Street, City = c.City, ZipCode = c.ZipCode })
-				.ToArray(); ;
+				.ToArray();
 		}
 
 		public void SetCustomer(CustomerInfo customer)
@@ -43,9 +42,9 @@ namespace Zuehlke.Zmapp.Services.Customers
 			this.repository.SetCustomer(customerEnity);
 		}
 
-		public void RemoveCustomer(int customerId)
+		public bool RemoveCustomer(int customerId)
 		{
-			this.repository.RemoveCustomer(customerId);
+			return this.repository.RemoveCustomer(customerId);
 		}
 
 		#endregion
