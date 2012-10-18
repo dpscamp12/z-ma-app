@@ -73,6 +73,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Employees.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Customers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -90,6 +94,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\CustomerToCityStringConverter.cs" />
+    <Compile Include="EmployeesViewModel.cs" />
+    <Compile Include="Employees.xaml.cs">
+      <DependentUpon>Employees.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Customers.xaml.cs">
       <DependentUpon>Customers.xaml</DependentUpon>
     </Compile>

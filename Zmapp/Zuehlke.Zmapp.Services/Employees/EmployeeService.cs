@@ -42,6 +42,12 @@ namespace Zuehlke.Zmapp.Services.Employees
 			this.repository.SetEmployee(employeeEntity);
 		}
 
+		public void SetEmployees(EmployeeInfo[] employees)
+		{
+			var employeeEntities = employees.Select(this.CreateEmployeeEntity);
+			this.repository.SetEmployeeBatch(employeeEntities);
+		}
+
 		public bool RemoveEmployee(int employeeId)
 		{
 			return this.repository.RemoveEmployee(employeeId);
@@ -92,11 +98,11 @@ namespace Zuehlke.Zmapp.Services.Employees
 		private Reservation CreateReservationEntity(ReservationInfo reservation)
 		{
 			return new Reservation
-				       {
-					       CustomerId = reservation.CustomerId,
-					       Start = reservation.Start,
-					       End = reservation.End
-				       };
+					   {
+						   CustomerId = reservation.CustomerId,
+						   Start = reservation.Start,
+						   End = reservation.End
+					   };
 		}
 	}
 }

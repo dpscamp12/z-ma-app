@@ -65,6 +65,22 @@ namespace Zuehlke.Zmapp.Services
 			DataAccess.WriteEmployeesToFile(EmployeeListFileName, Employees);
 		}
 
+		public void SetEmployeeBatch(IEnumerable<Employee> employees)
+		{
+			foreach (var employee in employees)
+			{
+				if (employee.Id <= 0)
+				{
+					throw new ArgumentException("Employee ID is invalid.");
+				}
+
+				RemoveEmployee(Employees, employee.Id);
+				Employees.Add(employee);
+			}
+
+			DataAccess.WriteEmployeesToFile(EmployeeListFileName, Employees);
+		}
+
 		public IEnumerable<Customer> GetCustomers()
 		{
 			return Customers;

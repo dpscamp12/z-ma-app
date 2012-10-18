@@ -16,13 +16,7 @@
         <Skill>WPF</Skill>
         <Skill>WCF</Skill>
       </Skills>
-      <Reservations>
-        <Reservation>
-          <Start>2012-10-17T00:00:00+02:00</Start>
-          <End>2012-10-17T00:00:00+02:00</End>
-          <CustomerId>1</CustomerId>
-        </Reservation>
-      </Reservations>
+      <Reservations />
       <CareerLevel>SoftwareEngineer</CareerLevel>
     </Employee>
     <Employee>
@@ -33,18 +27,7 @@
       <City>Florence</City>
       <ZipCode>34567</ZipCode>
       <Skills />
-      <Reservations>
-        <Reservation>
-          <Start>2013-01-01T00:00:00+01:00</Start>
-          <End>2013-12-31T00:00:00+01:00</End>
-          <CustomerId>3</CustomerId>
-        </Reservation>
-        <Reservation>
-          <Start>2013-01-01T00:00:00+01:00</Start>
-          <End>2013-12-31T00:00:00+01:00</End>
-          <CustomerId>1</CustomerId>
-        </Reservation>
-      </Reservations>
+      <Reservations />
       <CareerLevel>SoftwareEngineer</CareerLevel>
     </Employee>
     <Employee>
@@ -60,53 +43,7 @@
         <Skill>CSharp</Skill>
         <Skill>SqlServer</Skill>
       </Skills>
-      <Reservations>
-        <Reservation>
-          <Start>2013-01-01T00:00:00</Start>
-          <End>2013-02-05T00:00:00</End>
-          <CustomerId>1</CustomerId>
-        </Reservation>
-        <Reservation>
-          <Start>2013-01-01T00:00:00</Start>
-          <End>2013-02-05T00:00:00</End>
-          <CustomerId>2</CustomerId>
-        </Reservation>
-        <Reservation>
-          <Start>2012-10-17T00:00:00</Start>
-          <End>2012-10-17T00:00:00</End>
-          <CustomerId>1</CustomerId>
-        </Reservation>
-        <Reservation>
-          <Start>2012-10-18T00:00:00</Start>
-          <End>2012-10-18T00:00:00</End>
-          <CustomerId>1</CustomerId>
-        </Reservation>
-        <Reservation>
-          <Start>2013-01-01T00:00:00</Start>
-          <End>2013-02-05T00:00:00</End>
-          <CustomerId>1</CustomerId>
-        </Reservation>
-        <Reservation>
-          <Start>2013-01-01T00:00:00</Start>
-          <End>2013-02-05T00:00:00</End>
-          <CustomerId>2</CustomerId>
-        </Reservation>
-        <Reservation>
-          <Start>2012-10-17T00:00:00</Start>
-          <End>2012-10-17T00:00:00</End>
-          <CustomerId>1</CustomerId>
-        </Reservation>
-        <Reservation>
-          <Start>2012-10-18T00:00:00</Start>
-          <End>2012-10-18T00:00:00</End>
-          <CustomerId>1</CustomerId>
-        </Reservation>
-        <Reservation>
-          <Start>2012-10-19T00:00:00</Start>
-          <End>2013-01-16T00:00:00</End>
-          <CustomerId>1</CustomerId>
-        </Reservation>
-      </Reservations>
+      <Reservations />
       <CareerLevel>SoftwareEngineer</CareerLevel>
     </Employee>
     <Employee>
@@ -142,6 +79,16 @@
         </Reservation>
       </Reservations>
       <CareerLevel>SoftwareEngineer</CareerLevel>
+    </Employee>
+      <Id>3</Id>
+      <FirstName>Tom</FirstName>
+      <LastName>Jones</LastName>
+      <Street>Musikstrasse 123</Street>
+      <City>Soundcity</City>
+      <ZipCode>8978</ZipCode>
+      <Skills />
+      <Reservations />
+      <CareerLevel>JuniorSoftwareEngineer</CareerLevel>
     </Employee>
   </Employees>
 </EmployeeList>

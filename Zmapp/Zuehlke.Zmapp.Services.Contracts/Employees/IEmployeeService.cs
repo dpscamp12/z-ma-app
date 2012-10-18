@@ -15,6 +15,9 @@ namespace Zuehlke.Zmapp.Services.Contracts.Employees
 		void SetEmployee(EmployeeInfo employee);
 
 		[OperationContract]
+		void SetEmployees(EmployeeInfo[] employees);
+
+		[OperationContract]
 		bool RemoveEmployee(int employeeId);
 	}
 }
