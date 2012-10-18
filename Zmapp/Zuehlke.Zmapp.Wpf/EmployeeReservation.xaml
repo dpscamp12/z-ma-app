@@ -124,7 +124,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="{Binding EmployeeName}" FontWeight="Bold" Grid.Column="0" />
                                 <Button Content="Reserve" Padding="10,0,10,0"
-                                        commands:Click.Command="{Binding DataContext.ReserveEmployeeCommand,RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
+                                        commands:Click.Command="{Binding DataContext.ReserveEmployeeCommand,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" 
                                         commands:Click.CommandParameter="{Binding}" Grid.Column="1"/>
                             </Grid>
                         </DataTemplate>

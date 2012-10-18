@@ -46,6 +46,17 @@
       <CareerLevel>SoftwareEngineer</CareerLevel>
     </Employee>
     <Employee>
+      <Id>3</Id>
+      <FirstName>Tom</FirstName>
+      <LastName>Jones</LastName>
+      <Street>Musikstrasse 1234</Street>
+      <City>Soundcity</City>
+      <ZipCode>8978</ZipCode>
+      <Skills />
+      <Reservations />
+      <CareerLevel>JuniorSoftwareEngineer</CareerLevel>
+    </Employee>
+    <Employee>
       <Id>1</Id>
       <FirstName>Roger</FirstName>
       <LastName>Federer</LastName>
@@ -58,19 +69,14 @@
         <Skill>CSharp</Skill>
         <Skill>SqlServer</Skill>
       </Skills>
-      <Reservations />
+      <Reservations>
+        <Reservation>
+          <Start>2012-10-18T00:00:00+02:00</Start>
+          <End>2012-10-18T00:00:00+02:00</End>
+          <CustomerId>1</CustomerId>
+        </Reservation>
+      </Reservations>
       <CareerLevel>SoftwareEngineer</CareerLevel>
-    </Employee>
-    <Employee>
-      <Id>3</Id>
-      <FirstName>Tom</FirstName>
-      <LastName>Jones</LastName>
-      <Street>Musikstrasse 1234</Street>
-      <City>Soundcity</City>
-      <ZipCode>8978</ZipCode>
-      <Skills />
-      <Reservations />
-      <CareerLevel>JuniorSoftwareEngineer</CareerLevel>
     </Employee>
   </Employees>
 </EmployeeList>

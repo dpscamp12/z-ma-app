@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel;
+
 namespace Zuehlke.Zmapp.Wpf
 {
 	/// <summary>
@@ -6,14 +8,18 @@ namespace Zuehlke.Zmapp.Wpf
 	/// </summary>
 	public partial class Employees
 	{
-		private readonly EmployeesViewModel viewModel = new EmployeesViewModel();
+		private readonly EmployeesViewModel viewModel;
 
 		public Employees()
 		{
 			InitializeComponent();
 
-			this.viewModel.Init();
-			this.DataContext = this.viewModel;
+			if (!DesignerProperties.GetIsInDesignMode(this))
+			{
+				this.viewModel = new EmployeesViewModel();
+				this.viewModel.Init();
+				this.DataContext = this.viewModel;
+			}
 		}
 	}
 }

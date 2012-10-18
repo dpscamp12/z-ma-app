@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel;
+
 namespace Zuehlke.Zmapp.Wpf
 {
 	/// <summary>
@@ -6,14 +8,18 @@ namespace Zuehlke.Zmapp.Wpf
 	/// </summary>
 	public partial class EmployeeReservation
 	{
-		private readonly EmployeeReservationViewModel viewModel = new EmployeeReservationViewModel();
+		private readonly EmployeeReservationViewModel viewModel;
 
 		public EmployeeReservation()
 		{
 			this.InitializeComponent();
 
-			this.viewModel.Init();
-			this.DataContext = this.viewModel;
+			if (!DesignerProperties.GetIsInDesignMode(this))
+			{
+				this.viewModel = new EmployeeReservationViewModel();
+				this.viewModel.Init();
+				this.DataContext = this.viewModel;
+			}
 		}
 	}
 }
