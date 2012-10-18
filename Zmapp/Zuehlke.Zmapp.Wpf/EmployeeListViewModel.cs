@@ -40,10 +40,12 @@ namespace Zuehlke.Zmapp.Wpf
 			this.customerService = customerService;
 			this.service = injectedService;
 
-			this.Init();
 			this.Skills = new MultiSelectCollectionView<Skill>(availableSkills);
 			this.CareerLevels = new MultiSelectCollectionView<CareerLevel>(availableCareerLevels);
 
+			this.Init();
+
+	
 			this.CareerLevels.SelectedItems.CollectionChanged += this.OnFilterSelectionChanged;
 			this.Skills.SelectedItems.CollectionChanged += this.OnFilterSelectionChanged;
 			this.PropertyChanged += (o, e) => this.RefreshValues();
@@ -54,10 +56,10 @@ namespace Zuehlke.Zmapp.Wpf
 		public void Init()
 		{
 			this.beginOfWorkPeriod = this.endOfWorkPeriod = DateTime.Now;
-			this.customers.Clear();
+			
 			CustomerInfo[] customerInfos = this.customerService.GetCustomers();
+			this.customers.Clear();
 			this.customers.AddRange(customerInfos);
-
 			this.selectedCustomer = this.customers.FirstOrDefault();
 		}
 

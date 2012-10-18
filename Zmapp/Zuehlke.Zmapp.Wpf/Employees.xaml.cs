@@ -7,9 +7,14 @@ namespace Zuehlke.Zmapp.Wpf
 	/// </summary>
 	public partial class Employees : Window
 	{
+		private readonly EmployeesViewModel viewModel = new EmployeesViewModel();
+
 		public Employees()
 		{
 			InitializeComponent();
+
+			this.viewModel.Init();
+			this.DataContext = this.viewModel;
 		}
 	}
 }

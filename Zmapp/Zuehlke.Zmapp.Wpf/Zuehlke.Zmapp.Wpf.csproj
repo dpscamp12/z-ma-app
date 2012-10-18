@@ -113,7 +113,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tools\PrismReplacementDelegateCommand.cs" />
+    <Compile Include="Tools\EnumItemViewModel.cs" />
     <Compile Include="Tools\SelectorSelectedCommandBehavior.cs" />
     <Compile Include="Tools\Selected.cs" />
     <Compile Include="Tools\MultiSelect.cs" />
