@@ -1,11 +1,10 @@
-﻿using System.Windows;
-
+﻿
 namespace Zuehlke.Zmapp.Wpf
 {
 	/// <summary>
 	/// Interaction logic for Customers.xaml
 	/// </summary>
-	public partial class Customers : Window
+	public partial class Customers
 	{
 		private readonly CustomersViewModel viewModel = new CustomersViewModel();
 
