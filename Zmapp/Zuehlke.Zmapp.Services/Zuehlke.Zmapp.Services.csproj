@@ -45,6 +45,7 @@
     <Compile Include="Customers\CustomerService.cs" />
     <Compile Include="DataAccess.cs" />
     <Compile Include="Embloyee\EmployeeService.cs" />
+    <Compile Include="Employees\EmployeeService.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Embloyee\EmployeeReservationService.cs" />
     <Compile Include="Embloyee\EmployeeReservationServiceHelper.cs" />

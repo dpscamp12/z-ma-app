@@ -25,9 +25,9 @@
     <Customer>
       <Id>4</Id>
       <Name>UBS</Name>
-      <City>Zürich</City>
       <Street>Teststrasse 3</Street>
       <ZipCode>5678</ZipCode>
+      <City>Zürich</City>
     </Customer>
     <Customer>
       <Id>5</Id>
@@ -55,7 +55,7 @@
       <Name>khg</Name>
       <Street>jhg</Street>
       <ZipCode>hg</ZipCode>
-      <City>g</City>
+      <City>g5</City>
     </Customer>
   </Customers>
 </CustomerList>
