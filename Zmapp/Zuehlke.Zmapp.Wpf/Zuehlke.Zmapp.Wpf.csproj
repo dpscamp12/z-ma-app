@@ -85,7 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EmployeeList.xaml">
+    <Page Include="EmployeeReservation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -103,8 +103,8 @@
     </Compile>
     <Compile Include="CustomersViewModel.cs" />
     <Compile Include="EmployeeListViewModel.cs" />
-    <Compile Include="EmployeeList.xaml.cs">
-      <DependentUpon>EmployeeList.xaml</DependentUpon>
+    <Compile Include="EmployeeReservation.xaml.cs">
+      <DependentUpon>EmployeeReservation.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\Images.xaml">
