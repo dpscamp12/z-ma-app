@@ -50,12 +50,5 @@
       <ZipCode>hg</ZipCode>
       <City>jhg</City>
     </Customer>
-    <Customer>
-      <Id>8</Id>
-      <Name>khg</Name>
-      <Street>jhg</Street>
-      <ZipCode>hg</ZipCode>
-      <City>g56</City>
-    </Customer>
   </Customers>
 </CustomerList>
