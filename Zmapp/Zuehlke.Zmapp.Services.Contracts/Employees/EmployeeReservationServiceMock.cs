@@ -1,6 +1,6 @@
 using System;
 
-namespace Zuehlke.Zmapp.Services.Contracts.Employee
+namespace Zuehlke.Zmapp.Services.Contracts.Employees
 {
 	public class EmployeeReservationServiceMock : IEmployeeReservationService
 	{

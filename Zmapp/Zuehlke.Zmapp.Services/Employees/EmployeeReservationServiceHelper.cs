@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Zuehlke.Zmapp.Services.Contracts.Employee;
 
-namespace Zuehlke.Zmapp.Services.Embloyee
+using Zuehlke.Zmapp.Services.Contracts.Employees;
+
+namespace Zuehlke.Zmapp.Services.Employees
 {
 	internal static class EmployeeReservationServiceHelper
 	{

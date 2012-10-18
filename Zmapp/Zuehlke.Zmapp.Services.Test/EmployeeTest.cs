@@ -2,7 +2,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Xml.Serialization;
-using Zuehlke.Zmapp.Services.Contracts.Employee;
+
+using Zuehlke.Zmapp.Services.Contracts.Employees;
 
 namespace Zuehlke.Zmapp.Services.Test
 {

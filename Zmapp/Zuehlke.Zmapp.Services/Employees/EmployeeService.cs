@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using Zuehlke.Zmapp.Services.Contracts.Employee;
+
+using Zuehlke.Zmapp.Services.Contracts.Employees;
 
 namespace Zuehlke.Zmapp.Services.Employees
 {
@@ -47,24 +47,6 @@ namespace Zuehlke.Zmapp.Services.Employees
 			return this.repository.RemoveEmployee(employeeId);
 		}
 
-		public ReservationInfo[] GetReservationsOfEmployee(int employeeId)
-		{
-			Employee employee = this.repository.GetEmployee(employeeId);
-
-			return employee.Reservations.Select(CreateReservationInfo)
-				.ToArray();
-		}
-
-		public void SetReservationsOfEmployee(int employeeId, ReservationInfo[] reservations)
-		{
-			Employee employeeEntity = this.repository.GetEmployee(employeeId);
-
-			IEnumerable<Reservation> reservationEntities = reservations.Select(this.CreateReservationEntity);
-			employeeEntity.Reservations.AddRange(reservationEntities);
-
-			this.repository.SetEmployee(employeeEntity);
-		}
-
 		#endregion
 
 		private Employee CreateEmployeeEntity(EmployeeInfo employeeInfo)
@@ -90,16 +72,6 @@ namespace Zuehlke.Zmapp.Services.Employees
 			return employee;
 		}
 
-		private Reservation CreateReservationEntity(ReservationInfo reservation)
-		{
-			return new Reservation
-			{
-				CustomerId = reservation.CustomerId,
-				Start = reservation.Start,
-				End = reservation.End
-			};
-		}
-
 		private static EmployeeInfo CreateEmployeeInfo(Employee employee)
 		{
 			return new EmployeeInfo
@@ -117,14 +89,14 @@ namespace Zuehlke.Zmapp.Services.Employees
 			};
 		}
 
-		private static ReservationInfo CreateReservationInfo(Reservation reservation)
+		private Reservation CreateReservationEntity(ReservationInfo reservation)
 		{
-			return new ReservationInfo
-			{
-				CustomerId = reservation.CustomerId,
-				Start = reservation.Start,
-				End = reservation.End
-			};
+			return new Reservation
+				       {
+					       CustomerId = reservation.CustomerId,
+					       Start = reservation.Start,
+					       End = reservation.End
+				       };
 		}
 	}
 }

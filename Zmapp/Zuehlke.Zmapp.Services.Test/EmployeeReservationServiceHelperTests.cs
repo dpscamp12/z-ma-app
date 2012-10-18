@@ -1,8 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
-using Zuehlke.Zmapp.Services.Contracts.Employee;
-using Zuehlke.Zmapp.Services.Embloyee;
+
+using Zuehlke.Zmapp.Services.Contracts.Employees;
+using Zuehlke.Zmapp.Services.Employees;
 
 namespace Zuehlke.Zmapp.Services.Test
 {

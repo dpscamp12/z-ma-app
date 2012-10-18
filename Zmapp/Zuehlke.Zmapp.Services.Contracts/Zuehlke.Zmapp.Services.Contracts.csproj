@@ -42,17 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Customers\ICustomerService.cs" />
-    <Compile Include="Employee\CareerLevel.cs" />
+    <Compile Include="Employees\CareerLevel.cs" />
     <Compile Include="Customers\CustomerInfo.cs" />
-    <Compile Include="Employee\EmployeeReservationServiceMock.cs" />
-    <Compile Include="Employee\EmployeeInfo.cs" />
-    <Compile Include="Employee\EmployeeQuery.cs" />
-    <Compile Include="Employee\EmployeeSearchResult.cs" />
-    <Compile Include="Employee\IEmployeeReservationService.cs" />
-    <Compile Include="Employee\IEmployeeService.cs" />
-    <Compile Include="Employee\ReservationInfo.cs" />
+    <Compile Include="Employees\EmployeeReservationServiceMock.cs" />
+    <Compile Include="Employees\EmployeeInfo.cs" />
+    <Compile Include="Employees\EmployeeQuery.cs" />
+    <Compile Include="Employees\EmployeeSearchResult.cs" />
+    <Compile Include="Employees\IEmployeeReservationService.cs" />
+    <Compile Include="Employees\IEmployeeService.cs" />
+    <Compile Include="Employees\ReservationInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Employee\Skill.cs" />
+    <Compile Include="Employees\Skill.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,6 @@
 using System;
-using Zuehlke.Zmapp.Services.Contracts.Employee;
+
+using Zuehlke.Zmapp.Services.Contracts.Employees;
 
 namespace Zuehlke.Zmapp.Services.Client
 {

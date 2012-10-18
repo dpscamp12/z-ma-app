@@ -3,7 +3,8 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
-using Zuehlke.Zmapp.Services.Contracts.Employee;
+
+using Zuehlke.Zmapp.Services.Contracts.Employees;
 
 namespace Zuehlke.Zmapp.Wpf.Tests
 {

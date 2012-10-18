@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Zuehlke.Zmapp.Services.Contracts.Employee
+namespace Zuehlke.Zmapp.Services.Contracts.Employees
 {
 	[DataContract]
 	public class EmployeeInfo

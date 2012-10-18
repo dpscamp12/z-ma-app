@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
 
-namespace Zuehlke.Zmapp.Services.Contracts.Employee
+namespace Zuehlke.Zmapp.Services.Contracts.Employees
 {
 	[ServiceContract]
 	public interface IEmployeeReservationService
