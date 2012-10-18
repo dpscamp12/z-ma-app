@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{D32E2929-8
 		Employees.xml = Employees.xml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuehlke.Zmapp.Services.Client", "Zuehlke.Zmapp.Services.Client\Zuehlke.Zmapp.Services.Client.csproj", "{45924065-7CA6-4445-B34D-28C371B7F7E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{0890954D-311C-42AA-97A0-2DC0AFE65415}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0890954D-311C-42AA-97A0-2DC0AFE65415}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0890954D-311C-42AA-97A0-2DC0AFE65415}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45924065-7CA6-4445-B34D-28C371B7F7E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45924065-7CA6-4445-B34D-28C371B7F7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45924065-7CA6-4445-B34D-28C371B7F7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45924065-7CA6-4445-B34D-28C371B7F7E3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
