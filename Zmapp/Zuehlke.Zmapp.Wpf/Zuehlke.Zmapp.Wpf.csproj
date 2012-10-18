@@ -77,7 +77,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Customers.xaml">
+    <Page Include="Customers\Customers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -89,7 +89,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EmployeeReservation.xaml">
+    <Page Include="Employees\EmployeeReservation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -103,12 +103,12 @@
     <Compile Include="Employees\Employees.xaml.cs">
       <DependentUpon>Employees.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Customers.xaml.cs">
+    <Compile Include="Customers\Customers.xaml.cs">
       <DependentUpon>Customers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomersViewModel.cs" />
-    <Compile Include="EmployeeReservationViewModel.cs" />
-    <Compile Include="EmployeeReservation.xaml.cs">
+    <Compile Include="Customers\CustomersViewModel.cs" />
+    <Compile Include="Employees\EmployeeReservationViewModel.cs" />
+    <Compile Include="Employees\EmployeeReservation.xaml.cs">
       <DependentUpon>EmployeeReservation.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

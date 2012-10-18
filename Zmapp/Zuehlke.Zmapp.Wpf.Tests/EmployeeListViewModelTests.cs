@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Linq;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
-
 using Zuehlke.Zmapp.Services.Contracts.Employees;
+using Zuehlke.Zmapp.Wpf.Employees;
 
 namespace Zuehlke.Zmapp.Wpf.Tests
 {
