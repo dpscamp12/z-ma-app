@@ -73,6 +73,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Customers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,6 +90,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Converters\CustomerToCityStringConverter.cs" />
+    <Compile Include="Customers.xaml.cs">
+      <DependentUpon>Customers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerServiceProxy.cs" />
+    <Compile Include="CustomersViewModel.cs" />
+    <Compile Include="EmployeeEvaluationServiceProxy.cs" />
+    <Compile Include="EmployeeListViewModel.cs" />
     <Compile Include="EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -97,6 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmployeeListViewModel.cs" />
+    <Compile Include="Tools\PrismReplacementDelegateCommand.cs" />
+    <Compile Include="ServiceProxy.cs" />
     <Compile Include="Tools\SelectorSelectedCommandBehavior.cs" />
     <Compile Include="Tools\Selected.cs" />
     <Compile Include="Tools\MultiSelect.cs" />

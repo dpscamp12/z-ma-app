@@ -1,21 +1,23 @@
 ﻿using Microsoft.Practices.Prism.ViewModel;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
-using Zuehlke.Zmapp.Services.Contracts.Employee;
 using Zuehlke.Zmapp.Wpf.Tools;
 
 namespace Zuehlke.Zmapp.Wpf
 {
 	public class CustomersViewModel : NotificationObject
 	{
-		private readonly ICustomerService service;
-		private readonly List<CustomerInfo> customers = new List<CustomerInfo>();
+		private readonly ICustomerService service = new CustomerServiceProxy();
+		private readonly ObservableCollection<CustomerInfo> customers = new ObservableCollection<CustomerInfo>();
 		private CustomerInfo selectedCustomer;
 
+		private readonly PrismReplacementDelegateCommand<CustomerInfo> saveCustomer;
 
 		public CustomersViewModel()
 		{
+			this.saveCustomer = new PrismReplacementDelegateCommand<CustomerInfo>(this.OnSave);
+
 			this.Init();
 		}
 
@@ -25,22 +27,30 @@ namespace Zuehlke.Zmapp.Wpf
 			this.service = injectedService;
 		}
 
+		private void OnSave(CustomerInfo obj)
+		{
+			if (obj == null) return;
+			this.service.SetCustomer(obj);
+		}
+
+		public PrismReplacementDelegateCommand<CustomerInfo> SaveCustomerCommand
+		{
+			get { return this.saveCustomer; }
+		}
+
 		public void Init()
 		{
 			this.customers.Clear();
 			CustomerInfo[] customerInfos = this.service.GetCustomers();
-			this.customers.AddRange(customerInfos);
+			this.customers.ReplaceAllItemsWith(customerInfos);
 
 			this.selectedCustomer = this.customers.FirstOrDefault();
 		}
 
-		public IEnumerable<CustomerInfo> Customers
+		public ObservableCollection<CustomerInfo> Customers
 		{
 			get { return this.customers; }
 		}
-
-		public MultiSelectCollectionView<CareerLevel> CareerLevels { get; private set; }
-
 
 		public CustomerInfo SelectedCustomer
 		{
