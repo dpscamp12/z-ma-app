@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-
 using Zuehlke.Zmapp.Services.Contracts.Employees;
+using Zuehlke.Zmapp.Services.Data;
+using Zuehlke.Zmapp.Services.DomainModel;
 
 namespace Zuehlke.Zmapp.Services.Employees
 {
@@ -32,18 +34,27 @@ namespace Zuehlke.Zmapp.Services.Employees
 		public EmployeeInfo GetEmployee(int employeeId)
 		{
 			Employee employee = this.repository.GetEmployee(employeeId);
+			if (employee == null)
+			{
+				var error = String.Format("Employee with Id '{0}' not found.", employeeId);
+				throw new ArgumentException(error, "employeeId");
+			}
 
 			return CreateEmployeeInfo(employee);
 		}
 
 		public void SetEmployee(EmployeeInfo employee)
 		{
+			if (employee == null) throw new ArgumentNullException("employee");
+
 			Employee employeeEntity = this.CreateEmployeeEntity(employee);
 			this.repository.SetEmployee(employeeEntity);
 		}
 
 		public void SetEmployees(EmployeeInfo[] employees)
 		{
+			if (employees == null) throw new ArgumentNullException("employees");
+
 			var employeeEntities = employees.Select(this.CreateEmployeeEntity);
 			this.repository.SetEmployeeBatch(employeeEntities);
 		}
@@ -52,7 +63,6 @@ namespace Zuehlke.Zmapp.Services.Employees
 		{
 			return this.repository.RemoveEmployee(employeeId);
 		}
-
 		#endregion
 
 		private Employee CreateEmployeeEntity(EmployeeInfo employeeInfo)
@@ -91,7 +101,7 @@ namespace Zuehlke.Zmapp.Services.Employees
 				Phone = employee.Phone,
 				EMail = employee.EMail,
 				CareerLevel = employee.CareerLevel,
-				Skills = employee.Skills.ToArray()
+				Skills = (employee.Skills ?? new List<Skill>()).ToArray()
 			};
 		}
 

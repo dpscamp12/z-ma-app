@@ -41,17 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Customer.cs" />
+    <Compile Include="DomainModel\Customer.cs" />
     <Compile Include="Customers\CustomerService.cs" />
-    <Compile Include="DataAccess.cs" />
+    <Compile Include="Data\DataAccess.cs" />
     <Compile Include="Employees\EmployeeService.cs" />
-    <Compile Include="Employee.cs" />
+    <Compile Include="DomainModel\Employee.cs" />
     <Compile Include="Employees\EmployeeReservationService.cs" />
     <Compile Include="Employees\EmployeeReservationServiceHelper.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="Data\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="Reservation.cs" />
+    <Compile Include="Data\Repository.cs" />
+    <Compile Include="DomainModel\Reservation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zuehlke.Zmapp.Services.Contracts\Zuehlke.Zmapp.Services.Contracts.csproj">
