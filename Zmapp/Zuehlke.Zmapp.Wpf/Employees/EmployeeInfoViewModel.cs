@@ -1,25 +1,31 @@
 using Microsoft.Practices.Prism.ViewModel;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 using Zuehlke.Zmapp.Services.Contracts.Employees;
+using Zuehlke.Zmapp.Wpf.Tools;
 
 namespace Zuehlke.Zmapp.Wpf.Employees
 {
 	public class EmployeeInfoViewModel : NotificationObject
 	{
 		private readonly EmployeeInfo employeeInfoInstance;
+		private readonly List<Skill> availableSkills = new List<Skill>(typeof(Skill).GetEnumValues().Cast<Skill>());
 
 		public EmployeeInfoViewModel(EmployeeInfo info)
 		{
 			this.employeeInfoInstance = info;
-			this.Skills = new ObservableCollection<Skill>(info.Skills);
+			this.Skills = new MultiSelectCollectionView<Skill>(this.availableSkills);
+			foreach (var skill in info.Skills)
+			{
+				this.Skills.SelectedItems.Add(skill);
+			}
 		}
 
 		public EmployeeInfo EmployeeInfoInstance
 		{
 			get
 			{
-				this.employeeInfoInstance.Skills = this.Skills.ToArray();
+				this.employeeInfoInstance.Skills = this.Skills.SelectedItems.ToArray();
 				return this.employeeInfoInstance;
 			}
 		}
@@ -144,6 +150,6 @@ namespace Zuehlke.Zmapp.Wpf.Employees
 			}
 		}
 
-		public ObservableCollection<Skill> Skills { get; private set; }
+		public MultiSelectCollectionView<Skill> Skills { get; private set; }
 	}
 }

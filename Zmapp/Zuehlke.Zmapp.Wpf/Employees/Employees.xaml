@@ -27,11 +27,6 @@
                         <x:Type Type="Employees:CareerLevel"/>
                     </ObjectDataProvider.MethodParameters>
                 </ObjectDataProvider>
-                <ObjectDataProvider x:Key="SkillEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
-                    <ObjectDataProvider.MethodParameters>
-                        <x:Type Type="Employees:Skill"/>
-                    </ObjectDataProvider.MethodParameters>
-                </ObjectDataProvider>
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Width="SizeToCells" IsReadOnly="True" Binding="{Binding Id}"/>
@@ -44,7 +39,7 @@
                 <DataGridTextColumn Header="eMail" Width="SizeToCells" IsReadOnly="True" Binding="{Binding EMail}"/>
                 <DataGridComboBoxColumn Header="Career level" Width="SizeToCells" SelectedItemBinding="{Binding CareerLevel}" ItemsSource="{Binding Source={StaticResource CareerEnum}}"/>
                 <!--<DataGridComboBoxColumn Header="Skills" Width="SizeToCells"  SelectedItemBinding="{Binding Skills}" ItemsSource="{Binding Source={StaticResource SkillEnum}}"/>-->
-                <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                <!--<DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox>
@@ -52,16 +47,18 @@
                             </ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="Last name" Margin="10" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding SelectedEmployee.LastName}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,10,10" />
+            <TextBox Text="{Binding SelectedItem.LastName, ElementName=EmployeeGrid}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,10,10" />
+            <ListBox Grid.Column="2" ItemsSource="{Binding SelectedItem.Skills, ElementName=EmployeeGrid}" Style="{StaticResource ListBoxStyle}" local:MultiSelect.IsEnabled="True" />
         </Grid>
         <Button Content="Save" Padding="10,0,10,0" Grid.Row="2" Width="Auto" HorizontalAlignment="Left" Margin="10"
                                         commands:Click.Command="{Binding DataContext.SaveEmployeeCommand,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />

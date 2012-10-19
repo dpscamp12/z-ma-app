@@ -9,12 +9,7 @@
       <City>Schlieren</City>
       <ZipCode>8952</ZipCode>
       <Skills>
-        <Skill>CSharp</Skill>
-        <Skill>SqlServer</Skill>
         <Skill>AspDotNet</Skill>
-        <Skill>CloudComputing</Skill>
-        <Skill>WPF</Skill>
-        <Skill>WCF</Skill>
       </Skills>
       <Reservations />
       <CareerLevel>SeniorSoftwareEngineer</CareerLevel>
@@ -41,7 +36,11 @@
       <Street>Piazza del Singora</Street>
       <City>Florence</City>
       <ZipCode>34567</ZipCode>
-      <Skills />
+      <Skills>
+        <Skill>Windows7</Skill>
+        <Skill>CSharp</Skill>
+        <Skill>SqlServer</Skill>
+      </Skills>
       <Reservations />
       <CareerLevel>SoftwareEngineer</CareerLevel>
     </Employee>
