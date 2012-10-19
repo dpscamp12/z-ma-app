@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Wpf="clr-namespace:Zuehlke.Zmapp.Wpf"
         xmlns:Employees="clr-namespace:Zuehlke.Zmapp.Wpf.Employees"
-        xmlns:Customers="clr-namespace:Zuehlke.Zmapp.Wpf.Customers" Title="Zmapp - Zühlke Mitarbeiter App">
+        xmlns:Customers="clr-namespace:Zuehlke.Zmapp.Wpf.Customers" Title="Zmapp - Zühlke Mitarbeiter App" Width="1100">
     <Window.Resources>
         <Style x:Key="Header" TargetType="{x:Type TextBlock}" >
             <Setter Property="VerticalAlignment" Value="Center" />

@@ -118,6 +118,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tools\SkillListConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>

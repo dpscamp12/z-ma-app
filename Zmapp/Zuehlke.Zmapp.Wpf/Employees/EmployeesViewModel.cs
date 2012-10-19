@@ -11,7 +11,10 @@ namespace Zuehlke.Zmapp.Wpf.Employees
 	public class EmployeesViewModel : NotificationObject
 	{
 		private readonly IEmployeeService service = new EmployeeServiceProxy();
-		private readonly ObservableCollection<EmployeeInfoViewModel> employees = new ObservableCollection<EmployeeInfoViewModel>();
+
+		private readonly ObservableCollection<EmployeeInfoViewModel> employees =
+			new ObservableCollection<EmployeeInfoViewModel>();
+
 		private EmployeeInfoViewModel selectedEmployee;
 		//private readonly List<Skill> availableSkills = new List<Skill>(typeof(Skill).GetEnumValues().Cast<Skill>());
 
@@ -57,17 +60,12 @@ namespace Zuehlke.Zmapp.Wpf.Employees
 
 		public EmployeeInfoViewModel SelectedEmployee
 		{
-			get
-			{
-				return this.selectedEmployee;
-			}
+			get { return this.selectedEmployee; }
 			set
 			{
 				this.selectedEmployee = value;
 				this.RaisePropertyChanged(() => SelectedEmployee);
 			}
 		}
-
-		//public MultiSelectCollectionView<Skill> Skills { get; private set; }
 	}
 }

@@ -2,17 +2,36 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:commands="clr-namespace:Microsoft.Practices.Prism.Commands;assembly=Microsoft.Practices.Prism"
-             xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Zuehlke.Zmapp.Wpf.Tools"
              xmlns:Employees="clr-namespace:Zuehlke.Zmapp.Services.Contracts.Employees;assembly=Zuehlke.Zmapp.Services.Contracts"
-             xmlns:local="clr-namespace:Zuehlke.Zmapp.Wpf.Tools">
+             xmlns:System="clr-namespace:System;assembly=mscorlib">
     <UserControl.Resources>
         <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBox}" >
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
             <Setter Property="VerticalAlignment" Value="Stretch" />
-            <Setter Property="Margin" Value="5,0,5,0" />
+            <Setter Property="Margin" Value="5,0,0,0" />
             <Setter Property="SelectionMode" Value="Extended"/>
         </Style>
-
+        <ObjectDataProvider x:Key="CareerEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type Type="Employees:CareerLevel"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        <Style x:Key="InputBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,10,10,10" />
+        </Style>
+        <Style x:Key="InputLabelStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,10,10,10" />
+        </Style>
+        <Style x:Key="InputComboStyle" TargetType="{x:Type ComboBox}">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Margin" Value="0,10,10,10" />
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -22,11 +41,7 @@
         </Grid.RowDefinitions>
         <DataGrid x:Name="EmployeeGrid" ItemsSource="{Binding Employees}" SelectedItem="{Binding SelectedEmployee}" Margin="10" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ColumnWidth="*" AutoGenerateColumns="False" >
             <DataGrid.Resources>
-                <ObjectDataProvider x:Key="CareerEnum" MethodName="GetValues" ObjectType="{x:Type System:Enum}">
-                    <ObjectDataProvider.MethodParameters>
-                        <x:Type Type="Employees:CareerLevel"/>
-                    </ObjectDataProvider.MethodParameters>
-                </ObjectDataProvider>
+                <local:SkillListConverter x:Key="skillListConverter" />
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Width="SizeToCells" IsReadOnly="True" Binding="{Binding Id}"/>
@@ -36,29 +51,60 @@
                 <DataGridTextColumn Header="Zip code" Width="SizeToCells" IsReadOnly="True" Binding="{Binding ZipCode}"/>
                 <DataGridTextColumn Header="City" Width="SizeToCells" IsReadOnly="True" Binding="{Binding City}"/>
                 <DataGridTextColumn Header="Phone" Width="SizeToCells" IsReadOnly="True" Binding="{Binding Phone}"/>
-                <DataGridTextColumn Header="eMail" Width="SizeToCells" IsReadOnly="True" Binding="{Binding EMail}"/>
-                <DataGridComboBoxColumn Header="Career level" Width="SizeToCells" SelectedItemBinding="{Binding CareerLevel}" ItemsSource="{Binding Source={StaticResource CareerEnum}}"/>
-                <!--<DataGridComboBoxColumn Header="Skills" Width="SizeToCells"  SelectedItemBinding="{Binding Skills}" ItemsSource="{Binding Source={StaticResource SkillEnum}}"/>-->
-                <!--<DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ComboBox>
-                                
-                            </ComboBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
+                <DataGridTextColumn Header="eMail" Width="SizeToCells" IsReadOnly="True" Binding="{Binding Email}"/>
+                <DataGridTextColumn Header="Career level" Width="SizeToCells" Binding="{Binding Level}"/>
+                <DataGridTextColumn Header="Skills" Width="*" IsReadOnly="True" Binding="{Binding Skills.SelectedItems, Converter={StaticResource skillListConverter}}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="1">
+
+        <Grid Grid.Row="1" Grid.IsSharedSizeScope="True" HorizontalAlignment="Stretch" Margin="10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="Last name" Margin="10" VerticalAlignment="Center"/>
-            <TextBox Text="{Binding SelectedItem.LastName, ElementName=EmployeeGrid}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10,10,10" />
-            <ListBox Grid.Column="2" ItemsSource="{Binding SelectedItem.Skills, ElementName=EmployeeGrid}" Style="{StaticResource ListBoxStyle}" local:MultiSelect.IsEnabled="True" />
+
+            <Grid Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  />
+                    <ColumnDefinition  />
+                    <ColumnDefinition  />
+                    <ColumnDefinition  />
+                    <ColumnDefinition  />
+                    <ColumnDefinition  />
+                    <!--<ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="BoxColumn" />
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition  Width="Auto" SharedSizeGroup="BoxColumn"/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="LabelColumn" />
+                    <ColumnDefinition  Width="Auto" SharedSizeGroup="BoxColumn"/>-->
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Id" Style="{StaticResource InputLabelStyle}"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding SelectedItem.Id, ElementName=EmployeeGrid}" Style="{StaticResource InputBoxStyle}" />
+                <TextBlock Grid.Column="2" Grid.Row="0" Text="Last name" Style="{StaticResource InputLabelStyle}"/>
+                <TextBox Grid.Column="3" Grid.Row="0" Text="{Binding SelectedItem.LastName, ElementName=EmployeeGrid}" Style="{StaticResource InputBoxStyle}" />
+                <TextBlock Grid.Column="4" Grid.Row="0" Text="First name" Style="{StaticResource InputLabelStyle}"/>
+                <TextBox Grid.Column="5" Grid.Row="0" Text="{Binding SelectedItem.FirstName, ElementName=EmployeeGrid}" Style="{StaticResource InputBoxStyle}" />
+
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Street" Style="{StaticResource InputLabelStyle}"/>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SelectedItem.Street, ElementName=EmployeeGrid}" Style="{StaticResource InputBoxStyle}" />
+                <TextBlock Grid.Column="2" Grid.Row="1" Text="Zip code" Style="{StaticResource InputLabelStyle}"/>
+                <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding SelectedItem.ZipCode, ElementName=EmployeeGrid}" Style="{StaticResource InputBoxStyle}" />
+                <TextBlock Grid.Column="4" Grid.Row="1" Text="City" Style="{StaticResource InputLabelStyle}"/>
+                <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding SelectedItem.City, ElementName=EmployeeGrid}" Style="{StaticResource InputBoxStyle}" />
+
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Phone" Style="{StaticResource InputLabelStyle}"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SelectedItem.Phone, ElementName=EmployeeGrid}" Style="{StaticResource InputBoxStyle}" />
+                <TextBlock Grid.Column="2" Grid.Row="2" Text="eMail" Style="{StaticResource InputLabelStyle}"/>
+                <TextBox Grid.Column="3" Grid.Row="2" Text="{Binding SelectedItem.Email, ElementName=EmployeeGrid}" Style="{StaticResource InputBoxStyle}" />
+                <TextBlock Grid.Column="4" Grid.Row="2" Text="Career Level" Style="{StaticResource InputLabelStyle}"/>
+                <ComboBox Grid.Column="5" Grid.Row="2" SelectedItem="{Binding SelectedItem.Level, ElementName=EmployeeGrid}" ItemsSource="{Binding Source={StaticResource CareerEnum}}" Style="{StaticResource InputComboStyle}" />
+            </Grid>
+            <ListBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding SelectedItem.Skills, ElementName=EmployeeGrid}" Style="{StaticResource ListBoxStyle}" local:MultiSelect.IsEnabled="True" />
         </Grid>
         <Button Content="Save" Padding="10,0,10,0" Grid.Row="2" Width="Auto" HorizontalAlignment="Left" Margin="10"
                                         commands:Click.Command="{Binding DataContext.SaveEmployeeCommand,RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />

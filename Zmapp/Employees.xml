@@ -8,11 +8,12 @@
       <Street>Wiesenstrasse 10a</Street>
       <City>Schlieren</City>
       <ZipCode>8952</ZipCode>
+      <Phone>044 123 45 67</Phone>
       <Skills>
         <Skill>AspDotNet</Skill>
       </Skills>
       <Reservations />
-      <CareerLevel>SeniorSoftwareEngineer</CareerLevel>
+      <CareerLevel>PrincipalConsultant</CareerLevel>
     </Employee>
     <Employee>
       <Id>529</Id>
@@ -51,9 +52,15 @@
       <Street>Musikstrasse 1234</Street>
       <City>Soundcity</City>
       <ZipCode>8978</ZipCode>
-      <Skills />
+      <Skills>
+        <Skill>Windows7</Skill>
+        <Skill>CSharp</Skill>
+        <Skill>SqlServer</Skill>
+        <Skill>WCF</Skill>
+        <Skill>WPF</Skill>
+      </Skills>
       <Reservations />
-      <CareerLevel>JuniorSoftwareEngineer</CareerLevel>
+      <CareerLevel>ProjectManager</CareerLevel>
     </Employee>
     <Employee>
       <Id>1</Id>
