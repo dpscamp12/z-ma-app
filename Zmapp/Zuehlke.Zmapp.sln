@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{D32E2929-8
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuehlke.Zmapp.Services.Client", "Zuehlke.Zmapp.Services.Client\Zuehlke.Zmapp.Services.Client.csproj", "{45924065-7CA6-4445-B34D-28C371B7F7E3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zuehlke.Zmapp.RestService", "Zuehlke.Zmapp.RestService\Zuehlke.Zmapp.RestService.csproj", "{33BEC27B-3915-4287-9338-7AF2AFC8511C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{45924065-7CA6-4445-B34D-28C371B7F7E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45924065-7CA6-4445-B34D-28C371B7F7E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45924065-7CA6-4445-B34D-28C371B7F7E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33BEC27B-3915-4287-9338-7AF2AFC8511C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33BEC27B-3915-4287-9338-7AF2AFC8511C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33BEC27B-3915-4287-9338-7AF2AFC8511C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33BEC27B-3915-4287-9338-7AF2AFC8511C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

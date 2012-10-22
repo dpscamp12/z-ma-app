@@ -8,8 +8,8 @@ namespace Zuehlke.Zmapp.Services.Data
 {
 	public class Repository : IRepository
 	{
-		private static readonly string employeeListFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @".\..\Employees.xml");
-		private static readonly string customersListFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @".\..\Customers.xml");
+		private static readonly string employeeListFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @".\Employees.xml");
+		private static readonly string customersListFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @".\Customers.xml");
 		private static readonly Repository instance;
 
 		private static IList<Employee> employees;
