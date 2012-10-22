@@ -1,8 +1,9 @@
+using System.Threading.Tasks;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
 
 namespace Zuehlke.Zmapp.Services.Client
 {
-	public class CustomerServiceProxy : ServiceProxy<ICustomerService>, ICustomerService
+	public class CustomerServiceProxy : ServiceProxy<ICustomerService>, ICustomerServiceAsync
 	{
 		public CustomerServiceProxy()
 			: base("CustomerService")
@@ -30,5 +31,15 @@ namespace Zuehlke.Zmapp.Services.Client
 			return this.ExecuteRemoteCall((service) => service.RemoveCustomer(customerId));
 		}
 		#endregion
-	}
+
+        #region Implementation of ICustomerServiceAsync
+        public async Task<CustomerInfo[]> GetCustomersAsync()
+        {
+            return await Task.Factory.StartNew(() =>
+                {
+                    return this.GetCustomers();
+                });
+        }
+        #endregion
+    }
 }

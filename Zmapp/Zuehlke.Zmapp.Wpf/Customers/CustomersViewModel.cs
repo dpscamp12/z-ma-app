@@ -10,7 +10,7 @@ namespace Zuehlke.Zmapp.Wpf.Customers
 {
 	public class CustomersViewModel : NotificationObject
 	{
-		private readonly ICustomerService service = new CustomerServiceProxy();
+		private readonly ICustomerServiceAsync service = new CustomerServiceProxy();
 		private readonly ObservableCollection<CustomerInfo> customers = new ObservableCollection<CustomerInfo>();
 		private CustomerInfo selectedCustomer;
 
@@ -22,7 +22,7 @@ namespace Zuehlke.Zmapp.Wpf.Customers
 			this.Init();
 		}
 
-		public CustomersViewModel(ICustomerService injectedService)
+		public CustomersViewModel(ICustomerServiceAsync injectedService)
 			: this()
 		{
 			this.service = injectedService;
@@ -38,10 +38,10 @@ namespace Zuehlke.Zmapp.Wpf.Customers
 			get { return this.saveCustomer; }
 		}
 
-		public void Init()
+		public async void Init()
 		{
 			this.customers.Clear();
-			CustomerInfo[] customerInfos = this.service.GetCustomers();
+            CustomerInfo[] customerInfos = await this.service.GetCustomersAsync();
 			this.customers.ReplaceAllItemsWith(customerInfos);
 
 			this.selectedCustomer = this.customers.FirstOrDefault();
