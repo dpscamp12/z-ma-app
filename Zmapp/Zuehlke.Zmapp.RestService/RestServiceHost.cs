@@ -2,7 +2,8 @@
 using ServiceStack.CacheAccess.Providers;
 using ServiceStack.Redis;
 using ServiceStack.WebHost.Endpoints;
-using Zuehlke.Zmapp.RestService.Customer;
+
+using Zuehlke.Zmapp.RestService.Services;
 using Zuehlke.Zmapp.Services.Data;
 
 namespace Zuehlke.Zmapp.RestService

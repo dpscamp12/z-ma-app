@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceStack.Service;
 using ServiceStack.ServiceClient.Web;
 
-using Zuehlke.Zmapp.RestService.Customer;
+using Zuehlke.Zmapp.RestService.Services;
 
 namespace Zuehlke.Zmapp.RestService.Test
 {
@@ -53,9 +53,9 @@ namespace Zuehlke.Zmapp.RestService.Test
             client.Post(
                         new SaveCustomersRequest
                             {
-                                Customers = new List<Services.DomainModel.Customer>
+                                Customers = new List<Zmapp.Services.DomainModel.Customer>
                                     {
-                                        new Services.DomainModel.Customer
+                                        new Zmapp.Services.DomainModel.Customer
                                             {
                                                 Id = 4000,
                                                 City = "TestCity",

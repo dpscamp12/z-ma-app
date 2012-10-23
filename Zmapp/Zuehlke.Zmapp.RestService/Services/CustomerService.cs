@@ -7,43 +7,10 @@ using ServiceStack.ServiceInterface;
 
 using Zuehlke.Zmapp.Services.Data;
 
-namespace Zuehlke.Zmapp.RestService.Customer
+namespace Zuehlke.Zmapp.RestService.Services
 {
-    [Route("/Customers")]
-    public class GetCustomersRequest : IReturn<Services.DomainModel.Customer[]>
-    {
-    }
+    #region Service Implementation
 
-    [Route("/Customers/{Id}", "GET")]
-    public class SearchCustomerByIdRequest : IReturn<Services.DomainModel.Customer>
-    {
-        public int Id { get; set; }
-    }
-
-    [Route("/Customers/search/{Name}", "GET")]
-    public class SearchCustomersByNameRequest : IReturn<Services.DomainModel.Customer[]>
-    {
-        public string Name { get; set; }
-    }
-
-    [Route("/Customers/Delete/{Id}", "DELETE")]
-    public class DeleteCustomerByIdRequest : IReturnVoid
-    {
-        public int Id { get; set; }
-    }
-
-    [Route("/Customers/Delete/", "DELETE")]
-    public class DeleteCustomersByIdsRequest : IReturnVoid
-    {
-        public List<int> Ids { get; set; }
-    }
-
-    [Route("/Customers", "POST")]
-    public class SaveCustomersRequest : IReturnVoid
-    {
-        public List<Services.DomainModel.Customer> Customers { get; set; }
-    }
-     
     public class CustomerService : Service
     {
         public IRepository Repository { get; set; }
@@ -51,7 +18,7 @@ namespace Zuehlke.Zmapp.RestService.Customer
         public object Get(GetCustomersRequest request)
         {
             var cacheKey = "AllCustomers";
-            return base.RequestContext.ToOptimizedResultUsingCache(base.Cache, cacheKey, TimeSpan.FromSeconds(10), () => this.Repository.GetCustomers());
+            return base.RequestContext.ToOptimizedResultUsingCache(base.Cache, cacheKey, TimeSpan.FromSeconds(15), () => this.Repository.GetCustomers());
         }
 
         public object Get(SearchCustomerByIdRequest request)
@@ -86,4 +53,46 @@ namespace Zuehlke.Zmapp.RestService.Customer
             }
         }
     }
+
+    #endregion
+
+    #region Requests
+
+    [Route("/Customers")]
+    public class GetCustomersRequest : IReturn<Zuehlke.Zmapp.Services.DomainModel.Customer[]>
+    {
+    }
+
+    [Route("/Customers/{Id}", "GET")]
+    public class SearchCustomerByIdRequest : IReturn<Zuehlke.Zmapp.Services.DomainModel.Customer>
+    {
+        public int Id { get; set; }
+    }
+
+
+    [Route("/Customers/search/{Name}", "GET")]
+    public class SearchCustomersByNameRequest : IReturn<Zuehlke.Zmapp.Services.DomainModel.Customer[]>
+    {
+        public string Name { get; set; }
+    }
+
+    [Route("/Customers/Delete/{Id}", "DELETE")]
+    public class DeleteCustomerByIdRequest : IReturnVoid
+    {
+        public int Id { get; set; }
+    }
+
+    [Route("/Customers/Delete/", "DELETE")]
+    public class DeleteCustomersByIdsRequest : IReturnVoid
+    {
+        public List<int> Ids { get; set; }
+    }
+
+    [Route("/Customers", "POST")]
+    public class SaveCustomersRequest : IReturnVoid
+    {
+        public List<Zuehlke.Zmapp.Services.DomainModel.Customer> Customers { get; set; }
+    }
+
+    #endregion
 }

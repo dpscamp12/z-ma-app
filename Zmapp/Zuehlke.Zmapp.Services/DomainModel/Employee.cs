@@ -9,7 +9,6 @@ namespace Zuehlke.Zmapp.Services.DomainModel
 	public class Employee
 	{
 		private readonly List<Reservation> reservations = new List<Reservation>();
-		private readonly List<Skill> skills = new List<Skill>();
 
 		public int Id { get; set; }
 
@@ -27,10 +26,12 @@ namespace Zuehlke.Zmapp.Services.DomainModel
 
 		public string EMail { get; set; }
 
-		public List<Skill> Skills
-		{
-			get { return this.skills; }
-		}
+        public List<Skill> Skills { get; set; }
+
+	    public Employee()
+	    {
+	        this.Skills = new List<Skill>();
+	    }
 
 		public List<Reservation> Reservations
 		{

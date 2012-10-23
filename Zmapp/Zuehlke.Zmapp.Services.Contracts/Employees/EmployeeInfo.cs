@@ -5,6 +5,11 @@ namespace Zuehlke.Zmapp.Services.Contracts.Employees
 	[DataContract]
 	public class EmployeeInfo
 	{
+	    public EmployeeInfo()
+	    {
+	        this.Skills = new Skill[0];
+	    }
+
 		[DataMember]
 		public int Id { get; set; }
 

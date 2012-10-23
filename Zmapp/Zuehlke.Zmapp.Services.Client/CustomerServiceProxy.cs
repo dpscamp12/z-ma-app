@@ -4,7 +4,7 @@ using System.Linq;
 using ServiceStack.Service;
 using ServiceStack.ServiceClient.Web;
 
-using Zuehlke.Zmapp.RestService.Customer;
+using Zuehlke.Zmapp.RestService.Services;
 using Zuehlke.Zmapp.Services.Contracts.Customers;
 using Zuehlke.Zmapp.Services.DomainModel;
 

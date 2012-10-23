@@ -10,7 +10,7 @@ namespace Zuehlke.Zmapp.Wpf.Employees
 {
 	public class EmployeesViewModel : NotificationObject
 	{
-		private readonly IEmployeeService service = new EmployeeServiceProxy();
+		private readonly IEmployeeService service = new EmployeeServiceProxyRest();
 
 		private readonly ObservableCollection<EmployeeInfoViewModel> employees =
 			new ObservableCollection<EmployeeInfoViewModel>();
