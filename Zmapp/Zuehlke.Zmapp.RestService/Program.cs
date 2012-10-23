@@ -10,7 +10,7 @@ namespace Zuehlke.Zmapp.RestService
     {
         static void Main(string[] args)
         {
-            var apphost = new AppHost();
+            var apphost = new RestServiceHost();
             apphost.Init();
             apphost.Start("http://127.0.0.1:1337/");
 

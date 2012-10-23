@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using ServiceStack.ServiceHost;
+using ServiceStack.ServiceInterface;
 
 using Zuehlke.Zmapp.Services.Data;
 
@@ -42,13 +44,14 @@ namespace Zuehlke.Zmapp.RestService.Customer
         public List<Services.DomainModel.Customer> Customers { get; set; }
     }
      
-    public class CustomerService : IService
+    public class CustomerService : Service
     {
         public IRepository Repository { get; set; }
 
         public object Get(GetCustomersRequest request)
         {
-            return this.Repository.GetCustomers();
+            var cacheKey = "AllCustomers";
+            return base.RequestContext.ToOptimizedResultUsingCache(base.Cache, cacheKey, TimeSpan.FromSeconds(10), () => this.Repository.GetCustomers());
         }
 
         public object Get(SearchCustomerByIdRequest request)
@@ -64,6 +67,8 @@ namespace Zuehlke.Zmapp.RestService.Customer
         public object Post(SaveCustomersRequest request)
         {
             this.Repository.SetCustomerBatch(request.Customers);
+
+            this.RequestContext.RemoveFromCache(this.Cache, new[] { "AllCustomers" });
 
             return null;
         }

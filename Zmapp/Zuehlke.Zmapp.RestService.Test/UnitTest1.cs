@@ -15,12 +15,12 @@ namespace Zuehlke.Zmapp.RestService.Test
     {
         private const string ServiceUrl = "http://localhost:2222/";
 
-        private static AppHost apphost;
+        private static RestServiceHost apphost;
 
         [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            apphost = new AppHost();
+            apphost = new RestServiceHost();
             apphost.Init();
             apphost.Start(ServiceUrl);
         }
