@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\Zuehlke.Zmapp.RestService\bin\Debug\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\Zuehlke.Zmapp.RestService\bin\Debug\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -47,9 +53,17 @@
     <Compile Include="ServiceProxy.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zuehlke.Zmapp.RestService\Zuehlke.Zmapp.RestService.csproj">
+      <Project>{33BEC27B-3915-4287-9338-7AF2AFC8511C}</Project>
+      <Name>Zuehlke.Zmapp.RestService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zuehlke.Zmapp.Services.Contracts\Zuehlke.Zmapp.Services.Contracts.csproj">
       <Project>{C67B9670-075B-4196-B868-CABAAD068941}</Project>
       <Name>Zuehlke.Zmapp.Services.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zuehlke.Zmapp.Services\Zuehlke.Zmapp.Services.csproj">
+      <Project>{B7EC1CF4-0AB3-43DC-B299-EB7D41ADA67C}</Project>
+      <Name>Zuehlke.Zmapp.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

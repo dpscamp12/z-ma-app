@@ -27,7 +27,7 @@ namespace Zuehlke.Zmapp.Wpf.Employees
 		private readonly DelegateCommand<EmployeeSearchResult> reserveEmployeeCommand;
 
 		public EmployeeReservationViewModel()
-			: this(new CustomerServiceProxy(), new EmployeeReservationServiceProxy())
+			: this(new CustomerServiceProxyRest(), new EmployeeReservationServiceProxy())
 		{
 		}
 

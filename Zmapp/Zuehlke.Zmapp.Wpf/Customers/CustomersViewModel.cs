@@ -10,7 +10,7 @@ namespace Zuehlke.Zmapp.Wpf.Customers
 {
 	public class CustomersViewModel : NotificationObject
 	{
-		private readonly ICustomerService service = new CustomerServiceProxy();
+        private readonly ICustomerService service = new CustomerServiceProxyRest();
 		private readonly ObservableCollection<CustomerInfo> customers = new ObservableCollection<CustomerInfo>();
 		private CustomerInfo selectedCustomer;
 
