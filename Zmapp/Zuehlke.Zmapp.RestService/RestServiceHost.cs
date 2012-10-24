@@ -1,6 +1,5 @@
 ﻿using ServiceStack.CacheAccess;
 using ServiceStack.CacheAccess.Providers;
-using ServiceStack.Redis;
 using ServiceStack.WebHost.Endpoints;
 
 using Zuehlke.Zmapp.RestService.Services;
