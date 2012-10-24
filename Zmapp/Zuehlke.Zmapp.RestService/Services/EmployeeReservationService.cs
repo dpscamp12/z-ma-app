@@ -123,19 +123,10 @@ namespace Zuehlke.Zmapp.RestService.Services
     [Route("/Reservation/Query", "GET")]
     public class EmployeeQueryRequest : IReturn<List<EmployeeSearchResult>>
     {
-        public EmployeeQueryRequest()
-        {
-            this.RequestedSkills = new Skill[0];
-            this.RequestedCareerLevels = new CareerLevel[0];
-        }
         public int CustomerId { get; set; }
-
         public Skill[] RequestedSkills { get; set; }
-
         public CareerLevel[] RequestedCareerLevels { get; set; }
-
         public DateTime BeginOfWorkPeriod { get; set; }
-
         public DateTime EndOfWorkPeriod { get; set; }
     }
 
@@ -143,11 +134,8 @@ namespace Zuehlke.Zmapp.RestService.Services
     public class ReserveEmployeeForCustomerRequest : IReturnVoid
     {
         public int EmployeeId { get; set; }
-
         public int CustomerId { get; set; }
-
         public DateTime BeginOfPeriod { get; set; }
-
         public DateTime EndOfPeriod { get; set; }
     }
 
