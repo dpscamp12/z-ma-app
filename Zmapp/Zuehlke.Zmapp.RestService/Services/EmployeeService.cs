@@ -121,20 +121,20 @@ namespace Zuehlke.Zmapp.RestService.Services
 
     #region Requests
 
-    [Route("/Employees")]
-    public class GetEmployeesRequest : IReturn<Zuehlke.Zmapp.Services.DomainModel.Employee[]>
+    [Route("/Employees", "GET")]
+    public class GetEmployeesRequest : IReturn<List<Employee>>
     {
     }
 
     [Route("/Employees/{Id}", "GET")]
-    public class SearchEmployeeByIdRequest : IReturn<Zuehlke.Zmapp.Services.DomainModel.Employee>
+    public class SearchEmployeeByIdRequest : IReturn<Employee>
     {
         public int Id { get; set; }
     }
 
 
     [Route("/Employees/search/{Name}", "GET")]
-    public class SearchEmployeesByFirstNameRequest : IReturn<Zuehlke.Zmapp.Services.DomainModel.Employee[]>
+    public class SearchEmployeesByFirstNameRequest : IReturn<List<Employee>>
     {
         public string FirstName { get; set; }
     }

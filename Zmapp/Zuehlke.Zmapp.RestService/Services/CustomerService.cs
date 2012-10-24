@@ -58,20 +58,20 @@ namespace Zuehlke.Zmapp.RestService.Services
 
     #region Requests
 
-    [Route("/Customers")]
-    public class GetCustomersRequest : IReturn<Zuehlke.Zmapp.Services.DomainModel.Customer[]>
+    [Route("/Customers", "GET")]
+    public class GetCustomersRequest : IReturn<List<Zmapp.Services.DomainModel.Customer>>
     {
     }
 
     [Route("/Customers/{Id}", "GET")]
-    public class SearchCustomerByIdRequest : IReturn<Zuehlke.Zmapp.Services.DomainModel.Customer>
+    public class SearchCustomerByIdRequest : IReturn<Zmapp.Services.DomainModel.Customer>
     {
         public int Id { get; set; }
     }
 
 
     [Route("/Customers/search/{Name}", "GET")]
-    public class SearchCustomersByNameRequest : IReturn<Zuehlke.Zmapp.Services.DomainModel.Customer[]>
+    public class SearchCustomersByNameRequest : IReturn<List<Zmapp.Services.DomainModel.Customer>>
     {
         public string Name { get; set; }
     }
@@ -91,7 +91,7 @@ namespace Zuehlke.Zmapp.RestService.Services
     [Route("/Customers", "POST")]
     public class SaveCustomersRequest : IReturnVoid
     {
-        public List<Zuehlke.Zmapp.Services.DomainModel.Customer> Customers { get; set; }
+        public List<Zmapp.Services.DomainModel.Customer> Customers { get; set; }
     }
 
     #endregion
